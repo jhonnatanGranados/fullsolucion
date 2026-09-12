@@ -1,0 +1,141 @@
+---
+// src/components/Hero.astro
+import portada from '../assets/portada.jpg';
+import logo from '../assets/logo.png';
+import foto3 from '../assets/foto3.jpg';
+
+const heroImages = [
+  { src: portada.src, isLogo: false },
+  { src: logo.src,    isLogo: true  },
+  { src: foto3.src,   isLogo: false },
+];
+---
+
+<section id="inicio" class="hero" data-interval="5000">
+  {heroImages.map((img, i) => (
+    <div
+      class={`hero__slide ${img.isLogo ? 'hero__slide--logo' : ''}`}
+      style={`background-image:url(${img.src});`}
+      data-active={i === 0 ? 'true' : 'false'}
+    />
+  ))}
+
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <p class="hero__kicker">Automatización · Energía · Ingeniería eléctrica</p>
+    <h1 class="hero__title">Damos forma y vida a tus proyectos</h1>
+    <p class="hero__lead">
+      Diseñamos, instalamos y mantenemos los sistemas que hacen funcionar tu planta y tu hogar:
+      automatización, electricidad e integración inteligente en un mismo equipo.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#servicios" class="btn-primary">Ver servicios</a>
+      <button
+        type="button"
+        class="btn-ghost"
+        data-contact-trigger
+        aria-haspopup="menu"
+      >
+        Contáctanos
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--fs-primary);
+    overflow: hidden;
+  }
+
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  .hero__slide[data-active='true'] { opacity: 1; }
+
+  .hero__slide--logo {
+    background-size: contain;
+    background-color: var(--fs-primary);
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 33, 86, 0.62) 0%,
+      rgba(20, 33, 86, 0.78) 100%
+    );
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    max-width: 760px;
+    padding: 3rem clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .hero__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fs-highlight);
+    margin: 0;
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 4.8vw, 3.9rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--fs-white);
+    margin: 0;
+  }
+
+  .hero__lead {
+    font-size: 1.075rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 54ch;
+    margin: 0;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 560px) {
+    .hero { min-height: 560px; }
+    .hero__actions {
+      width: 100%;
+      flex-direction: column;
+    }
+    .hero__actions > * { width: 100%; }
+  }
+</style>

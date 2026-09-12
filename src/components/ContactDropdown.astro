@@ -1,0 +1,90 @@
+---
+// src/components/ContactDropdown.astro
+const links = [
+  {
+    href: 'https://wa.me/502410802663',
+    label: 'WhatsApp',
+    external: true,
+  },
+  {
+    href: 'mailto:fullsolution001@gmail.com',
+    label: 'Gmail',
+    external: false,
+  },
+  {
+    href: 'https://www.facebook.com/people/Fullsolution/61594225680720/?rdid=1kf7R4x86Kghs00s&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DmfMujL5a%2F',
+    label: 'Facebook',
+    external: true,
+  },
+  {
+    href: 'https://www.instagram.com/fullsolution001?utm_source=qr&stkn=ZjVubHBlczV4ejJ0',
+    label: 'Instagram',
+    external: true,
+  },
+];
+---
+
+<div
+  class="contact-dropdown"
+  id="contactDropdown"
+  hidden
+  role="menu"
+  aria-label="Canales de contacto"
+>
+  {links.map((l) => (
+    <a
+      href={l.href}
+      class="contact-dropdown__item"
+      role="menuitem"
+      target={l.external ? '_blank' : undefined}
+      rel={l.external ? 'noopener noreferrer' : undefined}
+    >
+      {l.label}
+    </a>
+  ))}
+</div>
+
+<style>
+  .contact-dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--fs-highlight);
+    border: 1px solid var(--fs-accent);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px -20px rgba(12, 187, 204, 0.55);
+    padding: 0.5rem;
+    min-width: 210px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    z-index: 1000;
+    animation: dropdownIn 0.18s ease;
+  }
+
+  @keyframes dropdownIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .contact-dropdown[hidden] { display: none; }
+
+  .contact-dropdown__item {
+    display: block;
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--fs-primary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .contact-dropdown__item:hover {
+    background: var(--fs-primary);
+    color: var(--fs-highlight);
+  }
+</style>

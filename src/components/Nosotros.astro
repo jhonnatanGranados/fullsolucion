@@ -1,0 +1,285 @@
+---
+// src/components/Nosotros.astro
+const valores = [
+  {
+    title: 'Responsabilidad',
+    description:
+      'Cuidamos el entorno y el bienestar común cumpliendo cada tarea y obligación asumida.',
+  },
+  {
+    title: 'Honestidad',
+    description:
+      'Comunicamos la verdad sin alterar el contexto, en beneficio de cada proyecto.',
+  },
+  {
+    title: 'Calidad',
+    description:
+      'Entregamos proyectos y servicios con los más altos estándares de excelencia.',
+  },
+  {
+    title: 'Innovación',
+    description:
+      'Buscamos constantemente nuevas formas de transformar ideas en realidad.',
+  },
+];
+---
+
+<section id="nosotros" class="section section--muted">
+  <div class="section__inner">
+    <div class="section__head section__head--center">
+      <span class="eyebrow">Nosotros</span>
+      <h2 class="section__title">Quiénes somos</h2>
+      <p class="section__lead">
+        Un equipo técnico que convierte ideas en resultados concretos, con estándares de calidad
+        y compromiso con cada proyecto.
+      </p>
+    </div>
+
+    <div class="statement statement--left">
+      <span class="statement__label">Misión</span>
+      <p class="statement__text">
+        Entregamos proyectos y servicios de alta calidad, atendiendo las necesidades reales de
+        nuestros clientes y convirtiendo cada idea en un resultado concreto.
+      </p>
+    </div>
+
+    <div class="statement statement--right">
+      <span class="statement__label">Visión</span>
+      <p class="statement__text">
+        Ser la empresa de referencia en soluciones industriales y eléctricas, reconocida por su
+        innovación, calidad técnica y compromiso con la sostenibilidad.
+      </p>
+    </div>
+
+    <div class="values">
+      <span class="eyebrow">Lo que nos define</span>
+      <h3 class="values__title">Valores</h3>
+      <div class="values__grid">
+        {valores.map((v) => (
+          <div class="value">
+            <h4 class="value__title">{v.title}</h4>
+            <p class="value__desc">{v.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 5.5rem clamp(1.5rem, 5vw, 5rem);
+    background: var(--fs-paper);
+  }
+
+  .section__inner {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .section__head {
+    max-width: 52ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .section__head--center {
+    max-width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section__head--center .section__lead {
+    margin: 0.85rem auto 0;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fs-accent);
+    margin-bottom: 0.85rem;
+  }
+
+  .section__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    color: var(--fs-primary);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin: 0 0 0.6rem;
+  }
+
+  .section__head--center .section__title::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 1rem auto 0;
+    border-radius: 2px;
+    background: var(--fs-gradient-accent);
+  }
+
+  .section__lead {
+    color: var(--fs-steel);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .statement {
+    position: relative;
+    max-width: 700px;
+    padding: 2rem 0 2rem 1.75rem;
+    border-left: 3px solid var(--fs-highlight);
+    margin-bottom: 2.5rem;
+  }
+
+  .statement::before {
+    content: '';
+    position: absolute;
+    left: -1.4rem;
+    top: 2rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fs-highlight);
+    box-shadow: 0 0 0 4px rgba(12, 187, 204, 0.18);
+  }
+
+  .statement--right {
+    margin-left: auto;
+    padding: 2rem 1.75rem 2rem 0;
+    border-left: none;
+    border-right: 3px solid var(--fs-accent);
+    text-align: right;
+  }
+
+  .statement--right::before {
+    left: auto;
+    right: -1.4rem;
+    background: var(--fs-accent);
+    box-shadow: 0 0 0 4px rgba(16, 123, 205, 0.18);
+  }
+
+  .statement__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fs-accent);
+    margin-bottom: 0.7rem;
+  }
+
+  .statement__text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--fs-primary);
+    margin: 0;
+  }
+
+  .values {
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--fs-line);
+    text-align: center;
+  }
+
+  .values .eyebrow { margin-bottom: 0.5rem; }
+
+  .values__title {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--fs-primary);
+    letter-spacing: -0.01em;
+    margin: 0 0 2rem;
+  }
+
+  .values__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .value {
+    position: relative;
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #FAFBFD 0%, #F0F3F7 100%);
+    border: 1px solid var(--fs-line);
+    box-shadow:
+      0 1px 2px rgba(20, 22, 31, 0.03),
+      0 8px 24px -16px rgba(20, 33, 86, 0.12);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .value::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.25rem;
+    right: 1.25rem;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--fs-gradient-accent);
+  }
+
+  .value:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 187, 204, 0.4);
+    box-shadow:
+      0 2px 6px rgba(20, 22, 31, 0.05),
+      0 18px 36px -18px rgba(20, 33, 86, 0.22);
+  }
+
+  .value__title {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--fs-primary);
+    letter-spacing: -0.01em;
+    margin: 0 0 0.55rem;
+  }
+
+  .value__desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--fs-slate);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .statement,
+    .statement--right {
+      margin-left: 0;
+      text-align: left;
+      padding: 1.75rem 0 1.75rem 1.5rem;
+      border-left: 3px solid var(--fs-highlight);
+      border-right: none;
+    }
+
+    .statement--right::before {
+      left: -1.4rem;
+      right: auto;
+      background: var(--fs-highlight);
+      box-shadow: 0 0 0 4px rgba(12, 187, 204, 0.18);
+    }
+
+    .values__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .values__grid { grid-template-columns: 1fr; }
+  }
+</style>

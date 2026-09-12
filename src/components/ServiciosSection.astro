@@ -1,0 +1,135 @@
+---
+// src/components/ServiciosSection.astro
+import Card from './Card.astro';
+import { servicios } from '../data/servicios';
+---
+
+<section id="servicios" class="section section--wide">
+  <div class="section__head section__head--center">
+    <span class="eyebrow">Servicios</span>
+    <h2 class="section__title">Soluciones integrales para cada etapa de tu proyecto</h2>
+    <p class="section__lead">Dieciséis áreas de trabajo, un mismo equipo técnico.</p>
+  </div>
+
+  <div class="services">
+    {servicios.map((s, i) => (
+      <Card
+        title={s.title}
+        subtitle={s.subtitle}
+        description={s.description}
+        icon={s.icon}
+        refCode={s.ref}
+        items={s.items}
+        image={s.image}
+        imageAlt={s.imageAlt}
+        reverse={i % 2 === 1}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 5.5rem clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .section__head {
+    max-width: 52ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .section__head--center {
+    max-width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section__head--center .section__lead {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.85rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fs-accent);
+    margin-bottom: 0.85rem;
+  }
+
+  .section__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    color: var(--fs-primary);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin: 0 0 0.6rem;
+  }
+
+  .section__head--center .section__title::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 1rem auto 0;
+    border-radius: 2px;
+    background: var(--fs-gradient-accent);
+  }
+
+  .section__lead {
+    color: var(--fs-steel);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12rem;
+    row-gap: 2.5rem;
+    align-items: start;
+    position: relative;
+  }
+
+  .services::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(16, 123, 205, 0.12) 15%,
+      rgba(12, 187, 204, 0.18) 50%,
+      rgba(16, 123, 205, 0.12) 85%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .services > :nth-child(odd)  { justify-self: start; }
+  .services > :nth-child(even) { justify-self: end;   }
+
+  @media (max-width: 900px) {
+    .services {
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 1.75rem;
+    }
+    .services::before { display: none; }
+    .services > :nth-child(odd),
+    .services > :nth-child(even) {
+      justify-self: stretch;
+    }
+  }
+</style>
