@@ -3,7 +3,15 @@
 import imgElectrico from '../assets/servicios/electrico.jpg';
 import imgRenovables from '../assets/foto3.jpg';
 import imgRedes from '../assets/servicios/3.jpg';
-import imgVideovigilancia from '../assets/servicios/4.jpg';
+import imgVideovigilancia from '../assets/servicios/videovigilancia.jpg';
+import imgDesarrollo from '../assets/servicios/Desarrollo.jpg';
+import imgEstructuras from '../assets/servicios/Estructuraslivianas.jpg';
+import imgMantenimiento from '../assets/servicios/Mantenimientoylimpieza.jpg';
+import imgPerfileria from '../assets/servicios/PerfileriaPVC.jpg';
+import imgGases from '../assets/servicios/Sistemasdegases.jpg';
+import imgIndustrial from '../assets/servicios/4.jpg';
+
+import type { ImageMetadata } from 'astro';
 
 export interface Servicio {
   ref: string;
@@ -11,26 +19,13 @@ export interface Servicio {
   subtitle: string;
   description: string;
   icon:
-    | 'automation'
-    | 'service'
-    | 'electrical'
-    | 'domotics'
-    | 'renewable'
-    | 'consulting'
-    | 'network'
-    | 'camera'
-    | 'sound'
-    | 'generator'
-    | 'prefab'
-    | 'paint'
-    | 'structure'
-    | 'welding'
-    | 'gas'
-    | 'pvc'
-    | 'cleaning'
-    | 'software';
+    | 'automation' | 'service' | 'electrical' | 'domotics'
+    | 'renewable' | 'consulting' | 'network' | 'camera'
+    | 'sound' | 'generator' | 'prefab' | 'paint'
+    | 'structure' | 'welding' | 'gas' | 'pvc'
+    | 'cleaning' | 'software';
   items?: string[];
-  image?: string;
+  image?: ImageMetadata;
   imageAlt?: string;
 }
 
@@ -42,7 +37,7 @@ export const servicios: Servicio[] = [
     description:
       'Ejecutamos instalaciones eléctricas residenciales e industriales bajo normativa, con materiales certificados y personal calificado.',
     icon: 'electrical',
-    image: imgElectrico.src,
+    image: imgElectrico,
     imageAlt: 'Instalaciones eléctricas residenciales e industriales',
     items: [
       'Instalaciones residenciales',
@@ -61,7 +56,7 @@ export const servicios: Servicio[] = [
     description:
       'Diseñamos e instalamos sistemas solares térmicos y fotovoltaicos adaptados a tu consumo real.',
     icon: 'renewable',
-    image: imgRenovables.src,
+    image: imgRenovables,
     imageAlt: 'Energías renovables',
     items: [
       'Diseño e instalación de sistemas de paneles solares',
@@ -75,7 +70,7 @@ export const servicios: Servicio[] = [
     description:
       'Diseñamos e implementamos infraestructura de red confiable para voz, datos y video.',
     icon: 'network',
-    image: imgRedes.src,
+    image: imgRedes,
     imageAlt: 'Cableado estructurado y redes',
     items: ['Diseño e instalación de sistemas de cableado estructurado'],
   },
@@ -86,7 +81,7 @@ export const servicios: Servicio[] = [
     description:
       'Sistemas de cámaras para interior y exterior, con monitoreo remoto y grabación segura.',
     icon: 'camera',
-    image: imgVideovigilancia.src,
+    image: imgVideovigilancia,
     imageAlt: 'Sistemas de videovigilancia',
     items: [
       'Diseño e instalación de sistemas de cámaras en interior y exterior, residencial, industrial y comercial',
@@ -99,6 +94,7 @@ export const servicios: Servicio[] = [
     description:
       'Sistemas de audio ambiental y profesional para comercios, oficinas y plantas.',
     icon: 'sound',
+    image: imgRedes,                    // ← reutilizada
     imageAlt: 'Sonido comercial',
     items: ['Asesoría, diseño e instalación de sistemas de sonido comercial'],
   },
@@ -109,6 +105,7 @@ export const servicios: Servicio[] = [
     description:
       'Venta, distribución e instalación de generadores de baja, media y alta potencia.',
     icon: 'generator',
+    image: imgElectrico,                // ← reutilizada
     imageAlt: 'Generadores eléctricos',
     items: [
       'Venta y distribución de generadores eléctricos de baja, media y alta potencia',
@@ -121,6 +118,7 @@ export const servicios: Servicio[] = [
     description:
       'Mantenimiento preventivo y correctivo para equipos, maquinaria y sistemas industriales y residenciales.',
     icon: 'service',
+    image: imgMantenimiento,            // ← reutilizada
     imageAlt: 'Reparación y mantenimiento',
     items: [
       'Reparación y mantenimiento de equipos, maquinaria y sistemas industriales y residenciales',
@@ -133,6 +131,7 @@ export const servicios: Servicio[] = [
     description:
       'Automatizamos procesos industriales con PLC, sensores y sistemas de control a medida.',
     icon: 'automation',
+    image: imgRedes,                    // ← reutilizada
     imageAlt: 'Automatización de sistemas industriales',
     items: ['Automatización de sistemas industriales'],
   },
@@ -143,6 +142,7 @@ export const servicios: Servicio[] = [
     description:
       'Fabricación e instalación de sistemas livianos para muros, cielos y divisiones.',
     icon: 'prefab',
+    image: imgEstructuras,              // ← reutilizada
     imageAlt: 'Sistemas prefabricados livianos',
     items: [
       'Sistemas livianos con tablero de yeso, tabla roca, SECUROCK, DUROCK, micro concreto',
@@ -158,6 +158,7 @@ export const servicios: Servicio[] = [
     description:
       'Aplicación de pintura decorativa, impermeabilización y recubrimientos industriales.',
     icon: 'paint',
+    image: imgIndustrial,               // ← reutilizada (4.jpg)
     imageAlt: 'Pintura residencial e industrial',
     items: [
       'Pintura interior y exterior, decorativas e impermeabilización',
@@ -171,6 +172,7 @@ export const servicios: Servicio[] = [
     description:
       'Diseñamos y fabricamos estructuras metálicas livianas a medida.',
     icon: 'structure',
+    image: imgEstructuras,
     imageAlt: 'Estructuras livianas',
     items: [
       'Puertas, ventanas, balcones, barandas, pasamanos y escaleras',
@@ -187,6 +189,7 @@ export const servicios: Servicio[] = [
     description:
       'Aplicamos procesos de soldadura industrial con personal calificado.',
     icon: 'welding',
+    image: imgEstructuras,              // ← reutilizada
     imageAlt: 'Soldadura industrial',
     items: [
       'Soldadura al arco voltaico con electrodo revestido (SEA)',
@@ -204,6 +207,7 @@ export const servicios: Servicio[] = [
     description:
       'Instalamos sistemas de gas propano, aire comprimido y oxígeno bajo normativa.',
     icon: 'gas',
+    image: imgGases,
     imageAlt: 'Sistemas de gases',
     items: ['Sistemas de gas propano', 'Aire comprimido', 'Oxígeno'],
   },
@@ -214,6 +218,7 @@ export const servicios: Servicio[] = [
     description:
       'Fabricamos puertas, ventanas y canceles a base de perfilaría PVC.',
     icon: 'pvc',
+    image: imgPerfileria,
     imageAlt: 'Perfilería PVC',
     items: ['Puertas, ventanas y canceles en PVC'],
   },
@@ -224,6 +229,7 @@ export const servicios: Servicio[] = [
     description:
       'Servicios de mantenimiento y limpieza para espacios comerciales e industriales.',
     icon: 'cleaning',
+    image: imgMantenimiento,
     imageAlt: 'Mantenimiento y limpieza',
     items: ['Mantenimiento y limpieza de espacios comerciales'],
   },
@@ -234,6 +240,7 @@ export const servicios: Servicio[] = [
     description:
       'Desarrollamos software a medida y gestionamos la implementación de hardware, software y servidores.',
     icon: 'software',
+    image: imgDesarrollo,
     imageAlt: 'Desarrollo de software',
     items: [
       'Desarrollo de software a medida',
