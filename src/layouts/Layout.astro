@@ -8,19 +8,47 @@ export interface Props {
 }
 
 const {
-  title = 'Full Solution — Servicio Técnico Industrial',
-  description = 'Automatización, energía e ingeniería eléctrica. Damos forma y vida a tus proyectos.',
+  title = 'Full Solución | Automatización, Energía e Ingeniería Eléctrica en Guatemala',
+  description = 'Empresa guatemalteca especializada en instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y 16 áreas de servicio técnico. Un solo equipo para cada etapa de tu proyecto.',
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-GT">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (para redes sociales) -->
+    <meta property="og:title" content="Full Solución | Automatización, Energía e Ingeniería Eléctrica" />
+    <meta property="og:description" content="16 áreas de servicio técnico: electricidad, paneles solares, automatización, videovigilancia y más." />
+    <meta property="og:url" content="https://fullsolucion.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_GT" />
+
+    <!-- Datos estructurados para Google -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Full Solución",
+      "alternateName": "Full Solución Guatemala",
+      "url": "https://fullsolucion.vercel.app/",
+      "logo": "https://fullsolucion.vercel.app/favicon.svg",
+      "description": "Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GT",
+        "addressLocality": "Guatemala"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Guatemala"
+      },
+      "priceRange": "$$"
+    })} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
