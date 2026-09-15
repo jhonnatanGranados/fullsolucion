@@ -2,21 +2,25 @@
 // src/components/ContactDropdown.astro
 const links = [
   {
+    id: 'whatsapp',
     href: 'https://wa.me/50241080263',
     label: 'WhatsApp',
     external: true,
   },
   {
+    id: 'gmail',
     href: 'mailto:fullsolution001@gmail.com',
     label: 'Gmail',
     external: false,
   },
   {
+    id: 'facebook',
     href: 'https://www.facebook.com/people/Fullsolution/61594225680720/?rdid=1kf7R4x86Kghs00s&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DmfMujL5a%2F',
     label: 'Facebook',
     external: true,
   },
   {
+    id: 'instagram',
     href: 'https://www.instagram.com/fullsolution001?utm_source=qr&stkn=ZjVubHBlczV4ejJ0',
     label: 'Instagram',
     external: true,
@@ -38,6 +42,7 @@ const links = [
       role="menuitem"
       target={l.external ? '_blank' : undefined}
       rel={l.external ? 'noopener noreferrer' : undefined}
+      data-channel={l.id}
     >
       {l.label}
     </a>

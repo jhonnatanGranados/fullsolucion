@@ -1,9 +1,21 @@
 // src/scripts/contact-dropdown.ts
 let activeClose: (() => void) | null = null;
 
+const PHONE = '50241080263';
+const EMAIL = 'fullsolution001@gmail.com';
+
 export function initContactDropdowns() {
   const dropdown = document.getElementById('contactDropdown');
   if (!dropdown) return;
+
+  // Guardamos las URLs base originales
+  const baseHrefs: Record<string, string> = {};
+  dropdown
+    .querySelectorAll<HTMLAnchorElement>('[data-channel]')
+    .forEach((a) => {
+      const ch = a.dataset.channel!;
+      baseHrefs[ch] = a.getAttribute('href') || '';
+    });
 
   document
     .querySelectorAll<HTMLElement>('[data-contact-trigger]')
@@ -11,9 +23,53 @@ export function initContactDropdowns() {
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
         if (activeClose) activeClose();
+
+        // Leer el servicio asociado al botón
+        const serviceCode = trigger.dataset.service || '';
+        const serviceTitle = trigger.dataset.serviceTitle || '';
+
+        // Personalizar los enlaces según el servicio
+        customizeLinks(dropdown, baseHrefs, serviceCode, serviceTitle);
+
         openNear(trigger, dropdown);
       });
     });
+}
+
+function customizeLinks(
+  dropdown: HTMLElement,
+  baseHrefs: Record<string, string>,
+  code: string,
+  title: string,
+) {
+  const whatsapp = dropdown.querySelector<HTMLAnchorElement>(
+    '[data-channel="whatsapp"]',
+  );
+  const gmail = dropdown.querySelector<HTMLAnchorElement>(
+    '[data-channel="gmail"]',
+  );
+
+  // Si no hay servicio asociado, restauramos los enlaces base
+  if (!code && !title) {
+    if (whatsapp) whatsapp.href = baseHrefs.whatsapp;
+    if (gmail) gmail.href = baseHrefs.gmail;
+    return;
+  }
+
+  const serviceLabel = `${code} – ${title}`.trim();
+
+  // WhatsApp: mensaje pre-escrito
+  if (whatsapp) {
+    const msg = `Hola Full Solución, me interesa el servicio ${serviceLabel}. ¿Me pueden dar más información?`;
+    whatsapp.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
+  }
+
+  // Gmail: asunto y cuerpo pre-escritos
+  if (gmail) {
+    const subject = `Consulta sobre ${serviceLabel}`;
+    const body = `Hola Full Solución,\n\nMe interesa el servicio "${serviceLabel}". ¿Me pueden dar más información?\n\nGracias.`;
+    gmail.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
 }
 
 function openNear(trigger: HTMLElement, dropdown: HTMLElement) {

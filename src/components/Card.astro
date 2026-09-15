@@ -133,6 +133,8 @@ const iconPath = icons[icon] ?? icons.automation;
       type="button"
       class="card__btn"
       data-contact-trigger
+      data-service={refCode}
+      data-service-title={title}
       aria-label={`Contáctanos por ${title}`}
     >
       Contáctanos
@@ -755,7 +757,6 @@ const iconPath = icons[icon] ?? icons.automation;
       color: var(--fs-accent);
     }
 
-    /* Reduce el blur del glass en pantallas pequeñas para no saturar GPU */
     .card {
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
