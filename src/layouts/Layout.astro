@@ -3,14 +3,22 @@
 import ContactDropdown from '../components/ContactDropdown.astro';
 
 export interface Props {
-  title: string;
+  title?: string;
   description?: string;
+  image?: string;
+  canonical?: string;
 }
 
 const {
-  title = 'Full Solución | Automatización, Energía e Ingeniería Eléctrica en Guatemala',
-  description = 'Empresa guatemalteca especializada en instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y 16 áreas de servicio técnico. Un solo equipo para cada etapa de tu proyecto.',
+  title = 'Servicios Eléctricos y Automatización en Guatemala y Huehuetenango | Full Solución',
+  description = 'Empresa guatemalteca especializada en instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y 16 áreas de servicio técnico en Guatemala y Huehuetenango.',
+  image = '/logo.png',
+  canonical = Astro.url.pathname,
 } = Astro.props;
+
+const siteUrl = 'https://fullsolucion.vercel.app';
+const canonicalURL = new URL(canonical, siteUrl);
+const ogImage = new URL(image, siteUrl);
 ---
 
 <!DOCTYPE html>
@@ -18,61 +26,116 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ============ SEO BÁSICO ============ -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph (para redes sociales) -->
-    <meta property="og:title" content="Full Solución | Automatización, Energía e Ingeniería Eléctrica" />
-    <meta property="og:description" content="16 áreas de servicio técnico: electricidad, paneles solares, automatización, videovigilancia y más." />
-    <meta property="og:url" content="https://fullsolucion.vercel.app/" />
+    <!-- Geolocalización para SEO local -->
+    <meta name="geo.region" content="GT" />
+    <meta name="geo.placename" content="Guatemala, Huehuetenango" />
+    <meta name="geo.position" content="14.6349;-90.5069" />
+    <meta name="ICBM" content="14.6349, -90.5069" />
+
+    <!-- ============ FAVICON (LOGO DE LA COMPAÑÍA) ============ -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- ============ OPEN GRAPH ============ -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Full Solución" />
     <meta property="og:locale" content="es_GT" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- Datos estructurados para Google -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Full Solución",
-      "alternateName": "Full Solución Guatemala",
-      "url": "https://fullsolucion.vercel.app/",
-      "logo": "https://fullsolucion.vercel.app/favicon.svg",
-      "description": "Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "GT",
-        "addressLocality": "Guatemala"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Guatemala"
-      },
-      "priceRange": "$$",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Full Solución",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalaciones eléctricas residenciales e industriales" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Energías renovables y paneles solares" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cableado estructurado y redes" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Videovigilancia" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sonido comercial" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generadores eléctricos" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reparación y mantenimiento" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización de sistemas industriales" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas prefabricados livianos" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pintura residencial e industrial" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Estructuras livianas" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Soldadura industrial" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas de gases" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Perfilería PVC" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento y limpieza" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Desarrollo de software" } }
-        ]
-      }
-    })} />
+    <!-- ============ TWITTER CARDS ============ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <!-- Google Fonts -->
+    <!-- ============ DATOS ESTRUCTURADOS (JSON-LD) ============ -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ElectricalContractor',
+        '@id': `${siteUrl}/#organizacion`,
+        name: 'Full Solución',
+        alternateName: 'Full Solución Guatemala',
+        url: siteUrl,
+        logo: `${siteUrl}/logo.png`,
+        image: ogImage,
+        description:
+          'Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales en Guatemala y Huehuetenango.',
+        telephone: '+502-0000-0000', // 👈 pon tu teléfono real
+        email: 'contacto@fullsolucion.com', // 👈 pon tu correo real
+        priceRange: '$$',
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'GT',
+          addressRegion: 'Huehuetenango',
+          addressLocality: 'Huehuetenango',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 15.3197,
+          longitude: -91.4708,
+        },
+        areaServed: [
+          { '@type': 'Country', name: 'Guatemala' },
+          { '@type': 'City', name: 'Guatemala' },
+          { '@type': 'City', name: 'Huehuetenango' },
+          { '@type': 'City', name: 'Quetzaltenango' },
+          { '@type': 'City', name: 'Chimaltenango' },
+        ],
+        knowsLanguage: ['es-GT', 'es'],
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '08:00',
+            closes: '18:00',
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Saturday'],
+            opens: '08:00',
+            closes: '13:00',
+          },
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Servicios de Full Solución',
+          itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Instalaciones eléctricas residenciales e industriales en Guatemala' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Energías renovables y paneles solares en Guatemala y Huehuetenango' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cableado estructurado y redes' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Videovigilancia y cámaras de seguridad' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sonido comercial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Generadores eléctricos' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Reparación y mantenimiento eléctrico' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatización de sistemas industriales en Guatemala y Huehuetenango' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas prefabricados livianos' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Pintura residencial e industrial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Estructuras livianas' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Soldadura industrial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas de gases' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Perfilería PVC' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y limpieza' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software' } },
+          ],
+        },
+      })}
+    />
+
+    <!-- ============ GOOGLE FONTS ============ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

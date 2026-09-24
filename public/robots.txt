@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Bloquea rutas internas de Astro
+Disallow: /_astro/
+
+Sitemap: https://fullsolucion.vercel.app/sitemap-index.xml

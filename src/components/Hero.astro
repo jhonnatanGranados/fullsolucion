@@ -1,12 +1,32 @@
 ---
 // src/components/Hero.astro
-import portada from '../assets/portada.jpg';
-import logo from '../assets/logo.png';
-import foto3 from '../assets/foto3.jpg';
+
+import portada  from '../assets/portada.jpg';
+import logo     from '../assets/logo.png';
+import imagen2  from '../assets/imagen2.webp';
+import imagen3  from '../assets/imagen3.webp';
+import imagen4  from '../assets/imagen4.webp';
+import imagen5  from '../assets/imagen5.webp';
+import imagen6  from '../assets/imagen6.webp';
+import imagen7  from '../assets/imagen7.webp';
+import imagen8  from '../assets/imagen8.webp';
+import imagen9  from '../assets/imagen9.webp';
+import imagen10 from '../assets/imagen10.webp';
+import imagen11 from '../assets/imagen11.webp';
 
 const heroImages = [
-  { src: portada.src, isLogo: false },
-  { src: logo.src,    isLogo: true  },
+  { src: portada.src,  isLogo: false },
+  { src: imagen2.src,  isLogo: false },
+  { src: imagen3.src,  isLogo: false },
+  { src: imagen4.src,  isLogo: false },
+  { src: imagen5.src,  isLogo: false },
+  { src: imagen6.src,  isLogo: false },
+  { src: imagen7.src,  isLogo: false },
+  { src: imagen8.src,  isLogo: false },
+  { src: imagen9.src,  isLogo: false },
+  { src: imagen10.src, isLogo: false },
+  { src: imagen11.src, isLogo: false },
+  { src: logo.src,     isLogo: true  },
 ];
 ---
 
@@ -46,7 +66,7 @@ const heroImages = [
 <style>
   .hero {
     position: relative;
-    min-height: 640px;
+    min-height: 100svh;      /* 👈 tamaño del contenedor (tú lo decides) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,17 +78,21 @@ const heroImages = [
   .hero__slide {
     position: absolute;
     inset: 0;
-    background-size: cover;
+    background-size: 100% 100%;   /* 👈 la imagen se estira/encoge para llenar TODO */
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
   }
 
-  .hero__slide[data-active='true'] { opacity: 1; }
+  .hero__slide[data-active='true'] {
+    opacity: 1;
+  }
 
+  /* El logo NO se estira: se muestra completo, centrado */
   .hero__slide--logo {
     background-size: contain;
+    background-position: center;
     background-color: var(--fs-primary);
   }
 
@@ -77,14 +101,16 @@ const heroImages = [
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(20, 33, 86, 0.62) 0%,
+      rgba(20, 33, 86, 0.55) 0%,
       rgba(20, 33, 86, 0.78) 100%
     );
+    pointer-events: none;
+    z-index: 1;
   }
 
   .hero__content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +142,7 @@ const heroImages = [
   .hero__lead {
     font-size: 1.075rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(255, 255, 255, 0.9);
     max-width: 54ch;
     margin: 0;
   }
@@ -130,11 +156,37 @@ const heroImages = [
   }
 
   @media (max-width: 560px) {
-    .hero { min-height: 560px; }
+    .hero {
+      min-height: 100svh;
+    }
     .hero__actions {
       width: 100%;
       flex-direction: column;
     }
-    .hero__actions > * { width: 100%; }
+    .hero__actions > * {
+      width: 100%;
+    }
   }
 </style>
+
+<script>
+  const hero = document.querySelector<HTMLElement>('.hero');
+  if (hero) {
+    const slides = hero.querySelectorAll<HTMLElement>('.hero__slide');
+    const interval = Number(hero.dataset.interval ?? 5000);
+
+    if (slides.length > 1) {
+      let current = 0;
+
+      slides.forEach((s, i) => {
+        s.dataset.active = i === 0 ? 'true' : 'false';
+      });
+
+      setInterval(() => {
+        slides[current].dataset.active = 'false';
+        current = (current + 1) % slides.length;
+        slides[current].dataset.active = 'true';
+      }, interval);
+    }
+  }
+</script>

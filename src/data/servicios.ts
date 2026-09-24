@@ -1,7 +1,7 @@
 // src/data/servicios.ts
 
 import imgElectrico from '../assets/servicios/electrico.jpg';
-import imgRenovables from '../assets/foto3.jpg';
+import imgRenovables from '../assets/imagen3.webp';
 import imgRedes from '../assets/servicios/3.jpg';
 import imgVideovigilancia from '../assets/servicios/videovigilancia.jpg';
 import imgDesarrollo from '../assets/servicios/Desarrollo.jpg';
