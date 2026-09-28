@@ -4,7 +4,7 @@ const valores = [
   {
     title: 'Colaboración',
     description:
-      'Fomentamos un ambiente de trabajo en equipo, tanto interna como externamente, donde juntos podemos alcanzar cada una de nuestras metas..',
+      'Fomentamos un ambiente de trabajo en equipo, tanto interna como externamente, donde juntos podemos alcanzar cada una de nuestras metas.',
   },
   {
     title: 'Responsabilidad y Empatía',
@@ -26,16 +26,19 @@ const valores = [
 
 <section id="nosotros" class="section section--muted">
   <div class="section__inner">
-    <div class="section__head section__head--center">
-      <span class="eyebrow">Nosotros</span>
-      <h2 class="section__title">Quiénes somos</h2>
+    <div class="section__head section__head--center digitize" data-digitize data-dir="up">
+      <h2 class="section__title">Nosotros</h2>
       <p class="section__lead">
         Un equipo técnico que convierte ideas en resultados concretos, con estándares de calidad
         y compromiso con cada proyecto.
       </p>
     </div>
 
-    <div class="statement statement--left">
+    <div class="statement statement--left digitize" data-digitize data-dir="left">
+      <span class="corner corner--tl"></span>
+      <span class="corner corner--tr"></span>
+      <span class="corner corner--bl"></span>
+      <span class="corner corner--br"></span>
       <span class="statement__label">Misión</span>
       <p class="statement__text">
         Ser una empresa comprometida a entregar proyectos y servicios de alta calidad,
@@ -44,7 +47,11 @@ const valores = [
       </p>
     </div>
 
-    <div class="statement statement--right">
+    <div class="statement statement--right digitize" data-digitize data-dir="right">
+      <span class="corner corner--tl"></span>
+      <span class="corner corner--tr"></span>
+      <span class="corner corner--bl"></span>
+      <span class="corner corner--br"></span>
       <span class="statement__label">Visión</span>
       <p class="statement__text">
         Ser la empresa líder en soluciones integrales de instalación y construcción, reconocida
@@ -54,11 +61,15 @@ const valores = [
     </div>
 
     <div class="values">
-      <span class="eyebrow">Lo que nos define</span>
-      <h3 class="values__title">Valores</h3>
+      <span class="eyebrow digitize" data-digitize data-dir="up">Lo que nos define</span>
+      <h3 class="values__title digitize" data-digitize data-dir="up">Valores</h3>
       <div class="values__grid">
         {valores.map((v) => (
-          <div class="value">
+          <div class="value digitize" data-digitize data-dir="up">
+            <span class="corner corner--tl"></span>
+            <span class="corner corner--tr"></span>
+            <span class="corner corner--bl"></span>
+            <span class="corner corner--br"></span>
             <h4 class="value__title">{v.title}</h4>
             <p class="value__desc">{v.description}</p>
           </div>
@@ -71,7 +82,8 @@ const valores = [
 <style>
   .section {
     padding: 5.5rem clamp(1.5rem, 5vw, 5rem);
-    background: var(--fs-paper);
+    background: #FFFFFF;
+    overflow-x: clip;
   }
 
   .section__inner {
@@ -95,163 +107,289 @@ const valores = [
     margin: 0.85rem auto 0;
   }
 
-  .eyebrow {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fs-accent);
-    margin-bottom: 0.85rem;
-  }
-
+  /* ===== Título "Nosotros" ===== */
   .section__title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
-    color: var(--fs-primary);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
-    margin: 0 0 0.6rem;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 6vw, 4.6rem);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin: 0 0 0.9rem;
+    background: linear-gradient(
+      135deg,
+      #0A1F44 0%,
+      #103E7A 25%,
+      #107BCD 55%,
+      #0CBBCC 85%,
+      #12D6E8 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95))
+      drop-shadow(0 2px 0 rgba(10, 31, 68, 0.18))
+      drop-shadow(0 6px 12px rgba(10, 31, 68, 0.22));
   }
 
   .section__head--center .section__title::after {
     content: '';
     display: block;
-    width: 56px;
-    height: 3px;
-    margin: 1rem auto 0;
-    border-radius: 2px;
-    background: var(--fs-gradient-accent);
+    width: 96px;
+    height: 5px;
+    margin: 1.3rem auto 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #103E7A 0%, #107BCD 50%, #12D6E8 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(16, 123, 205, 0.5),
+      0 2px 8px rgba(10, 31, 68, 0.2);
   }
 
   .section__lead {
-    color: var(--fs-steel);
-    font-size: 1rem;
-    line-height: 1.65;
+    position: relative;
+    display: inline-block;
+    color: var(--fs-primary);
+    font-size: 1.08rem;
+    font-weight: 600;
+    line-height: 1.7;
+    letter-spacing: 0.005em;
     margin: 0;
+    padding: 0.45rem 1.1rem;
+    text-align: justify;
+    text-justify: inter-word;
+    background: linear-gradient(
+      180deg,
+      rgba(240, 248, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: 8px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 0 rgba(20, 33, 86, 0.08),
+      0 1px 2px rgba(20, 22, 31, 0.05);
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(20, 33, 86, 0.08);
   }
 
+  /* ===== Esquineros ===== */
+  .corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    z-index: 2;
+  }
+
+  .corner--tl {
+    top: 8px;
+    left: 8px;
+    border-top: 3px solid var(--corner-color, var(--fs-highlight));
+    border-left: 3px solid var(--corner-color, var(--fs-highlight));
+    border-top-left-radius: 8px;
+  }
+
+  .corner--tr {
+    top: 8px;
+    right: 8px;
+    border-top: 3px solid var(--corner-color, var(--fs-highlight));
+    border-right: 3px solid var(--corner-color, var(--fs-highlight));
+    border-top-right-radius: 8px;
+  }
+
+  .corner--bl {
+    bottom: 8px;
+    left: 8px;
+    border-bottom: 3px solid var(--corner-color, var(--fs-highlight));
+    border-left: 3px solid var(--corner-color, var(--fs-highlight));
+    border-bottom-left-radius: 8px;
+  }
+
+  .corner--br {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 3px solid var(--corner-color, var(--fs-highlight));
+    border-right: 3px solid var(--corner-color, var(--fs-highlight));
+    border-bottom-right-radius: 8px;
+  }
+
+  /* ===== Misión / Visión ===== */
   .statement {
     position: relative;
     max-width: 700px;
-    padding: 2rem 0 2rem 1.75rem;
-    border-left: 3px solid var(--fs-highlight);
+    padding: 2.25rem 2rem;
+    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid rgba(20, 33, 86, 0.08);
     margin-bottom: 2.5rem;
-  }
-
-  .statement::before {
-    content: '';
-    position: absolute;
-    left: -1.4rem;
-    top: 2rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--fs-highlight);
-    box-shadow: 0 0 0 4px rgba(12, 187, 204, 0.18);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 1),
+      inset 0 -4px 0 rgba(20, 33, 86, 0.08),
+      0 2px 4px rgba(20, 22, 31, 0.06),
+      0 16px 36px -18px rgba(20, 33, 86, 0.35);
+    transition:
+      box-shadow 0.35s ease,
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      background 0.35s ease;
+    --corner-color: var(--fs-highlight);
   }
 
   .statement--right {
     margin-left: auto;
-    padding: 2rem 1.75rem 2rem 0;
-    border-left: none;
-    border-right: 3px solid var(--fs-accent);
     text-align: right;
+    --corner-color: var(--fs-accent);
   }
 
-  .statement--right::before {
-    left: auto;
-    right: -1.4rem;
-    background: var(--fs-accent);
-    box-shadow: 0 0 0 4px rgba(16, 123, 205, 0.18);
+  .statement:hover .corner { width: 32px; height: 32px; }
+
+  .statement:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 1),
+      inset 0 -4px 0 rgba(20, 33, 86, 0.08),
+      inset 0 0 40px rgba(255, 255, 255, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.5),
+      0 24px 48px -20px rgba(20, 33, 86, 0.4),
+      0 0 30px -5px rgba(12, 187, 204, 0.28);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(240, 248, 255, 0.85) 100%
+    );
   }
 
   .statement__label {
-    display: block;
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--fs-accent);
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.9rem;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(16, 123, 205, 0.18);
   }
 
   .statement__text {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.7;
     color: var(--fs-primary);
     margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9),
+      0 1px 1px rgba(20, 33, 86, 0.06);
   }
 
+  /* ===== Valores ===== */
   .values {
     margin-top: 3.5rem;
     padding-top: 3rem;
-    border-top: 1px solid var(--fs-line);
+    border-top: 1px solid rgba(20, 33, 86, 0.08);
     text-align: center;
   }
 
-  .values .eyebrow { margin-bottom: 0.5rem; }
+  .values .eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fs-accent);
+    margin-bottom: 0.75rem;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
 
   .values__title {
     font-family: var(--font-display);
-    font-size: 1.45rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 800;
     color: var(--fs-primary);
     letter-spacing: -0.01em;
     margin: 0 0 2rem;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 0 rgba(20, 33, 86, 0.08),
+      0 4px 10px rgba(20, 33, 86, 0.15);
   }
 
   .values__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
     text-align: left;
   }
 
   .value {
     position: relative;
-    padding: 1.5rem 1.25rem 1.25rem;
+    padding: 1.9rem 1.4rem 1.4rem;
     border-radius: 12px;
-    background: linear-gradient(180deg, #FAFBFD 0%, #F0F3F7 100%);
-    border: 1px solid var(--fs-line);
+    background: #FFFFFF;
+    border: 1px solid rgba(20, 33, 86, 0.08);
     box-shadow:
-      0 1px 2px rgba(20, 22, 31, 0.03),
-      0 8px 24px -16px rgba(20, 33, 86, 0.12);
+      inset 0 2px 0 rgba(255, 255, 255, 1),
+      inset 0 -4px 0 rgba(20, 33, 86, 0.08),
+      0 2px 4px rgba(20, 22, 31, 0.06),
+      0 14px 30px -18px rgba(20, 33, 86, 0.3);
     transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease,
+      background 0.35s ease;
+    --corner-color: var(--fs-accent);
   }
 
   .value::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 1.25rem;
-    right: 1.25rem;
+    left: 1.4rem;
+    right: 1.4rem;
     height: 3px;
     border-radius: 0 0 3px 3px;
     background: var(--fs-gradient-accent);
   }
 
+  .value:hover .corner { width: 30px; height: 30px; }
+
   .value:hover {
-    transform: translateY(-3px);
-    border-color: rgba(12, 187, 204, 0.4);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.75) 50%,
+      rgba(240, 248, 255, 0.9) 100%
+    );
     box-shadow:
-      0 2px 6px rgba(20, 22, 31, 0.05),
-      0 18px 36px -18px rgba(20, 33, 86, 0.22);
+      inset 0 2px 0 rgba(255, 255, 255, 1),
+      inset 0 -4px 0 rgba(20, 33, 86, 0.08),
+      inset 0 0 40px rgba(255, 255, 255, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.5),
+      0 24px 48px -20px rgba(20, 33, 86, 0.35),
+      0 0 30px -5px rgba(12, 187, 204, 0.25);
   }
 
   .value__title {
     font-family: var(--font-display);
-    font-size: 1.02rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: var(--fs-primary);
     letter-spacing: -0.01em;
-    margin: 0 0 0.55rem;
+    margin: 0 0 0.6rem;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 1px rgba(20, 33, 86, 0.1);
   }
 
   .value__desc {
@@ -259,6 +397,9 @@ const valores = [
     line-height: 1.6;
     color: var(--fs-slate);
     margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   @media (max-width: 900px) {
@@ -266,16 +407,6 @@ const valores = [
     .statement--right {
       margin-left: 0;
       text-align: left;
-      padding: 1.75rem 0 1.75rem 1.5rem;
-      border-left: 3px solid var(--fs-highlight);
-      border-right: none;
-    }
-
-    .statement--right::before {
-      left: -1.4rem;
-      right: auto;
-      background: var(--fs-highlight);
-      box-shadow: 0 0 0 4px rgba(12, 187, 204, 0.18);
     }
 
     .values__grid { grid-template-columns: 1fr 1fr; }
@@ -284,4 +415,134 @@ const valores = [
   @media (max-width: 560px) {
     .values__grid { grid-template-columns: 1fr; }
   }
+
+  /* =========================================================
+     EFECTO DIGITALIZACIÓN POR SCROLL CON DIRECCIÓN
+     ========================================================= */
+  .digitize {
+    --p: 0;
+    --tx: 0px;
+    --ty: 0px;
+    opacity: calc(0.15 + var(--p) * 0.85);
+    filter:
+      blur(calc((1 - var(--p)) * 6px))
+      saturate(calc(0.4 + var(--p) * 0.6));
+    transform: translate(
+      calc((1 - var(--p)) * var(--tx)),
+      calc((1 - var(--p)) * var(--ty))
+    );
+    clip-path: inset(0 0 calc((1 - var(--p)) * 100%) 0);
+    transition:
+      opacity 0.15s linear,
+      filter 0.15s linear,
+      transform 0.15s linear,
+      clip-path 0.15s linear;
+    will-change: opacity, filter, transform, clip-path;
+  }
+
+  /* Direcciones — desplazamiento grande para que venga desde la orilla */
+  .digitize[data-dir="up"]    { --ty: 40px;   --tx: 0; }
+  .digitize[data-dir="left"]  { --tx: -140px; --ty: 0; }
+  .digitize[data-dir="right"] { --tx: 140px;  --ty: 0; }
+
+  /* Línea de escaneo */
+  .digitize::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--p) * 100%);
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(12, 187, 204, 0.85) 50%,
+      transparent 100%
+    );
+    opacity: calc((1 - var(--p)) * 0.9);
+    pointer-events: none;
+    filter: blur(0.5px);
+    z-index: 3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .digitize {
+      opacity: 1 !important;
+      filter: none !important;
+      transform: none !important;
+      clip-path: none !important;
+    }
+    .digitize::after { display: none; }
+  }
 </style>
+
+<script>
+  const initDigitize = () => {
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>('.digitize')
+    );
+    if (!items.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      items.forEach((el) => el.style.setProperty('--p', '1'));
+      return;
+    }
+
+    let ticking = false;
+
+    const update = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      items.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const dir = el.dataset.dir;
+        let p = 0;
+
+        if (dir === 'left') {
+          // Entra desde la orilla izquierda del navegador.
+          // p = 0 cuando el borde izquierdo está completamente fuera (x = -ancho)
+          // p = 1 cuando el borde izquierdo llega al 15% del viewport
+          const start = -rect.width;
+          const end = vw * 0.15;
+          p = (rect.left - start) / (end - start);
+        } else if (dir === 'right') {
+          // Entra desde la orilla derecha del navegador.
+          // p = 0 cuando el borde derecho está completamente fuera (x = vw + ancho)
+          // p = 1 cuando el borde derecho llega al 85% del viewport
+          const start = vw + rect.width;
+          const end = vw * 0.85;
+          p = (start - rect.right) / (start - end);
+        } else {
+          // up: entra desde abajo del viewport
+          const start = vh;
+          const end = vh * 0.5;
+          p = (start - rect.top) / (start - end);
+        }
+
+        p = Math.max(0, Math.min(1, p));
+        el.style.setProperty('--p', p.toFixed(3));
+      });
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDigitize);
+  } else {
+    initDigitize();
+  }
+  document.addEventListener('astro:page-load', initDigitize);
+</script>
