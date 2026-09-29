@@ -117,7 +117,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   <Footer slot="footer" />
 
   <script>
-    // 1. Abrir card por hash (/servicios#slug)
     function abrirPorHash() {
       const hash = window.location.hash.replace('#', '');
       if (!hash) return;
@@ -148,7 +147,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     document.addEventListener('DOMContentLoaded', abrirPorHash);
     window.addEventListener('hashchange', abrirPorHash);
 
-    // 2. Menú desplegable
     const menu      = document.querySelector<HTMLElement>('[data-servicios-menu]');
     const trigger   = document.querySelector<HTMLButtonElement>('[data-servicios-menu-trigger]');
     const closers   = document.querySelectorAll<HTMLElement>('[data-servicios-menu-close]');
@@ -193,7 +191,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       });
     });
 
-    // 3. Swipe-down para cerrar
     const sheet = document.querySelector<HTMLElement>('.servicios-menu__sheet');
     if (sheet) {
       let startY = 0;
@@ -289,7 +286,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     }
     .servicio-anchor { scroll-margin-top: 150px; }
 
-    /* Menú */
     .servicios-menu {
       position: fixed;
       inset: 0;
@@ -420,7 +416,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       to   { transform: translateY(0);    opacity: 1; }
     }
 
-    /* PC: modal centrado */
     @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
       .servicios-menu { align-items: center; }
       .servicios-menu__sheet {
@@ -430,7 +425,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       }
     }
 
-    /* Android / móvil: lista plana tipo app de banco */
     @media (max-width: 720px), (hover: none) and (pointer: coarse) {
       .servicios-menu__body { padding: 0.5rem 1.25rem 2rem; gap: 1.5rem; }
       .servicios-menu__group-title { font-size: 0.7rem; color: #6b7280; margin: 0 0 0.25rem 0.15rem; }

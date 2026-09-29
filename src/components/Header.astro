@@ -584,9 +584,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 
   .megamenu__cta:hover { color: var(--fs-primary); }
 
-  /* ============================================================
-     BOTTOM SHEET (solo móvil)
-     ============================================================ */
+
   .header-services-sheet {
     position: fixed;
     inset: 0;
@@ -785,9 +783,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     .header.is-scrolled .header__inner { padding: 0.5rem clamp(0.8rem, 2vw, 1.5rem); }
   }
 
-  /* ============================================================
-     📱 MÓVIL — botones y marca más compactos
-     ============================================================ */
   @media (max-width: 720px) {
     .header__inner {
       grid-template-columns: auto 1fr auto;
@@ -840,9 +835,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 </style>
 
 <script>
-  // ============================================================
-  // Header: scroll state
-  // ============================================================
+
   const header = document.getElementById('siteHeader');
   if (header) {
     const onScroll = () => {
@@ -883,7 +876,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     servicesTrigger?.setAttribute('aria-expanded', 'false');
   };
 
-  // ✅ En móvil, el clic abre el bottom sheet. En PC, el hover ya muestra el megamenú.
   servicesTrigger?.addEventListener('click', (e) => {
     if (isMobile()) {
       e.preventDefault();
@@ -909,7 +901,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     });
   });
 
-  // Swipe-down para cerrar el bottom sheet
   const panel = document.querySelector<HTMLElement>('.header-services-sheet__panel');
   if (panel) {
     let startY = 0;

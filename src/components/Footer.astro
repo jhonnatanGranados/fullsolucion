@@ -15,7 +15,6 @@ const contacto = {
   tiktok: 'https://www.tiktok.com/@full.solution_gt?_r=1&_t=ZS-99vHFqEJWR2',
 };
 
-/* ---------- Redes sociales (fila de botones) ---------- */
 const social = [
   {
     label: 'WhatsApp',
@@ -54,7 +53,6 @@ const social = [
   },
 ];
 
-/* ---------- Enlaces de navegación ---------- */
 const navLinks = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Servicios', href: '#servicios' },
@@ -88,7 +86,6 @@ const contactRows = [
 ---
 
 <footer class="footer">
-  <!-- Elemento orgánico: curva superior que conecta con la página -->
   <div class="footer__curve" aria-hidden="true">
     <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -97,7 +94,6 @@ const contactRows = [
     </svg>
   </div>
 
-  <!-- Mapa de Guatemala vectorizado sutil como fondo decorativo -->
   <div class="footer__map" aria-hidden="true">
     <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -114,7 +110,6 @@ const contactRows = [
 
   <div class="footer__inner">
 
-    <!-- BLOQUE IZQUIERDO GRANDE (40%) -->
     <div class="footer__brand-col">
       <a href="#inicio" class="footer__logo" aria-label="Full Solución - Inicio">
         <span class="footer__logo-mark"></span>
@@ -144,7 +139,6 @@ const contactRows = [
       </div>
     </div>
 
-    <!-- BLOQUES DERECHOS PEQUEÑOS (60% dividido en 2 columnas) -->
     <div class="footer__links-col">
       <h4 class="footer__title">Navegación</h4>
       <ul class="footer__list">
@@ -183,7 +177,6 @@ const contactRows = [
 
   </div>
 
-  <!-- CIERRE DE PÁGINA: fondo y tratamiento visual diferenciado -->
   <div class="footer__bottom">
     <span>
       &copy; {year} Full Solución. Todos los derechos reservados.
@@ -204,7 +197,6 @@ const contactRows = [
     isolation: isolate;
   }
 
-  /* ---------- Curva orgánica superior ---------- */
   .footer__curve {
     position: absolute;
     top: -1px;
@@ -223,7 +215,6 @@ const contactRows = [
     display: block;
   }
 
-  /* ---------- Mapa vectorizado de fondo ---------- */
   .footer__map {
     position: absolute;
     right: -60px;
@@ -242,7 +233,6 @@ const contactRows = [
     height: 100%;
   }
 
-  /* Halo decorativo sutil */
   .footer::after {
     content: '';
     position: absolute;
@@ -260,7 +250,6 @@ const contactRows = [
     z-index: 0;
   }
 
-  /* ---------- Layout asimétrico 40/60 ---------- */
   .footer__inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -272,7 +261,6 @@ const contactRows = [
     z-index: 1;
   }
 
-  /* ---------- Bloque de marca (izquierda, grande) ---------- */
   .footer__brand-col {
     max-width: 460px;
   }
@@ -322,7 +310,6 @@ const contactRows = [
     font-weight: 600;
   }
 
-  /* ---------- Redes sociales grandes y a color ---------- */
   .footer__social {
     display: flex;
     gap: 0.85rem;
@@ -375,7 +362,6 @@ const contactRows = [
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
   }
 
-  /* ---------- Columnas derechas ---------- */
   .footer__links-col,
   .footer__contact-col {
     padding-top: 0.4rem;
@@ -431,7 +417,6 @@ const contactRows = [
     transform: translateX(3px);
   }
 
-  /* ---------- Contacto ---------- */
   .footer__list--contact li {
     display: flex;
     align-items: flex-start;
@@ -470,7 +455,6 @@ const contactRows = [
     color: #ffffff;
   }
 
-  /* ---------- Pie inferior: cierre visual de la página ---------- */
   .footer__bottom {
     position: relative;
     z-index: 1;
@@ -485,7 +469,6 @@ const contactRows = [
     font-size: 0.85rem;
     color: #c5dde6;
 
-    /* Fondo distinto: más oscuro y sólido para denotar el final */
     background: linear-gradient(
       180deg,
       #071826 0%,
@@ -493,13 +476,11 @@ const contactRows = [
       #030a12 100%
     );
 
-    /* Sombra interna superior + elevación hacia arriba */
     border-top: none;
     box-shadow: inset 0 1px 0 rgba(95, 208, 214, 0.25),
                 0 -20px 40px -20px rgba(0, 0, 0, 0.6);
   }
 
-  /* Línea de acento superior con degradado cian */
   .footer__bottom::before {
     content: '';
     position: absolute;
@@ -519,7 +500,6 @@ const contactRows = [
     pointer-events: none;
   }
 
-  /* Brillo central sutil que refuerza la idea de "base" */
   .footer__bottom::after {
     content: '';
     position: absolute;
@@ -550,7 +530,6 @@ const contactRows = [
     padding-left: 1rem;
   }
 
-  /* Pequeño punto decorativo antes del texto "Servicio Técnico..." */
   .footer__made::before {
     content: '';
     position: absolute;
@@ -564,7 +543,6 @@ const contactRows = [
     box-shadow: 0 0 8px rgba(95, 208, 214, 0.8);
   }
 
-  /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
     .footer__inner {
       grid-template-columns: 1fr 1fr;

@@ -30,17 +30,14 @@ const heroImages = [
 ];
 ---
 
-<!-- ✅ HERO vectorial con clip-path (proporción 3:1) -->
 <section
   id="inicio"
   class="hero"
   data-interval="5000"
 >
 
-  <!-- ✅ CAPA 1: Triángulo azul fondo izquierdo -->
   <div class="hero__layer hero__layer--blue" aria-hidden="true"></div>
 
-  <!-- ✅ CAPA 2: Franja diagonal gris/plata -->
   <div class="hero__layer hero__layer--silver" aria-hidden="true">
     <span class="hero__tri hero__tri--s1"></span>
     <span class="hero__tri hero__tri--s2"></span>
@@ -48,7 +45,6 @@ const heroImages = [
     <span class="hero__tri hero__tri--s4"></span>
   </div>
 
-  <!-- ✅ CAPA 3: Polígono principal -->
   <div class="hero__layer hero__layer--graphite" aria-hidden="true">
     <span class="hero__tri hero__tri--g1"></span>
     <span class="hero__tri hero__tri--g2"></span>
@@ -59,11 +55,9 @@ const heroImages = [
     <span class="hero__tri hero__tri--g7"></span>
   </div>
 
-  <!-- ✅ CAPA 4: Marco en V -->
   <div class="hero__layer hero__layer--v-accent" aria-hidden="true"></div>
   <div class="hero__layer hero__layer--v-line" aria-hidden="true"></div>
 
-  <!-- ✅ CAPA 5: Máscara de recorte para la fotografía -->
   <div class="hero__photo" aria-hidden="true">
     <div class="hero__photo-clip">
       <div class="hero__carousel">
@@ -85,7 +79,6 @@ const heroImages = [
     </div>
   </div>
 
-  <!-- ✅ CONTENIDO: texto central -->
   <div class="hero__content">
     <h1 class="hero__title">
       <span class="hero__title-blue">Trabajemos</span>
@@ -105,7 +98,6 @@ const heroImages = [
       energía e ingeniería eléctrica.
     </p>
 
-    <!-- ✅ "CONOCE MÁS" → MISMA lógica que "Contáctanos" (Card.astro) -->
     <button
       type="button"
       class="hero__cta"
@@ -118,9 +110,6 @@ const heroImages = [
 </section>
 
 <style>
-  /* ============================================================
-     HERO — vectorial con clip-path (proporción 3:1)
-     ============================================================ */
   .hero {
     position: relative;
     width: 100%;
@@ -132,9 +121,6 @@ const heroImages = [
     isolation: isolate;
   }
 
-  /* ------------------------------------------------------------
-     CAPA 1: Triángulo azul fondo izquierdo
-     ------------------------------------------------------------ */
   .hero__layer--blue {
     position: absolute;
     inset: 0;
@@ -143,9 +129,6 @@ const heroImages = [
     clip-path: polygon(0 0, 22% 32%, 0 100%);
   }
 
-  /* ------------------------------------------------------------
-     CAPA 2: Franja diagonal gris/plata
-     ------------------------------------------------------------ */
   .hero__layer--silver {
     position: absolute;
     inset: 0;
@@ -163,9 +146,6 @@ const heroImages = [
   .hero__tri--s3 { inset: 0; background: rgba(255,255,255,0.18); clip-path: polygon(0 55%, 31% 0, 18% 100%); }
   .hero__tri--s4 { inset: 0; background: rgba(100,116,139,0.25); clip-path: polygon(0 0, 18% 100%, 0 100%); }
 
-  /* ------------------------------------------------------------
-     CAPA 3: Polígono principal de fondo
-     ------------------------------------------------------------ */
   .hero__layer--graphite {
     position: absolute;
     inset: 0;
@@ -183,9 +163,6 @@ const heroImages = [
   .hero__tri--g6 { inset: 0; background: rgba(255,255,255,0.02); clip-path: polygon(12% 100%, 42% 100%, 58% 60%); }
   .hero__tri--g7 { inset: 0; background: rgba(0,0,0,0.06);       clip-path: polygon(12% 100%, 58% 60%, 25% 0); }
 
-  /* ------------------------------------------------------------
-     CAPA 4: Marco en V
-     ------------------------------------------------------------ */
   .hero__layer--v-accent {
     position: absolute;
     inset: 0;
@@ -202,9 +179,6 @@ const heroImages = [
     clip-path: polygon(71% 0, 73% 0, 60% 60%, 73% 100%, 71% 100%, 57% 60%);
   }
 
-  /* ------------------------------------------------------------
-     CAPA 5: Máscara de recorte para la fotografía
-     ------------------------------------------------------------ */
   .hero__photo {
     position: absolute;
     inset: 0;
@@ -265,9 +239,6 @@ const heroImages = [
     padding: 10%;
   }
 
-  /* ------------------------------------------------------------
-     CONTENIDO: texto central
-     ------------------------------------------------------------ */
   .hero__content {
     position: absolute;
     top: 50%;
@@ -314,9 +285,6 @@ const heroImages = [
     max-width: 42ch;
   }
 
-  /* ------------------------------------------------------------
-     ✅ .hero__cta — MISMO estilo que .card__btn (Contáctanos)
-     ------------------------------------------------------------ */
   .hero__cta {
     position: relative;
     display: inline-block;
@@ -351,7 +319,6 @@ const heroImages = [
       box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Barrido de brillo — igual que .card__btn::before */
   .hero__cta::before {
     content: '';
     position: absolute;
@@ -395,9 +362,6 @@ const heroImages = [
     outline-offset: 3px;
   }
 
-  /* ============================================================
-     RESPONSIVE
-     ============================================================ */
   @media (max-width: 1100px) {
     .hero__content { width: 38%; left: 26%; }
     .hero__title   { font-size: clamp(1.2rem, 2.2vw, 2rem); }
@@ -459,9 +423,7 @@ const heroImages = [
 </style>
 
 <script>
-  // ============================================================
-  // Carrusel del Hero
-  // ============================================================
+
   const hero = document.querySelector<HTMLElement>('.hero');
   if (hero) {
     const slides = hero.querySelectorAll<HTMLElement>('.hero__slide');
