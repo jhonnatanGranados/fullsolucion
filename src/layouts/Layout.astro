@@ -10,8 +10,8 @@ export interface Props {
 }
 
 const {
-  title = 'Full Solución (Full Solution) | Servicios Eléctricos y Técnicos en Guatemala y Huehuetenango',
-  description = 'Full Solución (Full Solution): empresa de servicios eléctricos, instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y servicios técnicos en Guatemala y Huehuetenango. Electricistas certificados. Cotiza por WhatsApp.',
+  title = 'Full Solución (Full Solution) | Servicios Eléctricos, Instalaciones Eléctricas y Servicios Técnicos en Guatemala y Huehuetenango',
+  description = 'Full Solución (Full Solution): empresa guatemalteca especializada en instalaciones eléctricas, servicios eléctricos, paneles solares, energía solar, automatización industrial, videovigilancia, cámaras de seguridad, cableado estructurado, generadores eléctricos y 16 servicios técnicos en Guatemala y Huehuetenango. Electricistas certificados. Cotiza por WhatsApp al +502 4108 0263.',
   image = '/og-image.jpg',
   canonical = Astro.url.pathname,
 } = Astro.props;
@@ -36,15 +36,25 @@ const ogImageURL = new URL(image, siteUrl);
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
     <meta name="author" content="Full Solución" />
+    <meta name="publisher" content="Full Solución" />
+    <meta name="copyright" content="Full Solución" />
+    <meta name="theme-color" content="#142156" />
+    <meta name="format-detection" content="telephone=+50241080263" />
+
     <meta
       name="keywords"
-      content="Full Solution, Full Solucion, Full Solución, Full Solutions, Full Soluciones, Full Solution Guatemala, Full Solucion Guatemala, Full Solución Guatemala, Full Solution Huehuetenango, Full Solucion Huehuetenango, Full Solución Huehuetenango, Full Solution Guate, Full Solucion Guate, Full Solution GT, Full Solucion GT, empresa de servicios electricos, empresa de servicios eléctricos, empresa electrica Guatemala, empresa eléctrica Guatemala, empresa electrica Huehuetenango, empresa eléctrica Huehuetenango, empresa de instalaciones electricas, empresa de instalaciones eléctricas, instalaciones electricas Guatemala, instalaciones eléctricas Guatemala, instalaciones electricas Huehuetenango, instalaciones eléctricas Huehuetenango, servicios electricos Guatemala, servicios eléctricos Guatemala, servicios electricos Huehuetenango, servicios eléctricos Huehuetenango, electricista Guatemala, electricista Huehuetenango, electricistas Guatemala, electricistas Huehuetenango, servicios tecnicos Guatemala, servicios técnicos Guatemala, servicios tecnicos Huehuetenango, servicios técnicos Huehuetenango, paneles solares Guatemala, paneles solares Huehuetenango, energia solar Guatemala, energía solar Guatemala, automatizacion industrial Guatemala, automatización industrial Guatemala, videovigilancia Guatemala, videovigilancia Huehuetenango, camaras de seguridad Guatemala, cámaras de seguridad Guatemala, cableado estructurado Guatemala, generadores electricos Guatemala, generadores eléctricos Guatemala, mantenimiento electrico Guatemala, mantenimiento eléctrico Guatemala, sonido comercial Guatemala, instalaciones residenciales Guatemala, instalaciones industriales Guatemala"
+      content="Full Solution, Full Solucion, Full Solución, Full Solutions, Full Soluciones, Full Solution Guatemala, Full Solucion Guatemala, Full Solución Guatemala, Full Solution Huehuetenango, Full Solucion Huehuetenango, Full Solución Huehuetenango, Full Solution Guate, Full Solucion Guate, Full Solution GT, Full Solucion GT, Full Solution Xela, Full Solucion Xela, empresa de servicios electricos, empresa de servicios eléctricos, empresa electrica Guatemala, empresa eléctrica Guatemala, empresa electrica Huehuetenango, empresa eléctrica Huehuetenango, empresa de instalaciones electricas, empresa de instalaciones eléctricas, empresa de instalaciones electricas Guatemala, empresa de instalaciones electricas Huehuetenango, instalaciones electricas, instalaciones eléctricas, instalaciones electricas Guatemala, instalaciones eléctricas Guatemala, instalaciones electricas Huehuetenango, instalaciones eléctricas Huehuetenango, instalaciones electricas residenciales, instalaciones electricas industriales, instalaciones electricas comerciales, servicios electricos, servicios eléctricos, servicios electricos Guatemala, servicios eléctricos Guatemala, servicios electricos Huehuetenango, servicios eléctricos Huehuetenango, electricista, electricistas, electricista Guatemala, electricista Huehuetenango, electricista certificado Guatemala, electricistas certificados Huehuetenango, servicios tecnicos, servicios técnicos, servicios tecnicos Guatemala, servicios técnicos Guatemala, servicios tecnicos Huehuetenango, servicios técnicos Huehuetenango, paneles solares, paneles solares Guatemala, paneles solares Huehuetenango, instalacion de paneles solares, instalación de paneles solares Guatemala, energia solar, energía solar, energia solar Guatemala, energía solar Guatemala, energia solar Huehuetenango, energía solar Huehuetenango, sistemas fotovoltaicos Guatemala, automatizacion industrial, automatización industrial, automatizacion industrial Guatemala, automatización industrial Guatemala, automatizacion industrial Huehuetenango, automatización industrial Huehuetenango, PLC Guatemala, tableros electricos Guatemala, videovigilancia, videovigilancia Guatemala, videovigilancia Huehuetenango, camaras de seguridad, cámaras de seguridad, camaras de seguridad Guatemala, cámaras de seguridad Guatemala, camaras de seguridad Huehuetenango, cámaras de seguridad Huehuetenango, CCTV Guatemala, cableado estructurado, cableado estructurado Guatemala, cableado estructurado Huehuetenango, redes informaticas Guatemala, generadores electricos, generadores eléctricos, generadores electricos Guatemala, generadores eléctricos Guatemala, plantas electricas Guatemala, mantenimiento electrico, mantenimiento eléctrico, mantenimiento electrico Guatemala, mantenimiento electrico Huehuetenango, reparacion electrica Guatemala, reparación eléctrica Guatemala, sonido comercial Guatemala, instalaciones residenciales Guatemala, instalaciones industriales Guatemala, construccion liviana Guatemala, estructuras livianas Guatemala, soldadura industrial Guatemala, sistemas de gases Guatemala, perfilaria PVC Guatemala, pintura residencial Guatemala, pintura industrial Guatemala, desarrollo de software Guatemala, Huehuetenango, Quetzaltenango, Xela, Chimaltenango, Totonicapan, Totonicapán, San Marcos, Guatemala"
     />
 
     <meta name="geo.region" content="GT-HU" />
     <meta name="geo.placename" content="Huehuetenango, Guatemala" />
     <meta name="geo.position" content="15.3197;-91.4708" />
     <meta name="ICBM" content="15.3197, -91.4708" />
+    <meta name="language" content="Spanish" />
+    <meta name="coverage" content="Guatemala, Huehuetenango, Quetzaltenango, Chimaltenango, Totonicapán, San Marcos" />
+    <meta name="distribution" content="local" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="7 days" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -68,13 +78,16 @@ const ogImageURL = new URL(image, siteUrl);
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Full Solución (Full Solution) - Empresa de servicios eléctricos e instalaciones eléctricas en Guatemala y Huehuetenango"
+      content="Full Solución (Full Solution) - Empresa de servicios eléctricos, instalaciones eléctricas y servicios técnicos en Guatemala y Huehuetenango"
     />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content="Full Solución - Servicios eléctricos en Guatemala y Huehuetenango" />
+    <meta name="twitter:site" content="@fullsolucion" />
+    <meta name="twitter:creator" content="@fullsolucion" />
 
     <script
       type="application/ld+json"
@@ -99,6 +112,9 @@ const ogImageURL = new URL(image, siteUrl);
           'Full Solucion Guate',
           'Full Solution GT',
           'Full Solucion GT',
+          'Full Solution Xela',
+          'Full Solucion Xela',
+          'Full Solución Quetzaltenango',
           'Empresa de servicios eléctricos en Guatemala',
           'Empresa de servicios eléctricos en Huehuetenango',
           'Empresa de instalaciones eléctricas en Guatemala',
@@ -111,6 +127,7 @@ const ogImageURL = new URL(image, siteUrl);
           'Electricistas Full Solución',
           'Full Solución Electricistas',
           'Full Solución Guatemala Electricidad',
+          'Full Solución Huehuetenango Electricidad',
         ],
         url: siteUrl,
         logo: `${siteUrl}/favicon.svg`,
@@ -120,6 +137,8 @@ const ogImageURL = new URL(image, siteUrl);
         telephone: '+50241080263',
         email: 'fullsolution001@gmail.com',
         priceRange: '$$',
+        currenciesAccepted: 'GTQ',
+        paymentAccepted: 'Efectivo, Transferencia, Tarjeta',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'GT',
@@ -136,15 +155,20 @@ const ogImageURL = new URL(image, siteUrl);
           { '@type': 'City', name: 'Guatemala' },
           { '@type': 'City', name: 'Huehuetenango' },
           { '@type': 'City', name: 'Quetzaltenango' },
+          { '@type': 'City', name: 'Xela' },
           { '@type': 'City', name: 'Chimaltenango' },
           { '@type': 'City', name: 'Totonicapán' },
           { '@type': 'City', name: 'San Marcos' },
+          { '@type': 'AdministrativeArea', name: 'Huehuetenango' },
+          { '@type': 'AdministrativeArea', name: 'Quetzaltenango' },
+          { '@type': 'AdministrativeArea', name: 'Chimaltenango' },
         ],
         knowsLanguage: ['es-GT', 'es'],
         sameAs: [
           // 'https://www.facebook.com/tu-pagina',
           // 'https://www.instagram.com/tu-cuenta',
           // 'https://www.tiktok.com/@tu-cuenta',
+          // 'https://www.youtube.com/@tu-canal',
         ],
         openingHoursSpecification: [
           {
@@ -312,6 +336,8 @@ const ogImageURL = new URL(image, siteUrl);
           'Full Solution Guatemala',
           'Full Solución Huehuetenango',
           'Full Solution Huehuetenango',
+          'Full Solución Quetzaltenango',
+          'Full Solution Xela',
         ],
         description:
           'Empresa de servicios eléctricos, instalaciones eléctricas, paneles solares, automatización industrial y servicios técnicos en Guatemala y Huehuetenango.',
@@ -346,6 +372,8 @@ const ogImageURL = new URL(image, siteUrl);
         telephone: '+50241080263',
         email: 'fullsolution001@gmail.com',
         priceRange: '$$',
+        currenciesAccepted: 'GTQ',
+        paymentAccepted: 'Efectivo, Transferencia, Tarjeta',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'GT',
@@ -358,6 +386,13 @@ const ogImageURL = new URL(image, siteUrl);
           longitude: -91.4708,
         },
         url: siteUrl,
+        areaServed: [
+          { '@type': 'City', name: 'Huehuetenango' },
+          { '@type': 'City', name: 'Quetzaltenango' },
+          { '@type': 'City', name: 'Chimaltenango' },
+          { '@type': 'City', name: 'Totonicapán' },
+          { '@type': 'City', name: 'San Marcos' },
+        ],
         openingHoursSpecification: [
           {
             '@type': 'OpeningHoursSpecification',
@@ -431,7 +466,7 @@ const ogImageURL = new URL(image, siteUrl);
 
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 80px;
+        scroll-padding-top: 72px;
       }
 
       body {
@@ -666,6 +701,12 @@ const ogImageURL = new URL(image, siteUrl);
         section { padding: 3rem 0; }
         .container { padding: 0 1.25rem; }
         .section-title::after { width: 44px; }
+      }
+
+      @media (max-width: 720px) {
+        html {
+          scroll-padding-top: 56px;
+        }
       }
 
       @media (max-width: 480px) {
