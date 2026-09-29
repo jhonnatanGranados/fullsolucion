@@ -12,13 +12,11 @@ export interface Props {
 const {
   title = 'Servicios Eléctricos y Automatización en Guatemala y Huehuetenango | Full Solución',
   description = 'Empresa guatemalteca especializada en instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y 16 áreas de servicio técnico en Guatemala y Huehuetenango.',
-  image = '/logo.png',
   canonical = Astro.url.pathname,
 } = Astro.props;
 
 const siteUrl = 'https://fullsolucion.vercel.app';
 const canonicalURL = new URL(canonical, siteUrl);
-const ogImage = new URL(image, siteUrl);
 ---
 
 <!DOCTYPE html>
@@ -27,37 +25,32 @@ const ogImage = new URL(image, siteUrl);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ============ SEO BÁSICO ============ -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Geolocalización para SEO local -->
     <meta name="geo.region" content="GT" />
     <meta name="geo.placename" content="Guatemala, Huehuetenango" />
     <meta name="geo.position" content="14.6349;-90.5069" />
     <meta name="ICBM" content="14.6349, -90.5069" />
 
-    <!-- ============ FAVICON (LOGO DE LA COMPAÑÍA) ============ -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="preload" as="image" href="/favicon.svg" type="image/svg+xml" fetchpriority="high" />
 
-    <!-- ============ OPEN GRAPH ============ -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Full Solución" />
     <meta property="og:locale" content="es_GT" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
 
     <script
       type="application/ld+json"
@@ -68,12 +61,11 @@ const ogImage = new URL(image, siteUrl);
         name: 'Full Solución',
         alternateName: 'Full Solución Guatemala',
         url: siteUrl,
-        logo: `${siteUrl}/logo.png`,
-        image: ogImage,
+      
         description:
           'Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales en Guatemala y Huehuetenango.',
-        telephone: '+50241080263', 
-        email: 'fullsolution001@gmail.com', 
+        telephone: '+50241080263',
+        email: 'fullsolution001@gmail.com',
         priceRange: '$$',
         address: {
           '@type': 'PostalAddress',
@@ -133,7 +125,6 @@ const ogImage = new URL(image, siteUrl);
       })}
     />
 
-    <!-- ============ GOOGLE FONTS ============ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -142,9 +133,6 @@ const ogImage = new URL(image, siteUrl);
     />
 
     <style is:global>
-      /* ============================================================
-         PALETA INSTITUCIONAL FULL SOLUCIÓN
-         ============================================================ */
       :root {
         --fs-primary: #142156;
         --fs-secondary: #152A7D;
@@ -183,9 +171,6 @@ const ogImage = new URL(image, siteUrl);
         --radius-lg: 16px;
       }
 
-      /* ============================================================
-         RESET Y BASE
-         ============================================================ */
       *,
       *::before,
       *::after {
@@ -298,9 +283,6 @@ const ogImage = new URL(image, siteUrl);
         margin-bottom: 0.75rem;
       }
 
-      /* ============================================================
-         BOTONES GLOBALES
-         ============================================================ */
       .btn-primary,
       .btn-secondary,
       .btn-ghost {

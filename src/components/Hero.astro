@@ -214,10 +214,22 @@ const heroImages = [
     align-items: center;
     justify-content: flex-end;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transform: scale(1.04);
+    transition:
+      opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
     overflow: hidden;
   }
-  .hero__slide[data-active='true'] { opacity: 1; }
+
+  .hero__slide[data-active='true'] {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
 
   .hero__slide img {
     display: block;
@@ -231,6 +243,9 @@ const heroImages = [
     user-select: none;
     -webkit-user-drag: none;
     filter: saturate(0.9) brightness(0.95) contrast(1.05);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: none;
   }
 
   .hero__slide--logo img {
@@ -367,38 +382,68 @@ const heroImages = [
     .hero__title   { font-size: clamp(1.2rem, 2.2vw, 2rem); }
   }
 
+  /* =========================================================
+     MÓVIL: carrusel arriba estático, texto debajo, fondo negro
+     ========================================================= */
   @media (max-width: 900px) {
     .hero {
       aspect-ratio: auto;
-      min-height: 100svh;
+      min-height: auto;
       max-height: none;
+      display: flex;
+      flex-direction: column;
+      background: #000000;
+      overflow: hidden;
     }
 
+    /* Ocultar capas decorativas del layout desktop */
     .hero__layer--blue,
     .hero__layer--silver,
     .hero__layer--graphite,
     .hero__layer--v-accent,
     .hero__layer--v-line { display: none; }
 
-    .hero { background: linear-gradient(135deg, #1E2530 0%, #0f1823 100%); }
-
+    /* Carrusel arriba, en su propia fila, tamaño fijo */
     .hero__photo {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: 44vh;
+      min-height: 280px;
+      max-height: 380px;
       clip-path: none;
-      inset: 0 0 auto 0;
-      height: 42vh;
-      border-radius: 0 0 24px 24px;
+      border-radius: 0;
+      background: #000000;
+      flex: 0 0 auto;
+      z-index: 1;
     }
 
-    .hero__photo-clip { width: 100%; height: 100%; }
-    .hero__slide      { justify-content: center; }
+    .hero__photo-clip {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+    }
+
+    .hero__carousel {
+      background: #000000;
+    }
+
+    .hero__slide {
+      justify-content: center;
+      align-items: center;
+    }
 
     .hero__slide img {
       object-fit: contain;
       object-position: center center;
-      padding: 2%;
+      padding: 4%;
     }
 
-    .hero__slide--logo img { object-fit: contain; padding: 8% 16%; }
+    .hero__slide--logo img {
+      object-fit: contain;
+      padding: 12% 20%;
+    }
 
     .hero__content {
       position: relative;
@@ -407,9 +452,12 @@ const heroImages = [
       transform: none;
       width: 100%;
       max-width: 100%;
-      padding: 2rem 1.5rem 2.5rem;
+      padding: 2rem 1.5rem 3rem;
       align-items: center;
       text-align: center;
+      background: #000000;
+      flex: 1 1 auto;
+      z-index: 2;
     }
 
     .hero__divider { max-width: 200px; }
@@ -417,29 +465,87 @@ const heroImages = [
   }
 
   @media (max-width: 560px) {
-    .hero__photo { height: 36vh; }
+    .hero__photo { height: 40vh; min-height: 240px; max-height: 320px; }
     .hero__title { font-size: clamp(1.3rem, 6vw, 1.7rem); }
   }
 </style>
 
 <script>
-
   const hero = document.querySelector<HTMLElement>('.hero');
-  if (hero) {
+
+  if (hero && !hero.dataset.carouselInit) {
+    hero.dataset.carouselInit = 'true';
+
     const slides = hero.querySelectorAll<HTMLElement>('.hero__slide');
     const interval = Number(hero.dataset.interval ?? 5000);
 
     if (slides.length > 1) {
       let current = 0;
-      slides.forEach((s, i) => { s.dataset.active = i === 0 ? 'true' : 'false'; });
+      let rafId: number | null = null;
+      let lastTime = performance.now();
+      let isPaused = false;
 
-      setInterval(() => {
+      // Estado inicial
+      slides.forEach((s, i) => {
+        s.dataset.active = i === 0 ? 'true' : 'false';
+      });
+
+      const nextSlide = () => {
         slides[current].dataset.active = 'false';
         current = (current + 1) % slides.length;
         slides[current].dataset.active = 'true';
-      }, interval);
+      };
+
+      const tick = (now: number) => {
+        if (!isPaused && now - lastTime >= interval) {
+          nextSlide();
+          lastTime = now;
+        }
+        rafId = requestAnimationFrame(tick);
+      };
+
+      const start = () => {
+        if (rafId !== null) return;
+        lastTime = performance.now();
+        rafId = requestAnimationFrame(tick);
+      };
+
+      const stop = () => {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      };
+
+      document.addEventListener('visibilitychange', () => {
+        isPaused = document.hidden;
+        if (document.hidden) {
+          stop();
+        } else {
+          start();
+        }
+      });
+
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          isPaused = !entry.isIntersecting;
+          if (entry.isIntersecting && !document.hidden) {
+            start();
+          } else {
+            stop();
+          }
+        },
+        { threshold: 0.15 }
+      );
+      io.observe(hero);
+
+      // Arranque inicial
+      start();
+
+      document.addEventListener('astro:before-swap', () => {
+        stop();
+        io.disconnect();
+      });
     }
   }
-
- 
 </script>
