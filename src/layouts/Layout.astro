@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title = 'Full Solución (Full Solution) | Servicios Eléctricos y Técnicos en Guatemala y Huehuetenango',
-  description = 'Full Solución (Full Solution): servicios eléctricos, paneles solares, automatización industrial, videovigilancia y 16 servicios técnicos en Guatemala y Huehuetenango. Electricistas certificados. Cotiza por WhatsApp.',
+  description = 'Full Solución (Full Solution): empresa de servicios eléctricos, instalaciones eléctricas, paneles solares, automatización industrial, videovigilancia y servicios técnicos en Guatemala y Huehuetenango. Electricistas certificados. Cotiza por WhatsApp.',
   image = '/og-image.jpg',
   canonical = Astro.url.pathname,
 } = Astro.props;
@@ -38,7 +38,7 @@ const ogImageURL = new URL(image, siteUrl);
     <meta name="author" content="Full Solución" />
     <meta
       name="keywords"
-      content="Full Solution, Full Solución, Full Solución Guatemala, Full Solution Guatemala, servicios eléctricos Guatemala, servicios eléctricos Huehuetenango, electricista Guatemala, electricista Huehuetenango, servicios técnicos Guatemala, servicios técnicos Huehuetenango, paneles solares Guatemala, paneles solares Huehuetenango, automatización industrial Guatemala, automatización industrial Huehuetenango, videovigilancia Guatemala, energía solar Guatemala, instalaciones eléctricas Guatemala, empresa eléctrica Guatemala, empresa eléctrica Huehuetenango"
+      content="Full Solution, Full Solucion, Full Solución, Full Solutions, Full Soluciones, Full Solution Guatemala, Full Solucion Guatemala, Full Solución Guatemala, Full Solution Huehuetenango, Full Solucion Huehuetenango, Full Solución Huehuetenango, Full Solution Guate, Full Solucion Guate, Full Solution GT, Full Solucion GT, empresa de servicios electricos, empresa de servicios eléctricos, empresa electrica Guatemala, empresa eléctrica Guatemala, empresa electrica Huehuetenango, empresa eléctrica Huehuetenango, empresa de instalaciones electricas, empresa de instalaciones eléctricas, instalaciones electricas Guatemala, instalaciones eléctricas Guatemala, instalaciones electricas Huehuetenango, instalaciones eléctricas Huehuetenango, servicios electricos Guatemala, servicios eléctricos Guatemala, servicios electricos Huehuetenango, servicios eléctricos Huehuetenango, electricista Guatemala, electricista Huehuetenango, electricistas Guatemala, electricistas Huehuetenango, servicios tecnicos Guatemala, servicios técnicos Guatemala, servicios tecnicos Huehuetenango, servicios técnicos Huehuetenango, paneles solares Guatemala, paneles solares Huehuetenango, energia solar Guatemala, energía solar Guatemala, automatizacion industrial Guatemala, automatización industrial Guatemala, videovigilancia Guatemala, videovigilancia Huehuetenango, camaras de seguridad Guatemala, cámaras de seguridad Guatemala, cableado estructurado Guatemala, generadores electricos Guatemala, generadores eléctricos Guatemala, mantenimiento electrico Guatemala, mantenimiento eléctrico Guatemala, sonido comercial Guatemala, instalaciones residenciales Guatemala, instalaciones industriales Guatemala"
     />
 
     <meta name="geo.region" content="GT-HU" />
@@ -68,7 +68,7 @@ const ogImageURL = new URL(image, siteUrl);
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Full Solución (Full Solution) - Servicios eléctricos y técnicos en Guatemala y Huehuetenango"
+      content="Full Solución (Full Solution) - Empresa de servicios eléctricos e instalaciones eléctricas en Guatemala y Huehuetenango"
     />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -85,18 +85,38 @@ const ogImageURL = new URL(image, siteUrl);
         name: 'Full Solución',
         alternateName: [
           'Full Solution',
-          'Full Solución Guatemala',
+          'Full Solucion',
+          'Full Solución',
+          'Full Solutions',
+          'Full Soluciones',
           'Full Solution Guatemala',
-          'Full Solución Huehuetenango',
+          'Full Solucion Guatemala',
+          'Full Solución Guatemala',
           'Full Solution Huehuetenango',
-          'Servicios Eléctricos Full Solución',
-          'Servicios Técnicos Full Solución',
+          'Full Solucion Huehuetenango',
+          'Full Solución Huehuetenango',
+          'Full Solution Guate',
+          'Full Solucion Guate',
+          'Full Solution GT',
+          'Full Solucion GT',
+          'Empresa de servicios eléctricos en Guatemala',
+          'Empresa de servicios eléctricos en Huehuetenango',
+          'Empresa de instalaciones eléctricas en Guatemala',
+          'Empresa de instalaciones eléctricas en Huehuetenango',
+          'Servicios eléctricos Full Solución',
+          'Servicios eléctricos Full Solution',
+          'Servicios técnicos Full Solución',
+          'Servicios técnicos Full Solution',
+          'Instalaciones eléctricas Full Solución',
+          'Electricistas Full Solución',
+          'Full Solución Electricistas',
+          'Full Solución Guatemala Electricidad',
         ],
         url: siteUrl,
         logo: `${siteUrl}/favicon.svg`,
         image: ogImageURL,
         description:
-          'Full Solución (Full Solution) es una empresa guatemalteca especializada en servicios eléctricos, energías renovables, paneles solares, automatización industrial, videovigilancia y servicios técnicos integrales en Guatemala y Huehuetenango.',
+          'Full Solución (Full Solution) es una empresa guatemalteca de servicios eléctricos e instalaciones eléctricas, especializada en energías renovables, paneles solares, automatización industrial, videovigilancia y servicios técnicos integrales en Guatemala y Huehuetenango.',
         telephone: '+50241080263',
         email: 'fullsolution001@gmail.com',
         priceRange: '$$',
@@ -142,13 +162,27 @@ const ogImageURL = new URL(image, siteUrl);
         ],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'Servicios eléctricos y técnicos de Full Solución en Guatemala y Huehuetenango',
+          name: 'Servicios eléctricos, instalaciones eléctricas y servicios técnicos de Full Solución en Guatemala y Huehuetenango',
           itemListElement: [
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
                 name: 'Instalaciones eléctricas residenciales e industriales en Guatemala',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Instalaciones eléctricas residenciales e industriales en Huehuetenango',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Servicios eléctricos en Guatemala y Huehuetenango',
               },
             },
             {
@@ -162,14 +196,14 @@ const ogImageURL = new URL(image, siteUrl);
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Cableado estructurado y redes',
+                name: 'Cableado estructurado y redes en Guatemala',
               },
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Videovigilancia y cámaras de seguridad',
+                name: 'Videovigilancia y cámaras de seguridad en Guatemala y Huehuetenango',
               },
             },
             {
@@ -183,14 +217,14 @@ const ogImageURL = new URL(image, siteUrl);
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Generadores eléctricos',
+                name: 'Generadores eléctricos en Guatemala',
               },
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'Reparación y mantenimiento eléctrico',
+                name: 'Reparación y mantenimiento eléctrico en Guatemala y Huehuetenango',
               },
             },
             {
@@ -269,9 +303,18 @@ const ogImageURL = new URL(image, siteUrl);
         '@id': `${siteUrl}/#website`,
         url: siteUrl,
         name: 'Full Solución',
-        alternateName: ['Full Solution', 'Full Solución Guatemala', 'Full Solution Guatemala'],
+        alternateName: [
+          'Full Solution',
+          'Full Solucion',
+          'Full Solutions',
+          'Full Soluciones',
+          'Full Solución Guatemala',
+          'Full Solution Guatemala',
+          'Full Solución Huehuetenango',
+          'Full Solution Huehuetenango',
+        ],
         description:
-          'Servicios eléctricos, paneles solares, automatización industrial y servicios técnicos en Guatemala y Huehuetenango.',
+          'Empresa de servicios eléctricos, instalaciones eléctricas, paneles solares, automatización industrial y servicios técnicos en Guatemala y Huehuetenango.',
         inLanguage: 'es-GT',
         publisher: { '@id': `${siteUrl}/#organizacion` },
         potentialAction: {
@@ -292,7 +335,13 @@ const ogImageURL = new URL(image, siteUrl);
         '@type': 'LocalBusiness',
         '@id': `${siteUrl}/#localbusiness`,
         name: 'Full Solución',
-        alternateName: 'Full Solution',
+        alternateName: [
+          'Full Solution',
+          'Full Solucion',
+          'Full Solutions',
+          'Empresa de servicios eléctricos en Guatemala',
+          'Empresa de instalaciones eléctricas en Huehuetenango',
+        ],
         image: ogImageURL,
         telephone: '+50241080263',
         email: 'fullsolution001@gmail.com',
