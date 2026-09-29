@@ -31,7 +31,10 @@ const ogImageURL = new URL(image, siteUrl);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
     <meta name="author" content="Full Solución" />
     <meta
       name="keywords"
@@ -46,7 +49,13 @@ const ogImageURL = new URL(image, siteUrl);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
-    <link rel="preload" as="image" href="/favicon.svg" type="image/svg+xml" fetchpriority="high" />
+    <link
+      rel="preload"
+      as="image"
+      href="/favicon.svg"
+      type="image/svg+xml"
+      fetchpriority="high"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Full Solución" />
@@ -57,7 +66,10 @@ const ogImageURL = new URL(image, siteUrl);
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Full Solución (Full Solution) - Servicios eléctricos y técnicos en Guatemala y Huehuetenango" />
+    <meta
+      property="og:image:alt"
+      content="Full Solución (Full Solution) - Servicios eléctricos y técnicos en Guatemala y Huehuetenango"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -132,28 +144,119 @@ const ogImageURL = new URL(image, siteUrl);
           '@type': 'OfferCatalog',
           name: 'Servicios eléctricos y técnicos de Full Solución en Guatemala y Huehuetenango',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Instalaciones eléctricas residenciales e industriales en Guatemala' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Energías renovables y paneles solares en Guatemala y Huehuetenango' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cableado estructurado y redes' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Videovigilancia y cámaras de seguridad' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sonido comercial' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Generadores eléctricos' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Reparación y mantenimiento eléctrico' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatización de sistemas industriales en Guatemala y Huehuetenango' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas prefabricados livianos' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Pintura residencial e industrial' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Estructuras livianas' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Soldadura industrial' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas de gases' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Perfilería PVC' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y limpieza' } },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software' } },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Instalaciones eléctricas residenciales e industriales en Guatemala',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Energías renovables y paneles solares en Guatemala y Huehuetenango',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Cableado estructurado y redes',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Videovigilancia y cámaras de seguridad',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Sonido comercial',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Generadores eléctricos',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Reparación y mantenimiento eléctrico',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Automatización de sistemas industriales en Guatemala y Huehuetenango',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Sistemas prefabricados livianos',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Pintura residencial e industrial',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Estructuras livianas',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Soldadura industrial',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Sistemas de gases',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Perfilería PVC',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Mantenimiento y limpieza',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Desarrollo de software',
+              },
+            },
           ],
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '5',
-          reviewCount: '1',
         },
       })}
     />
@@ -166,7 +269,7 @@ const ogImageURL = new URL(image, siteUrl);
         '@id': `${siteUrl}/#website`,
         url: siteUrl,
         name: 'Full Solución',
-        alternateName: ['Full Solution', 'Full Solución Guatemala'],
+        alternateName: ['Full Solution', 'Full Solución Guatemala', 'Full Solution Guatemala'],
         description:
           'Servicios eléctricos, paneles solares, automatización industrial y servicios técnicos en Guatemala y Huehuetenango.',
         inLanguage: 'es-GT',
