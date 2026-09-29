@@ -20,7 +20,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 <header class="header" id="siteHeader">
   <div class="header__main">
     <div class="header__inner">
-      <!-- Logo -->
       <a href="/" class="brand">
         <img src={logo.src} alt="Full Solution" class="brand__logo" />
         <span class="brand__wrap">
@@ -29,13 +28,11 @@ const serviciosPorCategoria = categorias.map((cat) => ({
         </span>
       </a>
 
-      <!-- Nav centrado -->
       <nav class="nav" aria-label="Navegación principal">
         <ul class="nav__list">
           <li><a href="/" class="nav__btn nav__btn--inicio">Inicio</a></li>
 
           <li class="nav__item--has-menu">
-            <!-- ✅ Botón: en PC muestra megamenú con hover, en móvil abre bottom sheet -->
             <button
               type="button"
               class="nav__btn nav__btn--servicios"
@@ -49,7 +46,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
               </svg>
             </button>
 
-            <!-- ✅ MEGAMENÚ (solo PC, se muestra con hover) -->
             <div class="megamenu" role="menu" aria-label="Servicios">
               <div class="megamenu__grid">
                 {serviciosPorCategoria.map((cat) => (
@@ -75,7 +71,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
         </ul>
       </nav>
 
-      <!-- Botón WhatsApp -->
       <a
         href="https://wa.me/50241080263"
         class="header__wa"
@@ -154,9 +149,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 </div>
 
 <style>
-  /* ============================================================
-     HEADER — base
-     ============================================================ */
   .header {
     position: sticky;
     top: 0;
@@ -199,9 +191,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     padding: 0.5rem clamp(1rem, 2.5vw, 2rem);
   }
 
-  /* ============================================================
-     MARCA
-     ============================================================ */
   .brand {
     display: flex;
     align-items: center;
@@ -246,9 +235,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     margin-top: 3px;
   }
 
-  /* ============================================================
-     NAV
-     ============================================================ */
   .nav {
     justify-self: center;
     width: 100%;
@@ -278,9 +264,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     justify-content: center;
   }
 
-  /* ============================================================
-     BOTONES DEL NAV — azul brillante glossy
-     ============================================================ */
   .nav__btn {
     position: relative;
     display: inline-flex;
@@ -430,9 +413,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transform: rotate(180deg);
   }
 
-  /* ============================================================
-     BOTÓN WHATSAPP
-     ============================================================ */
   .header__wa {
     justify-self: end;
     display: inline-flex;
@@ -490,9 +470,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     filter: drop-shadow(0 1px 1px rgba(0, 60, 40, 0.15));
   }
 
-  /* ============================================================
-     MEGAMENÚ (solo PC)
-     ============================================================ */
   .megamenu {
     position: absolute;
     top: calc(100% + 14px);
@@ -761,9 +738,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     to   { transform: translateY(0);    opacity: 1; }
   }
 
-  /* ============================================================
-     RESPONSIVE
-     ============================================================ */
   @media (max-width: 1180px) {
     .nav__list { gap: 0.75rem; font-size: 0.84rem; max-width: 560px; }
     .nav__btn { padding: 0.6rem 1rem; }
@@ -790,13 +764,11 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     }
     .header.is-scrolled .header__inner { padding: 0.45rem 0.7rem; }
 
-    /* 🔽 Marca más pequeña */
     .brand { gap: 0.45rem; }
     .brand__logo { height: 28px; }
     .brand__name { font-size: 0.92rem; }
     .brand__tagline { display: none; }
 
-    /* 🔽 Botones del nav más pequeños */
     .nav__list { gap: 0.28rem; font-size: 0.62rem; max-width: 100%; }
     .nav__btn {
       padding: 0.38rem 0.5rem;
@@ -805,7 +777,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     }
     .nav__caret { display: none; }
 
-    /* 🔽 WhatsApp más compacto */
     .header__wa { padding: 0.45rem; }
     .header__wa span { display: none; }
     .header__wa-icon { width: 15px; height: 15px; }
@@ -813,9 +784,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     .megamenu { display: none !important; }
   }
 
-  /* ============================================================
-     📱 MÓVIL MUY PEQUEÑO (≤ 400px)
-     ============================================================ */
   @media (max-width: 400px) {
     .brand__logo { height: 24px; }
     .brand__name { font-size: 0.82rem; }
@@ -848,14 +816,8 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // ============================================================
-  // Detectar móvil
-  // ============================================================
   const isMobile = () => window.matchMedia('(max-width: 720px), (hover: none) and (pointer: coarse)').matches;
 
-  // ============================================================
-  // Bottom sheet de servicios (solo móvil)
-  // ============================================================
   const servicesTrigger = document.querySelector<HTMLButtonElement>('[data-servicios-trigger]');
   const servicesSheet   = document.querySelector<HTMLElement>('[data-header-services-sheet]');
   const servicesClosers = document.querySelectorAll<HTMLElement>('[data-header-services-close]');
@@ -893,7 +855,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     }
   });
 
-  // Al tocar un servicio o "Ver todos", cerramos y navegamos
   servicesItems.forEach((link) => {
     link.addEventListener('click', () => {
       closeServicesSheet();
