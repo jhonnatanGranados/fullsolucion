@@ -15,18 +15,66 @@ import imagen10 from '../assets/imagen10.webp';
 import imagen11 from '../assets/imagen11.webp';
 
 const heroImages = [
-  { src: portada.src,  isLogo: false },
-  { src: imagen2.src,  isLogo: false },
-  { src: imagen3.src,  isLogo: false },
-  { src: imagen4.src,  isLogo: false },
-  { src: imagen5.src,  isLogo: false },
-  { src: imagen6.src,  isLogo: false },
-  { src: imagen7.src,  isLogo: false },
-  { src: imagen8.src,  isLogo: false },
-  { src: imagen9.src,  isLogo: false },
-  { src: imagen10.src, isLogo: false },
-  { src: imagen11.src, isLogo: false },
-  { src: logo.src,     isLogo: true  },
+  {
+    src: portada.src,
+    alt: 'Proyecto eléctrico residencial en Guatemala ejecutado por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen2.src,
+    alt: 'Instalación eléctrica industrial en Huehuetenango por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen3.src,
+    alt: 'Panel solar instalado por Full Solución en Guatemala',
+    isLogo: false,
+  },
+  {
+    src: imagen4.src,
+    alt: 'Automatización industrial ejecutada por Full Solución en Guatemala',
+    isLogo: false,
+  },
+  {
+    src: imagen5.src,
+    alt: 'Sistema de videovigilancia instalado en Guatemala por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen6.src,
+    alt: 'Trabajo de cableado estructurado en Huehuetenango por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen7.src,
+    alt: 'Mantenimiento eléctrico industrial en Guatemala por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen8.src,
+    alt: 'Instalación de generador eléctrico en Guatemala por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen9.src,
+    alt: 'Proyecto de construcción liviana en Huehuetenango por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: imagen10.src,
+    alt: 'Estructura metálica liviana instalada por Full Solución en Guatemala',
+    isLogo: false,
+  },
+  {
+    src: imagen11.src,
+    alt: 'Proyecto de soldadura industrial en Guatemala por Full Solución',
+    isLogo: false,
+  },
+  {
+    src: logo.src,
+    alt: 'Full Solución — Servicios eléctricos y técnicos en Guatemala y Huehuetenango',
+    isLogo: true,
+  },
 ];
 ---
 
@@ -34,6 +82,7 @@ const heroImages = [
   id="inicio"
   class="hero"
   data-interval="5000"
+  aria-label="Full Solución — Servicios eléctricos, energía solar y automatización industrial en Guatemala y Huehuetenango"
 >
 
   <div class="hero__layer hero__layer--blue" aria-hidden="true"></div>
@@ -58,7 +107,7 @@ const heroImages = [
   <div class="hero__layer hero__layer--v-accent" aria-hidden="true"></div>
   <div class="hero__layer hero__layer--v-line" aria-hidden="true"></div>
 
-  <div class="hero__photo" aria-hidden="true">
+  <div class="hero__photo">
     <div class="hero__photo-clip">
       <div class="hero__carousel">
         {heroImages.map((img, i) => (
@@ -70,20 +119,24 @@ const heroImages = [
               <div class="hero__logo-wrap">
                 <img
                   src={img.src}
-                  alt=""
+                  alt={img.alt}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                   draggable="false"
+                  width="600"
+                  height="600"
                 />
-                <span class="hero__logo-text">FULL SOLUTION</span>
+                <span class="hero__logo-text">FULL SOLUCIÓN</span>
               </div>
             ) : (
               <img
                 src={img.src}
-                alt=""
+                alt={img.alt}
                 loading={i === 0 ? 'eager' : 'lazy'}
                 decoding="async"
                 draggable="false"
+                width="1200"
+                height="800"
               />
             )}
           </div>
@@ -94,9 +147,9 @@ const heroImages = [
 
   <div class="hero__content">
     <h1 class="hero__title">
-      <span class="hero__title-blue">Trabajemos</span>
-      <span class="hero__title-white">juntos</span><br />
-      <span class="hero__title-white">y construyamos tu proyecto</span>
+      <span class="hero__title-blue">Servicios eléctricos</span>
+      <span class="hero__title-white">y técnicos</span><br />
+      <span class="hero__title-white">en Guatemala y Huehuetenango</span>
     </h1>
 
     <div class="hero__divider" aria-hidden="true">
@@ -106,9 +159,9 @@ const heroImages = [
     </div>
 
     <p class="hero__lead">
-      Diseñamos, instalamos y mantenemos los sistemas que hacen funcionar
-      tu planta y tu hogar. Soluciones integrales de automatización,
-      energía e ingeniería eléctrica.
+      En <strong>Full Solución</strong> (Full Solution) diseñamos, instalamos y mantenemos
+      los sistemas eléctricos, de energía solar y de automatización industrial que hacen
+      funcionar tu planta y tu hogar en toda Guatemala.
     </p>
 
     <button
@@ -117,7 +170,7 @@ const heroImages = [
       data-contact-trigger
       data-service="hero"
       data-service-title="Trabajemos juntos"
-      aria-label="Contáctanos"
+      aria-label="Contáctanos por WhatsApp"
     >CONOCE MÁS</button>
   </div>
 </section>
@@ -359,6 +412,11 @@ const heroImages = [
     max-width: 42ch;
   }
 
+  .hero__lead strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
   .hero__cta {
     position: relative;
     display: inline-block;
@@ -458,7 +516,6 @@ const heroImages = [
     .hero__layer--v-accent,
     .hero__layer--v-line { display: none; }
 
-    /* La foto ocupa TODO el hero */
     .hero__photo {
       position: absolute;
       inset: 0;
@@ -489,7 +546,6 @@ const heroImages = [
       background: #000000;
     }
 
-    /* Imagen cubre todo el fondo negro */
     .hero__slide img {
       object-fit: cover;
       object-position: center center;
@@ -518,7 +574,6 @@ const heroImages = [
       font-size: clamp(0.85rem, 3.5vw, 1.2rem);
     }
 
-    /* ----- Contenido sobre "película" gris ----- */
     .hero__content {
       position: absolute;
       left: 50%;
