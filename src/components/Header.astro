@@ -1,129 +1,917 @@
 ---
 // src/components/Header.astro
 import logo from '../assets/logo.png';
+import { servicios } from '../data/servicios';
+
+const categorias = [
+  { id: 'electrico',            label: 'Eléctrico'            },
+  { id: 'energia-redes',        label: 'Energía y redes'      },
+  { id: 'industrial',           label: 'Industrial'           },
+  { id: 'construccion-liviana', label: 'Construcción liviana' },
+  { id: 'complementarios',      label: 'Complementarios'      },
+] as const;
+
+const serviciosPorCategoria = categorias.map((cat) => ({
+  ...cat,
+  items: servicios.filter((s) => s.category === cat.id),
+}));
 ---
 
-<header class="header">
-  <div class="header__bar" aria-hidden="true"></div>
+<header class="header" id="siteHeader">
+  <div class="header__main">
+    <div class="header__inner">
+      <!-- Logo -->
+      <a href="/" class="brand">
+        <img src={logo.src} alt="Full Solution" class="brand__logo" />
+        <span class="brand__wrap">
+          <span class="brand__name">Full Solution</span>
+          <span class="brand__tagline"></span>
+        </span>
+      </a>
 
-  <div class="header__inner">
-    <a href="#inicio" class="brand">
-      <img src={logo.src} alt="Full Solution" class="brand__logo" />
-      <span class="brand__name">Full Solution</span>
-    </a>
+      <!-- Nav centrado -->
+      <nav class="nav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="/" class="nav__btn nav__btn--inicio">Inicio</a></li>
 
-    <nav class="nav" aria-label="Navegación principal">
-      <ul class="nav__list">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-      </ul>
-    </nav>
+          <li class="nav__item--has-menu">
+            <!-- ✅ Botón: en PC muestra megamenú con hover, en móvil abre bottom sheet -->
+            <button
+              type="button"
+              class="nav__btn nav__btn--servicios"
+              aria-haspopup="true"
+              aria-expanded="false"
+              data-servicios-trigger
+            >
+              Servicios
+              <svg class="nav__caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+                <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <!-- ✅ MEGAMENÚ (solo PC, se muestra con hover) -->
+            <div class="megamenu" role="menu" aria-label="Servicios">
+              <div class="megamenu__grid">
+                {serviciosPorCategoria.map((cat) => (
+                  <div class="megamenu__col">
+                    <h4 class="megamenu__title">{cat.label}</h4>
+                    <ul class="megamenu__list">
+                      {cat.items.map((s) => (
+                        <li><a href={`/servicios#${s.slug}`}>{s.title}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div class="megamenu__footer">
+                <p>16 servicios técnicos ejecutados con personal calificado y materiales certificados.</p>
+                <a href="/servicios" class="megamenu__cta">Ver todos los servicios →</a>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="/#nosotros" class="nav__btn nav__btn--nosotros">Nosotros</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botón WhatsApp -->
+      <a
+        href="https://wa.me/50241080263"
+        class="header__wa"
+        target="_blank"
+        rel="noopener"
+        aria-label="WhatsApp directo"
+      >
+        <svg class="header__wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
   </div>
 </header>
 
-<style>
-  .header__bar {
-    height: 4px;
-    width: 100%;
-    background: linear-gradient(
-      90deg,
-      var(--fs-primary) 0%,
-      var(--fs-secondary) 35%,
-      var(--fs-accent) 70%,
-      var(--fs-highlight) 100%
-    );
-  }
+<!-- ✅ BOTTOM SHEET: solo para móvil -->
+<div
+  class="header-services-sheet"
+  id="header-services-sheet"
+  data-header-services-sheet
+  hidden
+>
+  <div class="header-services-sheet__backdrop" data-header-services-close></div>
 
+  <div
+    class="header-services-sheet__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="header-services-title"
+  >
+    <div class="header-services-sheet__handle" aria-hidden="true"></div>
+
+    <header class="header-services-sheet__head">
+      <h2 id="header-services-title">Servicios</h2>
+      <button
+        type="button"
+        class="header-services-sheet__close"
+        data-header-services-close
+        aria-label="Cerrar"
+      >✕</button>
+    </header>
+
+    <div class="header-services-sheet__body">
+      {serviciosPorCategoria.map((cat) => (
+        <section class="header-services-sheet__group">
+          <h3 class="header-services-sheet__group-title">{cat.label}</h3>
+          <ul class="header-services-sheet__list">
+            {cat.items.map((s) => (
+              <li>
+                <a
+                  href={`/servicios#${s.slug}`}
+                  class="header-services-sheet__item"
+                  data-header-services-item
+                >
+                  <span class="header-services-sheet__item-text">
+                    <strong>{s.title}</strong>
+                    <small>{s.subtitle}</small>
+                  </span>
+                  <span class="header-services-sheet__item-arrow" aria-hidden="true">›</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <a
+        href="/servicios"
+        class="header-services-sheet__all"
+        data-header-services-item
+      >
+        Ver todos los servicios →
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============================================================
+     HEADER — base
+     ============================================================ */
   .header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: saturate(180%) blur(10px);
-    -webkit-backdrop-filter: saturate(180%) blur(10px);
-    border-bottom: 1px solid var(--fs-line);
+    padding: 0;
+    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .header__main {
+    background: linear-gradient(180deg, #f0fbfd 0%, #eaf7fa 45%, #e4f4f8 100%);
+    backdrop-filter: saturate(160%) blur(8px);
+    -webkit-backdrop-filter: saturate(160%) blur(8px);
+    border-bottom: 1px solid rgba(0, 180, 216, 0.12);
+    transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+  }
+
+  .header.is-scrolled {
+    padding: clamp(0.5rem, 1vw, 0.9rem) clamp(0.75rem, 2vw, 1.75rem) 0;
+  }
+
+  .header.is-scrolled .header__main {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
   }
 
   .header__inner {
     max-width: none;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem clamp(1.25rem, 3vw, 2.5rem);
+    gap: 1.5rem;
+    padding: 1.6rem clamp(2rem, 5vw, 4.5rem);
+    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .header.is-scrolled .header__inner {
+    padding: 0.5rem clamp(1rem, 2.5vw, 2rem);
+  }
+
+  /* ============================================================
+     MARCA
+     ============================================================ */
   .brand {
     display: flex;
     align-items: center;
     gap: 0.65rem;
     text-decoration: none;
+    justify-self: start;
   }
 
   .brand__logo {
     height: 40px;
     width: auto;
     display: block;
+    filter: drop-shadow(0 2px 4px rgba(11, 31, 51, 0.08));
+    transition: filter 0.4s ease, height 0.4s ease;
   }
+
+  .header.is-scrolled .brand__logo {
+    filter: drop-shadow(0 5px 12px rgba(11, 31, 51, 0.18));
+  }
+
+  .brand__wrap { display: flex; flex-direction: column; line-height: 1.1; }
 
   .brand__name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     letter-spacing: -0.01em;
     color: var(--fs-primary);
+    transition: text-shadow 0.4s ease;
+  }
+
+  .header.is-scrolled .brand__name {
+    text-shadow: 0 2px 8px rgba(11, 31, 51, 0.15);
+  }
+
+  .brand__tagline {
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fs-accent);
+    margin-top: 3px;
+  }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .nav {
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .nav__list {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    justify-content: center;
+    gap: clamp(0.75rem, 2.5vw, 2rem);
     list-style: none;
     margin: 0;
     padding: 0;
     font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.98rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    width: 100%;
+    max-width: 640px;
   }
 
-  .nav__list a {
+  .nav__list > li {
     position: relative;
-    color: var(--fs-primary);
+    flex: 1 1 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ============================================================
+     BOTONES DEL NAV — azul brillante glossy
+     ============================================================ */
+  .nav__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    color: #ffffff;
     text-decoration: none;
-    padding: 0.25rem 0;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    font-family: inherit;
+    font-size: inherit;
+    border: 1px solid rgba(120, 210, 255, 0.6);
+    cursor: pointer;
+
+    /* ✅ Base azul brillante con degradado vertical tipo "glossy" */
+    background: linear-gradient(
+      180deg,
+      #5fc8ff 0%,
+      #2ba7f0 18%,
+      #0b8ce0 45%,
+      #0673c9 70%,
+      #035fa9 100%
+    );
+
+    /* ✅ Sombra exterior + brillo interior superior + oscurecimiento inferior */
+    box-shadow:
+      0 6px 14px rgba(3, 95, 169, 0.45),
+      0 2px 4px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
+      inset 0 8px 12px rgba(255, 255, 255, 0.25);
+
+    text-shadow: 0 1px 2px rgba(0, 45, 90, 0.45);
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+    max-width: 190px;
+
+    transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.2s ease;
+  }
+
+  /* ✅ Reflejo superior tipo "cápsula" */
+  .nav__btn::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 6%;
+    width: 88%;
+    height: 42%;
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.35) 40%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+    filter: blur(0.5px);
+  }
+
+  /* ✅ Brillo diagonal animado al hover */
+  .nav__btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+
+  .nav__btn:hover::after { left: 125%; }
+
+  .nav__btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08) saturate(1.1);
+    box-shadow:
+      0 10px 22px rgba(3, 95, 169, 0.55),
+      0 3px 6px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
+      inset 0 8px 12px rgba(255, 255, 255, 0.3);
+  }
+
+  .nav__btn:active {
+    transform: translateY(0);
+    filter: brightness(0.96);
+    box-shadow:
+      0 3px 8px rgba(3, 95, 169, 0.4),
+      inset 0 2px 6px rgba(0, 40, 90, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .header.is-scrolled .nav__btn {
+    box-shadow:
+      0 12px 26px rgba(3, 95, 169, 0.55),
+      0 3px 6px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
+      inset 0 8px 12px rgba(255, 255, 255, 0.3);
+  }
+
+  /* ===== Variaciones por botón (mismo azul brillante, ligeros matices) ===== */
+
+  /* Inicio: azul un poco más claro / cian */
+  .nav__btn--inicio {
+    background: linear-gradient(
+      180deg,
+      #6fd0ff 0%,
+      #35b0f5 18%,
+      #1095e8 45%,
+      #0a7cd0 70%,
+      #065fa8 100%
+    );
+  }
+
+  /* Servicios: azul medio estándar (el de la imagen) */
+  .nav__btn--servicios {
+    background: linear-gradient(
+      180deg,
+      #5fc8ff 0%,
+      #2ba7f0 18%,
+      #0b8ce0 45%,
+      #0673c9 70%,
+      #035fa9 100%
+    );
+  }
+
+  /* Nosotros: azul un poco más profundo */
+  .nav__btn--nosotros {
+    background: linear-gradient(
+      180deg,
+      #57c0fb 0%,
+      #229ee8 18%,
+      #0884d8 45%,
+      #0569be 70%,
+      #03569e 100%
+    );
+  }
+
+  .nav__caret { transition: transform 0.2s ease; }
+
+  .nav__item--has-menu:hover .nav__caret,
+  .nav__item--has-menu:focus-within .nav__caret {
+    transform: rotate(180deg);
+  }
+
+  /* ============================================================
+     BOTÓN WHATSAPP
+     ============================================================ */
+  .header__wa {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    background: linear-gradient(135deg, #7ee0a0 0%, #4fd17e 50%, #2bb866 100%);
+    box-shadow: 0 4px 14px rgba(43, 184, 102, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.35s ease, background 0.25s ease, filter 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .header.is-scrolled .header__wa {
+    box-shadow: 0 10px 26px rgba(43, 184, 102, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  }
+
+  .header__wa::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    animation: wa-shine 3.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes wa-shine {
+    0%   { left: -75%; }
+    60%  { left: 125%; }
+    100% { left: 125%; }
+  }
+
+  .header__wa:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #6dd592 0%, #42c574 50%, #25a95c 100%);
+    box-shadow: 0 10px 24px rgba(43, 184, 102, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    filter: brightness(1.04);
+  }
+
+  .header__wa-icon {
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 1px rgba(0, 60, 40, 0.15));
+  }
+
+  /* ============================================================
+     MEGAMENÚ (solo PC)
+     ============================================================ */
+  .megamenu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translate(-50%, 8px);
+    width: min(1080px, 96vw);
+    background: #ffffff;
+    border-top: 2px solid #7ed9b8;
+    border-radius: 10px;
+    box-shadow: 0 18px 48px rgba(11, 31, 51, 0.16);
+    padding: 1.5rem 1.6rem 1.1rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    z-index: 60;
+  }
+
+  .nav__item--has-menu:hover .megamenu,
+  .nav__item--has-menu:focus-within .megamenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  .megamenu__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.3rem;
+  }
+
+  .megamenu__title {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-display);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fs-primary);
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--fs-line);
+  }
+
+  .megamenu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .megamenu__list a {
+    font-size: 0.86rem;
+    line-height: 1.3;
+    color: #37475a;
+    padding: 0.1rem 0;
+    text-decoration: none;
+  }
+
+  .megamenu__list a:hover {
+    color: #2bb583;
+    padding-left: 4px;
+    transition: padding 0.2s ease, color 0.2s ease;
+  }
+
+  .megamenu__footer {
+    margin-top: 1.2rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--fs-line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .megamenu__footer p { margin: 0; font-size: 0.8rem; color: #5a6b7b; }
+
+  .megamenu__cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2bb583;
+    text-decoration: none;
+    white-space: nowrap;
     transition: color 0.2s ease;
   }
 
-  .nav__list a::after {
-    content: '';
+  .megamenu__cta:hover { color: var(--fs-primary); }
+
+  /* ============================================================
+     BOTTOM SHEET (solo móvil)
+     ============================================================ */
+  .header-services-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .header-services-sheet[hidden] { display: none !important; }
+
+  .header-services-sheet__backdrop {
     position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--fs-accent), var(--fs-highlight));
-    transition: width 0.25s ease;
+    inset: 0;
+    background: rgba(11, 15, 26, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: headerFadeIn 0.25s ease-out;
   }
 
-  .nav__list a:hover {
-    color: var(--fs-accent);
-  }
-
-  .nav__list a:hover::after {
+  .header-services-sheet__panel {
+    position: relative;
     width: 100%;
+    max-height: 92dvh;
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    animation: headerSheetSlideUp 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 -12px 40px -12px rgba(0, 0, 0, 0.35);
+    touch-action: pan-y;
+    will-change: transform;
+  }
+
+  .header-services-sheet__handle {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    margin: 0.7rem auto 0.4rem;
+  }
+
+  .header-services-sheet__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1.25rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 2;
+  }
+
+  .header-services-sheet__head h2 {
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0b0f1a;
+    margin: 0;
+  }
+
+  .header-services-sheet__close {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-services-sheet__body {
+    padding: 0.5rem 1.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .header-services-sheet__group-title {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin: 0 0 0.25rem 0.15rem;
+  }
+
+  .header-services-sheet__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+  }
+
+  .header-services-sheet__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1.05rem 1rem;
+    min-height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .header-services-sheet__list li:last-child .header-services-sheet__item { border-bottom: none; }
+  .header-services-sheet__item:active { background: #f2f4f8; }
+
+  .header-services-sheet__item-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+    gap: 0.1rem;
+  }
+
+  .header-services-sheet__item-text strong {
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0b0f1a;
+    line-height: 1.3;
+  }
+
+  .header-services-sheet__item-text small {
+    font-size: 0.78rem;
+    color: #6b7280;
+    line-height: 1.3;
+  }
+
+  .header-services-sheet__item-arrow {
+    font-size: 1.1rem;
+    color: #c4c9d2;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+
+  .header-services-sheet__all {
+    display: block;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #107bcd, #0A4BD3);
+    border-radius: 14px;
+    text-decoration: none;
+    transition: transform 0.15s ease, filter 0.2s ease;
+  }
+
+  .header-services-sheet__all:active { transform: scale(0.98); }
+
+  @keyframes headerFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes headerSheetSlideUp {
+    from { transform: translateY(60px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 1180px) {
+    .nav__list { gap: 0.75rem; font-size: 0.84rem; max-width: 560px; }
+    .nav__btn { padding: 0.6rem 1rem; }
+    .header__wa { padding: 0.55rem 1rem; font-size: 0.82rem; }
+  }
+
+  @media (max-width: 980px) {
+    .brand__tagline { display: none; }
+    .nav__list { gap: 0.5rem; font-size: 0.78rem; max-width: 480px; }
+    .nav__btn { padding: 0.55rem 0.8rem; }
+    .megamenu { width: 96vw; padding: 1.1rem 1.2rem 0.9rem; }
+    .megamenu__grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .header__wa span { display: none; }
+    .header__wa { padding: 0.6rem; }
+    .header__inner { padding: 1.3rem clamp(1.5rem, 4vw, 3rem); }
+    .header.is-scrolled .header__inner { padding: 0.5rem clamp(0.8rem, 2vw, 1.5rem); }
   }
 
   @media (max-width: 720px) {
-    .brand__name {
-      font-size: 1.05rem;
-    }
-    .brand__logo {
-      height: 34px;
-    }
-    .nav__list {
-      gap: 1.1rem;
-      font-size: 0.82rem;
-    }
+    .header__inner { grid-template-columns: auto 1fr auto; gap: 0.6rem; padding: 1rem 0.8rem; }
+    .header.is-scrolled .header__inner { padding: 0.5rem 0.8rem; }
+    .brand__name { font-size: 1.05rem; }
+    .brand__logo { height: 34px; }
+    .nav__list { gap: 0.35rem; font-size: 0.7rem; }
+    .nav__btn { padding: 0.5rem 0.65rem; }
+    .nav__caret { display: none; }
+    .megamenu { display: none !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header, .header__main, .header__inner, .nav__btn, .header__wa, .brand__logo { transition: none; }
+  }
+
+  @supports (padding: max(0px)) {
+    .header-services-sheet__panel { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
   }
 </style>
+
+<script>
+  // ============================================================
+  // Header: scroll state
+  // ============================================================
+  const header = document.getElementById('siteHeader');
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // ============================================================
+  // Detectar móvil
+  // ============================================================
+  const isMobile = () => window.matchMedia('(max-width: 720px), (hover: none) and (pointer: coarse)').matches;
+
+  // ============================================================
+  // Bottom sheet de servicios (solo móvil)
+  // ============================================================
+  const servicesTrigger = document.querySelector<HTMLButtonElement>('[data-servicios-trigger]');
+  const servicesSheet   = document.querySelector<HTMLElement>('[data-header-services-sheet]');
+  const servicesClosers = document.querySelectorAll<HTMLElement>('[data-header-services-close]');
+  const servicesItems   = document.querySelectorAll<HTMLAnchorElement>('[data-header-services-item]');
+
+  const openServicesSheet = () => {
+    if (!servicesSheet) return;
+    servicesSheet.hidden = false;
+    document.body.style.overflow = 'hidden';
+    servicesTrigger?.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeServicesSheet = () => {
+    if (!servicesSheet) return;
+    servicesSheet.hidden = true;
+    document.body.style.overflow = '';
+    servicesTrigger?.setAttribute('aria-expanded', 'false');
+  };
+
+  // ✅ En móvil, el clic abre el bottom sheet. En PC, el hover ya muestra el megamenú.
+  servicesTrigger?.addEventListener('click', (e) => {
+    if (isMobile()) {
+      e.preventDefault();
+      e.stopPropagation();
+      openServicesSheet();
+    } else {
+      // En PC no navega: el megamenú se muestra con hover.
+      e.preventDefault();
+    }
+  });
+
+  servicesClosers.forEach((el) => el.addEventListener('click', closeServicesSheet));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && servicesSheet && !servicesSheet.hidden) {
+      closeServicesSheet();
+    }
+  });
+
+  // Al tocar un servicio o "Ver todos", cerramos y navegamos
+  servicesItems.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeServicesSheet();
+    });
+  });
+
+  // Swipe-down para cerrar el bottom sheet
+  const panel = document.querySelector<HTMLElement>('.header-services-sheet__panel');
+  if (panel) {
+    let startY = 0;
+    let currentY = 0;
+    let dragging = false;
+
+    panel.addEventListener('touchstart', (e: TouchEvent) => {
+      if (panel.scrollTop > 0) return;
+      startY = currentY = e.touches[0].clientY;
+      dragging = true;
+      panel.style.transition = 'none';
+    }, { passive: true });
+
+    panel.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!dragging) return;
+      currentY = e.touches[0].clientY;
+      const delta = currentY - startY;
+      if (delta > 0) panel.style.transform = `translateY(${delta}px)`;
+    }, { passive: true });
+
+    panel.addEventListener('touchend', () => {
+      if (!dragging) return;
+      dragging = false;
+      panel.style.transition = '';
+      if (currentY - startY > 120) closeServicesSheet();
+      panel.style.transform = '';
+    });
+  }
+</script>

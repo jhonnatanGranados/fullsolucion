@@ -13,7 +13,16 @@ import imgIndustrial from '../assets/servicios/4.jpg';
 
 import type { ImageMetadata } from 'astro';
 
+export type Categoria =
+  | 'electrico'
+  | 'energia-redes'
+  | 'industrial'
+  | 'construccion-liviana'
+  | 'complementarios';
+
 export interface Servicio {
+  slug: string;           // ← NUEVO: ancla + futura URL
+  category: Categoria;    // ← NUEVO: agrupación para el megamenú
   ref: string;
   title: string;
   subtitle: string;
@@ -31,6 +40,8 @@ export interface Servicio {
 
 export const servicios: Servicio[] = [
   {
+    slug: 'electricidad-general',
+    category: 'electrico',
     ref: 'FS-01',
     title: 'Instalaciones residenciales e industriales',
     subtitle: 'Electricidad general',
@@ -50,6 +61,8 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'energias-renovables',
+    category: 'energia-redes',
     ref: 'FS-02',
     title: 'Energías renovables',
     subtitle: 'Asesoría, diseño e instalación',
@@ -64,6 +77,8 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'cableado-estructurado',
+    category: 'energia-redes',
     ref: 'FS-03',
     title: 'Cableado estructurado y redes',
     subtitle: 'Asesoría, diseño e instalación',
@@ -75,6 +90,8 @@ export const servicios: Servicio[] = [
     items: ['Diseño e instalación de sistemas de cableado estructurado'],
   },
   {
+    slug: 'videovigilancia',
+    category: 'energia-redes',
     ref: 'FS-04',
     title: 'Videovigilancia',
     subtitle: 'Asesoría, diseño e instalación',
@@ -88,61 +105,71 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'sonido-comercial',
+    category: 'complementarios',
     ref: 'FS-05',
     title: 'Sonido comercial',
     subtitle: 'Asesoría, diseño e instalación',
     description:
       'Sistemas de audio ambiental y profesional para comercios, oficinas y plantas.',
     icon: 'sound',
-    image: imgRedes,                    // ← reutilizada
+    image: imgRedes,
     imageAlt: 'Sonido comercial',
     items: ['Asesoría, diseño e instalación de sistemas de sonido comercial'],
   },
   {
+    slug: 'generadores-electricos',
+    category: 'electrico',
     ref: 'FS-06',
     title: 'Generadores eléctricos',
     subtitle: 'Venta y distribución',
     description:
       'Venta, distribución e instalación de generadores de baja, media y alta potencia.',
     icon: 'generator',
-    image: imgElectrico,                // ← reutilizada
+    image: imgElectrico,
     imageAlt: 'Generadores eléctricos',
     items: [
       'Venta y distribución de generadores eléctricos de baja, media y alta potencia',
     ],
   },
   {
+    slug: 'reparacion-mantenimiento',
+    category: 'industrial',
     ref: 'FS-07',
     title: 'Reparación y mantenimiento',
     subtitle: 'Equipos, maquinaria y sistemas',
     description:
       'Mantenimiento preventivo y correctivo para equipos, maquinaria y sistemas industriales y residenciales.',
     icon: 'service',
-    image: imgMantenimiento,            // ← reutilizada
+    image: imgMantenimiento,
     imageAlt: 'Reparación y mantenimiento',
     items: [
       'Reparación y mantenimiento de equipos, maquinaria y sistemas industriales y residenciales',
     ],
   },
   {
+    slug: 'automatizacion-industrial',
+    category: 'industrial',
     ref: 'FS-08',
     title: 'Automatización de sistemas industriales',
     subtitle: 'Control y monitoreo',
     description:
       'Automatizamos procesos industriales con PLC, sensores y sistemas de control a medida.',
     icon: 'automation',
-    image: imgRedes,                    // ← reutilizada
+    image: imgRedes,
     imageAlt: 'Automatización de sistemas industriales',
     items: ['Automatización de sistemas industriales'],
   },
   {
+    slug: 'sistemas-prefabricados',
+    category: 'construccion-liviana',
     ref: 'FS-09',
     title: 'Sistemas prefabricados livianos',
     subtitle: 'Interior y exterior',
     description:
       'Fabricación e instalación de sistemas livianos para muros, cielos y divisiones.',
     icon: 'prefab',
-    image: imgEstructuras,              // ← reutilizada
+    image: imgEstructuras,
     imageAlt: 'Sistemas prefabricados livianos',
     items: [
       'Sistemas livianos con tablero de yeso, tabla roca, SECUROCK, DUROCK, micro concreto',
@@ -152,13 +179,15 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'pintura',
+    category: 'construccion-liviana',
     ref: 'FS-10',
     title: 'Pintura residencial e industrial',
     subtitle: 'Recubrimientos',
     description:
       'Aplicación de pintura decorativa, impermeabilización y recubrimientos industriales.',
     icon: 'paint',
-    image: imgIndustrial,               // ← reutilizada (4.jpg)
+    image: imgIndustrial,
     imageAlt: 'Pintura residencial e industrial',
     items: [
       'Pintura interior y exterior, decorativas e impermeabilización',
@@ -166,6 +195,8 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'estructuras-livianas',
+    category: 'construccion-liviana',
     ref: 'FS-11',
     title: 'Estructuras livianas',
     subtitle: 'Diseño y fabricación',
@@ -183,13 +214,15 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'soldadura-industrial',
+    category: 'industrial',
     ref: 'FS-12',
     title: 'Soldadura industrial',
     subtitle: 'Procesos certificados',
     description:
       'Aplicamos procesos de soldadura industrial con personal calificado.',
     icon: 'welding',
-    image: imgEstructuras,              // ← reutilizada
+    image: imgEstructuras,
     imageAlt: 'Soldadura industrial',
     items: [
       'Soldadura al arco voltaico con electrodo revestido (SEA)',
@@ -201,6 +234,8 @@ export const servicios: Servicio[] = [
     ],
   },
   {
+    slug: 'sistemas-de-gases',
+    category: 'electrico',
     ref: 'FS-13',
     title: 'Sistemas de gases',
     subtitle: 'Asesoría, diseño e instalación',
@@ -212,6 +247,8 @@ export const servicios: Servicio[] = [
     items: ['Sistemas de gas propano', 'Aire comprimido', 'Oxígeno'],
   },
   {
+    slug: 'perfileria-pvc',
+    category: 'construccion-liviana',
     ref: 'FS-14',
     title: 'Perfilería PVC',
     subtitle: 'Diseño y fabricación',
@@ -223,6 +260,8 @@ export const servicios: Servicio[] = [
     items: ['Puertas, ventanas y canceles en PVC'],
   },
   {
+    slug: 'mantenimiento-limpieza',
+    category: 'complementarios',
     ref: 'FS-15',
     title: 'Mantenimiento y limpieza',
     subtitle: 'Espacios comerciales',
@@ -234,6 +273,8 @@ export const servicios: Servicio[] = [
     items: ['Mantenimiento y limpieza de espacios comerciales'],
   },
   {
+    slug: 'desarrollo-software',
+    category: 'complementarios',
     ref: 'FS-16',
     title: 'Desarrollo de software',
     subtitle: 'Hardware, software y servidores',

@@ -7,7 +7,6 @@ export default defineConfig({
   site: 'https://fullsolucion.vercel.app',
 
   integrations: [
-    // 1️⃣ Sitemap (solo i18n)
     sitemap({
       i18n: {
         defaultLocale: 'es',
@@ -18,7 +17,7 @@ export default defineConfig({
     icon({
       include: {
         'simple-icons': ['whatsapp', 'facebook', 'instagram', 'tiktok'],
-        'mdi': ['email-outline', 'phone'],
+        'mdi': ['email-outline', 'map-marker','phone'],
       },
     }),
   ],
