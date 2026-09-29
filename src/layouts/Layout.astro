@@ -466,7 +466,7 @@ const ogImageURL = new URL(image, siteUrl);
 
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 72px;
+        scroll-padding-top: 96px;
       }
 
       body {
@@ -691,8 +691,16 @@ const ogImageURL = new URL(image, siteUrl);
         border: 0;
       }
 
+      @media (max-width: 1180px) {
+        html { scroll-padding-top: 92px; }
+      }
+
       @media (max-width: 1024px) {
         section { padding: 4rem 0; }
+      }
+
+      @media (max-width: 980px) {
+        html { scroll-padding-top: 88px; }
       }
 
       @media (max-width: 768px) {
@@ -704,13 +712,15 @@ const ogImageURL = new URL(image, siteUrl);
       }
 
       @media (max-width: 720px) {
-        html {
-          scroll-padding-top: 56px;
-        }
+        html { scroll-padding-top: 72px; }
       }
 
       @media (max-width: 480px) {
         body { font-size: 15px; }
+      }
+
+      @media (max-width: 400px) {
+        html { scroll-padding-top: 64px; }
       }
 
       @media (prefers-reduced-motion: reduce) {

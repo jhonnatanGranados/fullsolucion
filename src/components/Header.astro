@@ -34,10 +34,10 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 <header class="header" id="siteHeader">
   <div class="header__main">
     <div class="header__inner">
-      <a href="/" class="brand" aria-label="Full Solution — Inicio">
+      <a href="/" class="brand" aria-label="Full Solución — Inicio">
         <img
           src={logo.src}
-          alt="Full Solution"
+          alt="Full Solución — Servicios eléctricos y técnicos en Guatemala y Huehuetenango"
           class="brand__logo"
           width="52"
           height="52"
@@ -46,7 +46,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
         />
         <span class="brand__name" aria-hidden="true">
           <span class="brand__name-main">FULL</span>
-          <span class="brand__name-sub">SOLUTION</span>
+          <span class="brand__name-sub">SOLUCIÓN</span>
         </span>
       </a>
 
@@ -176,19 +176,16 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transition: none !important;
   }
 
-  /* ---------- Header ---------- */
   .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
     padding: 0;
-    pointer-events: none;
     transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Fondo blanco SOLO cuando NO se ha hecho scroll */
   .header__main {
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 180, 216, 0.12);
@@ -199,7 +196,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       box-shadow 0.35s ease;
   }
 
-  /* Al hacer scroll: fondo transparente, solo flotan los iconos */
   .header.is-scrolled .header__main {
     background: transparent;
     border-bottom-color: transparent;
@@ -214,19 +210,13 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     align-items: center;
     gap: 1rem;
     padding: 1rem 1rem 1rem 0.5rem;
-    pointer-events: none;
     transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .header__inner > * {
-    pointer-events: auto;
   }
 
   .header.is-scrolled .header__inner {
     padding: 0.6rem 0.75rem 0.6rem 0.35rem;
   }
 
-  /* ---------- Brand ---------- */
   .brand {
     display: flex;
     align-items: center;
@@ -240,7 +230,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transition: filter 0.35s ease;
   }
 
-  /* Cuando flota, agrega sombra al brand para que se lea sobre cualquier fondo */
   .header.is-scrolled .brand {
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
   }
@@ -293,7 +282,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transition: color 0.35s ease, text-shadow 0.35s ease;
   }
 
-  /* Al hacer scroll: texto blanco con sombra para leerse sobre cualquier fondo */
   .header.is-scrolled .brand__name-main {
     color: #ffffff;
     text-shadow:
@@ -308,7 +296,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       0 2px 8px rgba(0, 0, 0, 0.55);
   }
 
-  /* ---------- Navegación ---------- */
   .nav {
     justify-self: center;
     width: 100%;
@@ -633,7 +620,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   }
 
   .megamenu__cta:hover { color: var(--fs-primary); }
-
 
   .header-services-sheet {
     position: fixed;
