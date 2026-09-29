@@ -105,102 +105,15 @@ const heroImages = [
       energía e ingeniería eléctrica.
     </p>
 
-    <!-- ✅ Botón que ABRE el overlay (no navega) -->
+    <!-- ✅ "CONOCE MÁS" → MISMA lógica que "Contáctanos" (Card.astro) -->
     <button
       type="button"
       class="hero__cta"
-      data-services-trigger
-      aria-expanded="false"
-      aria-controls="hero-services-menu"
+      data-contact-trigger
+      data-service="hero"
+      data-service-title="Trabajemos juntos"
+      aria-label="Contáctanos"
     >CONOCE MÁS</button>
-  </div>
-
-  <!-- ✅ OVERLAY de servicios -->
-  <div
-    class="hero__services-menu"
-    data-services-menu
-    id="hero-services-menu"
-    hidden
-  >
-    <div class="hero__services-sheet" role="dialog" aria-modal="true" aria-labelledby="hero-services-title">
-      <header class="hero__services-head">
-        <h2 id="hero-services-title">Servicios</h2>
-        <button
-          type="button"
-          class="hero__services-close"
-          data-services-close
-          aria-label="Cerrar"
-        >✕</button>
-      </header>
-
-      <ul class="hero__services-list">
-        <li>
-          <button type="button" data-service-target="automatizacion-industrial">
-            <span class="hero__services-icon">⚙️</span>
-            <span class="hero__services-text">
-              <strong>Automatización industrial</strong>
-              <small>PLC · HMI · SCADA</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" data-service-target="electricidad-general">
-            <span class="hero__services-icon">⚡</span>
-            <span class="hero__services-text">
-              <strong>Ingeniería eléctrica</strong>
-              <small>Tableros · Cableado · Tierras</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" data-service-target="energias-renovables">
-            <span class="hero__services-icon">🔋</span>
-            <span class="hero__services-text">
-              <strong>Energía y respaldo</strong>
-              <small>UPS · Plantas · Solar</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" data-service-target="cableado-estructurado">
-            <span class="hero__services-icon">🌐</span>
-            <span class="hero__services-text">
-              <strong>Redes y cableado</strong>
-              <small>Voz · Datos · Video</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" data-service-target="videovigilancia">
-            <span class="hero__services-icon">📹</span>
-            <span class="hero__services-text">
-              <strong>Videovigilancia</strong>
-              <small>Cámaras · Monitoreo</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" data-service-target="reparacion-mantenimiento">
-            <span class="hero__services-icon">🛠️</span>
-            <span class="hero__services-text">
-              <strong>Mantenimiento</strong>
-              <small>Preventivo · Correctivo</small>
-            </span>
-            <span class="hero__services-arrow">›</span>
-          </button>
-        </li>
-      </ul>
-
-      <!-- ✅ ÚNICO elemento que SÍ navega a #servicios -->
-      <a href="#servicios" class="hero__services-all" data-services-all>
-        Ver todos los servicios →
-      </a>
-    </div>
   </div>
 </section>
 
@@ -401,195 +314,85 @@ const heroImages = [
     max-width: 42ch;
   }
 
-  /* ✅ .hero__cta como <button> estilizado */
+  /* ------------------------------------------------------------
+     ✅ .hero__cta — MISMO estilo que .card__btn (Contáctanos)
+     ------------------------------------------------------------ */
   .hero__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.7rem 1.6rem;
-    border: none;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #0A4BD3, #107bcd);
-    color: #ffffff;
+    position: relative;
+    display: inline-block;
+    margin: 0.3rem 0 0;
     font-family: var(--font-display, system-ui, sans-serif);
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(10, 75, 211, 0.4);
-    transition: transform 0.15s ease, filter 0.2s ease;
-    margin-top: 0.3rem;
-  }
-  .hero__cta:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-  /* ============================================================
-     OVERLAY DE SERVICIOS
-     ============================================================ */
-  .hero__services-menu {
-    display: flex;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    align-items: flex-end;
-    justify-content: center;
-    background: rgba(11, 15, 26, 0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    animation: sheetFadeIn 0.25s ease-out;
-  }
-
-  .hero__services-menu[hidden] { display: none !important; }
-
-  .hero__services-sheet {
-    width: 100%;
-    max-height: 85dvh;
-    background: #ffffff;
-    border-radius: 24px 24px 0 0;
-    padding: 1rem 1.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    animation: sheetSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow:
-      0 -10px 40px -10px rgba(0, 0, 0, 0.3),
-      0 -1px 0 rgba(255, 255, 255, 0.9) inset;
-  }
-
-  .hero__services-sheet::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(0, 0, 0, 0.15);
-    margin: 0 auto 0.75rem;
-  }
-
-  .hero__services-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-
-  .hero__services-head h2 {
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #0b0f1a;
-    margin: 0;
-  }
-
-  .hero__services-close {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.06);
-    border: none;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #0b0f1a;
-    cursor: pointer;
-  }
-
-  .hero__services-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .hero__services-list button {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2.5rem 1fr auto;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 0.85rem 1rem;
-    background: linear-gradient(145deg, #ffffff, #f5f6f8);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 14px;
-    cursor: pointer;
-    text-align: left;
-    transition: transform 0.15s ease, background 0.2s ease;
-  }
-
-  .hero__services-list button:active {
-    transform: scale(0.98);
-    background: linear-gradient(145deg, #f0f2f6, #e6e8ec);
-  }
-
-  .hero__services-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(12, 187, 204, 0.15), rgba(16, 123, 205, 0.1));
-    border: 1px solid rgba(12, 187, 204, 0.25);
-    font-size: 1.25rem;
-  }
-
-  .hero__services-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    min-width: 0;
-  }
-
-  .hero__services-text strong {
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: #0b0f1a;
-    line-height: 1.2;
-  }
-
-  .hero__services-text small {
-    font-size: 0.78rem;
-    color: #5a6273;
-    line-height: 1.3;
-  }
-
-  .hero__services-arrow {
-    font-size: 1.5rem;
-    color: #9aa2b1;
-    line-height: 1;
-  }
-
-  .hero__services-all {
-    display: block;
-    margin-top: 1rem;
-    padding: 0.9rem 1rem;
-    text-align: center;
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-weight: 700;
-    font-size: 0.98rem;
+    width: auto;
+    min-width: 170px;
+    padding: 0.8rem 1.7rem;
+    background-color: var(--fs-accent, #107bcd);
+    border: 1px solid var(--fs-accent, #107bcd);
+    border-radius: 999px;
     color: #ffffff;
-    background: linear-gradient(135deg, #107bcd, #0A4BD3);
-    border-radius: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
     text-decoration: none;
-    transition: transform 0.15s ease, filter 0.2s ease;
+    text-align: center;
+
+    box-shadow:
+      0 4px 12px -4px rgba(16, 123, 205, 0.5),
+      0 12px 28px -12px rgba(16, 123, 205, 0.6);
+
+    transition:
+      background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .hero__services-all:hover  { filter: brightness(1.08); }
-  .hero__services-all:active { transform: scale(0.98); }
+  /* Barrido de brillo — igual que .card__btn::before */
+  .hero__cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
 
-  @keyframes sheetFadeIn  { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes sheetSlideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .hero__cta:hover::before { left: 130%; }
 
-  @media (min-width: 901px) {
-    .hero__services-menu { align-items: center; }
-    .hero__services-sheet {
-      max-width: 480px;
-      max-height: 80vh;
-      border-radius: 24px;
-    }
+  .hero__cta:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 16px -6px rgba(20, 22, 31, 0.25),
+      0 18px 40px -16px rgba(20, 33, 86, 0.35);
+  }
+
+  .hero__cta:active {
+    background-color: rgba(12, 187, 204, 0.35);
+    border-color: rgba(12, 187, 204, 0.75);
+    color: #ffffff;
+    transform: translateY(0) scale(0.98);
+  }
+
+  .hero__cta:focus-visible {
+    outline: 2px solid var(--fs-highlight, #0cbbcc);
+    outline-offset: 3px;
   }
 
   /* ============================================================
@@ -676,81 +479,5 @@ const heroImages = [
     }
   }
 
-  // ============================================================
-  // Overlay de servicios
-  // ============================================================
-  const servicesTrigger = document.querySelector<HTMLButtonElement>('[data-services-trigger]');
-  const servicesMenu    = document.querySelector<HTMLElement>('[data-services-menu]');
-  const servicesClose   = document.querySelector<HTMLButtonElement>('[data-services-close]');
-  const servicesAll     = document.querySelector<HTMLAnchorElement>('[data-services-all]');
-
-  const openServicesMenu = () => {
-    if (!servicesMenu) return;
-    servicesMenu.hidden = false;
-    document.body.style.overflow = 'hidden';
-    servicesTrigger?.setAttribute('aria-expanded', 'true');
-  };
-
-  const closeServicesMenu = () => {
-    if (!servicesMenu) return;
-    servicesMenu.hidden = true;
-    document.body.style.overflow = '';
-    servicesTrigger?.setAttribute('aria-expanded', 'false');
-  };
-
-  servicesTrigger?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openServicesMenu();
-  });
-
-  servicesClose?.addEventListener('click', closeServicesMenu);
-
-  servicesMenu?.addEventListener('click', (e) => {
-    if (e.target === servicesMenu) closeServicesMenu();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && servicesMenu && !servicesMenu.hidden) {
-      closeServicesMenu();
-    }
-  });
-
-  // ✅ "Ver todos los servicios" → cierra overlay y deja que el <a href="#servicios"> navegue
-  servicesAll?.addEventListener('click', () => {
-    closeServicesMenu();
-    // NO hacemos preventDefault: el navegador salta a #servicios
-  });
-
-  // ✅ Ítems del overlay → cierran overlay + scroll a la card (NO navegan a otra vista)
-  document.querySelectorAll<HTMLButtonElement>('[data-service-target]').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();          // ← evita cualquier navegación por defecto
-      e.stopPropagation();
-
-      const target = btn.getAttribute('data-service-target');
-      if (!target) return;
-
-      closeServicesMenu();
-
-      // Busca la card por slug (id o data-service) en la misma página
-      const card =
-        document.querySelector<HTMLElement>(`[data-service="${target}"]`) ??
-        document.getElementById(target) ??
-        document.querySelector<HTMLElement>(`#${CSS.escape(target)}`);
-
-      if (card) {
-        setTimeout(() => {
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-          if (
-            card.classList.contains('card--expandable') &&
-            !card.classList.contains('card--open')
-          ) {
-            card.querySelector<HTMLButtonElement>('.card__toggle')?.click();
-          }
-        }, 180);
-      }
-    });
-  });
+ 
 </script>

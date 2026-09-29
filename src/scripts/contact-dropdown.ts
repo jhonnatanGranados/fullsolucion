@@ -8,7 +8,6 @@ export function initContactDropdowns() {
   const dropdown = document.getElementById('contactDropdown');
   if (!dropdown) return;
 
-  // Guardamos las URLs base originales
   const baseHrefs: Record<string, string> = {};
   dropdown
     .querySelectorAll<HTMLAnchorElement>('[data-channel]')
@@ -24,13 +23,10 @@ export function initContactDropdowns() {
         e.stopPropagation();
         if (activeClose) activeClose();
 
-        // Leer el servicio asociado al botón
         const serviceCode = trigger.dataset.service || '';
         const serviceTitle = trigger.dataset.serviceTitle || '';
 
-        // Personalizar los enlaces según el servicio
         customizeLinks(dropdown, baseHrefs, serviceCode, serviceTitle);
-
         openNear(trigger, dropdown);
       });
     });
@@ -49,7 +45,6 @@ function customizeLinks(
     '[data-channel="gmail"]',
   );
 
-  // Si no hay servicio asociado, restauramos los enlaces base
   if (!code && !title) {
     if (whatsapp) whatsapp.href = baseHrefs.whatsapp;
     if (gmail) gmail.href = baseHrefs.gmail;
@@ -58,13 +53,11 @@ function customizeLinks(
 
   const serviceLabel = `${code} – ${title}`.trim();
 
-  // WhatsApp: mensaje pre-escrito
   if (whatsapp) {
     const msg = `Hola Full Solución, me interesa el servicio ${serviceLabel}. ¿Me pueden dar más información?`;
     whatsapp.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
   }
 
-  // Gmail: asunto y cuerpo pre-escritos
   if (gmail) {
     const subject = `Consulta sobre ${serviceLabel}`;
     const body = `Hola Full Solución,\n\nMe interesa el servicio "${serviceLabel}". ¿Me pueden dar más información?\n\nGracias.`;
@@ -78,7 +71,26 @@ function openNear(trigger: HTMLElement, dropdown: HTMLElement) {
   const rect = trigger.getBoundingClientRect();
   dropdown.style.top = `${rect.bottom + 8}px`;
   dropdown.style.left = `${rect.left + rect.width / 2}px`;
-  dropdown.style.transform = 'translateX(-50%)';
+
+  requestAnimationFrame(() => {
+    dropdown.classList.add('is-open');
+  });
+
+  let hoverTimer: number | null = null;
+
+  const scheduleClose = () => {
+    if (hoverTimer !== null) window.clearTimeout(hoverTimer);
+    hoverTimer = window.setTimeout(() => {
+      close();
+    }, 180);
+  };
+
+  const cancelClose = () => {
+    if (hoverTimer !== null) {
+      window.clearTimeout(hoverTimer);
+      hoverTimer = null;
+    }
+  };
 
   const onScroll = () => {
     const r = trigger.getBoundingClientRect();
@@ -101,13 +113,30 @@ function openNear(trigger: HTMLElement, dropdown: HTMLElement) {
     if (ev.key === 'Escape') close();
   };
 
+  const onTriggerLeave = () => scheduleClose();
+  const onDropdownLeave = () => scheduleClose();
+  const onTriggerEnter = () => cancelClose();
+  const onDropdownEnter = () => cancelClose();
+
   const close = () => {
+    if (hoverTimer !== null) {
+      window.clearTimeout(hoverTimer);
+      hoverTimer = null;
+    }
     dropdown.setAttribute('hidden', '');
+    dropdown.classList.remove('is-open');
     dropdown.style.cssText = '';
+
     document.removeEventListener('click', onDocClick);
     document.removeEventListener('keydown', onKey);
     window.removeEventListener('scroll', onScroll, true);
     window.removeEventListener('resize', onResize);
+
+    trigger.removeEventListener('mouseenter', onTriggerEnter);
+    trigger.removeEventListener('mouseleave', onTriggerLeave);
+    dropdown.removeEventListener('mouseenter', onDropdownEnter);
+    dropdown.removeEventListener('mouseleave', onDropdownLeave);
+
     activeClose = null;
   };
 
@@ -118,5 +147,10 @@ function openNear(trigger: HTMLElement, dropdown: HTMLElement) {
     document.addEventListener('keydown', onKey);
     window.addEventListener('scroll', onScroll, true);
     window.addEventListener('resize', onResize);
+
+    trigger.addEventListener('mouseenter', onTriggerEnter);
+    trigger.addEventListener('mouseleave', onTriggerLeave);
+    dropdown.addEventListener('mouseenter', onDropdownEnter);
+    dropdown.addEventListener('mouseleave', onDropdownLeave);
   }, 0);
 }
