@@ -176,27 +176,34 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transition: none !important;
   }
 
+  /* ---------- Header ---------- */
   .header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     padding: 0;
+    pointer-events: none;
     transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* Fondo blanco SOLO cuando NO se ha hecho scroll */
   .header__main {
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 180, 216, 0.12);
-    transition: background 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+    transition:
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
   }
 
-  .header.is-scrolled {
-    padding: clamp(0.5rem, 1vw, 0.9rem) clamp(0.75rem, 2vw, 1.75rem) 0;
-  }
-
+  /* Al hacer scroll: fondo transparente, solo flotan los iconos */
   .header.is-scrolled .header__main {
-    background: #ffffff;
-    border-bottom: 1px solid rgba(0, 180, 216, 0.12);
+    background: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
   }
 
   .header__inner {
@@ -207,14 +214,19 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     align-items: center;
     gap: 1rem;
     padding: 1rem 1rem 1rem 0.5rem;
+    pointer-events: none;
     transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .header.is-scrolled .header__inner {
-    padding: 0.4rem 0.75rem 0.4rem 0.35rem;
+  .header__inner > * {
+    pointer-events: auto;
   }
 
-  /* ---------- Brand (logo + texto) ---------- */
+  .header.is-scrolled .header__inner {
+    padding: 0.6rem 0.75rem 0.6rem 0.35rem;
+  }
+
+  /* ---------- Brand ---------- */
   .brand {
     display: flex;
     align-items: center;
@@ -225,6 +237,12 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     margin: 0;
     padding: 0;
     line-height: 1;
+    transition: filter 0.35s ease;
+  }
+
+  /* Cuando flota, agrega sombra al brand para que se lea sobre cualquier fondo */
+  .header.is-scrolled .brand {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
   }
 
   .brand__logo {
@@ -235,14 +253,14 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     object-fit: contain;
     flex: 0 0 auto;
     filter: drop-shadow(0 2px 4px rgba(11, 31, 51, 0.08));
-    transition: filter 0.4s ease, width 0.4s ease;
+    transition: filter 0.35s ease, width 0.4s ease;
     will-change: width;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
 
   .header.is-scrolled .brand__logo {
-    filter: drop-shadow(0 5px 12px rgba(11, 31, 51, 0.18));
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
   }
 
   .brand__name {
@@ -261,6 +279,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     letter-spacing: 0.02em;
     color: #0A4BD3;
     text-transform: uppercase;
+    transition: color 0.35s ease, text-shadow 0.35s ease;
   }
 
   .brand__name-sub {
@@ -271,6 +290,22 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     color: #0b0f1a;
     text-transform: uppercase;
     margin-top: 0.15em;
+    transition: color 0.35s ease, text-shadow 0.35s ease;
+  }
+
+  /* Al hacer scroll: texto blanco con sombra para leerse sobre cualquier fondo */
+  .header.is-scrolled .brand__name-main {
+    color: #ffffff;
+    text-shadow:
+      0 1px 0 rgba(10, 75, 211, 0.6),
+      0 2px 8px rgba(0, 0, 0, 0.55);
+  }
+
+  .header.is-scrolled .brand__name-sub {
+    color: #ffffff;
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.45),
+      0 2px 8px rgba(0, 0, 0, 0.55);
   }
 
   /* ---------- Navegación ---------- */
@@ -475,7 +510,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   }
 
   .header.is-scrolled .header__wa {
-    box-shadow: 0 10px 26px rgba(43, 184, 102, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    box-shadow: 0 10px 26px rgba(43, 184, 102, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.32);
   }
 
   .header__wa::after {
@@ -791,7 +826,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     .header__wa span { display: none; }
     .header__wa { padding: 0.55rem; }
     .header__inner { padding: 0.9rem 0.9rem 0.9rem 0.4rem; }
-    .header.is-scrolled .header__inner { padding: 0.4rem 0.7rem 0.4rem 0.3rem; }
+    .header.is-scrolled .header__inner { padding: 0.5rem 0.7rem 0.5rem 0.3rem; }
   }
 
   @media (max-width: 720px) {
@@ -800,7 +835,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       gap: 0.4rem;
       padding: 0.7rem 0.6rem 0.7rem 0.25rem;
     }
-    .header.is-scrolled .header__inner { padding: 0.4rem 0.5rem 0.4rem 0.25rem; }
+    .header.is-scrolled .header__inner { padding: 0.5rem 0.5rem 0.5rem 0.25rem; }
 
     .brand { gap: 0.4rem; }
     .brand__logo { width: clamp(36px, 10vw, 46px); max-height: 46px; }
