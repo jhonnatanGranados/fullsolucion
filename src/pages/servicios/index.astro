@@ -117,6 +117,8 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   <Footer slot="footer" />
 
   <script>
+    let serviciosInit = false;
+
     function abrirPorHash() {
       const hash = window.location.hash.replace('#', '');
       if (!hash) return;
@@ -139,86 +141,106 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       const itemsPanel = card.querySelector('.card__items');
       if (itemsPanel) (itemsPanel as HTMLElement).hidden = false;
 
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 120);
-    }
-
-    document.addEventListener('DOMContentLoaded', abrirPorHash);
-    window.addEventListener('hashchange', abrirPorHash);
-
-    const menu      = document.querySelector<HTMLElement>('[data-servicios-menu]');
-    const trigger   = document.querySelector<HTMLButtonElement>('[data-servicios-menu-trigger]');
-    const closers   = document.querySelectorAll<HTMLElement>('[data-servicios-menu-close]');
-    const menuItems = document.querySelectorAll<HTMLAnchorElement>('[data-servicios-menu-item]');
-
-    let lastFocus: HTMLElement | null = null;
-
-    const openMenu = () => {
-      if (!menu) return;
-      lastFocus = document.activeElement as HTMLElement;
-      menu.hidden = false;
-      document.body.style.overflow = 'hidden';
-      trigger?.setAttribute('aria-expanded', 'true');
       requestAnimationFrame(() => {
-        menu.querySelector<HTMLElement>('.servicios-menu__close')?.focus();
-      });
-    };
-
-    const closeMenu = () => {
-      if (!menu) return;
-      menu.hidden = true;
-      document.body.style.overflow = '';
-      trigger?.setAttribute('aria-expanded', 'false');
-      lastFocus?.focus();
-    };
-
-    trigger?.addEventListener('click', openMenu);
-    closers.forEach((el) => el.addEventListener('click', closeMenu));
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu && !menu.hidden) closeMenu();
-    });
-
-    menuItems.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const slug = link.dataset.slug;
-        if (!slug) return;
-        closeMenu();
-        history.pushState(null, '', `#${slug}`);
-        abrirPorHash();
-      });
-    });
-
-    const sheet = document.querySelector<HTMLElement>('.servicios-menu__sheet');
-    if (sheet) {
-      let startY = 0;
-      let currentY = 0;
-      let dragging = false;
-
-      sheet.addEventListener('touchstart', (e: TouchEvent) => {
-        if (sheet.scrollTop > 0) return;
-        startY = currentY = e.touches[0].clientY;
-        dragging = true;
-        sheet.style.transition = 'none';
-      }, { passive: true });
-
-      sheet.addEventListener('touchmove', (e: TouchEvent) => {
-        if (!dragging) return;
-        currentY = e.touches[0].clientY;
-        const delta = currentY - startY;
-        if (delta > 0) sheet.style.transform = `translateY(${delta}px)`;
-      }, { passive: true });
-
-      sheet.addEventListener('touchend', () => {
-        if (!dragging) return;
-        dragging = false;
-        sheet.style.transition = '';
-        if (currentY - startY > 120) closeMenu();
-        sheet.style.transform = '';
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
+
+    function initServicios() {
+      if (serviciosInit) return;
+      serviciosInit = true;
+
+      const tieneHash = !!window.location.hash;
+
+      if (tieneHash) {
+        abrirPorHash();
+      } else {
+        window.scrollTo(0, 0);
+      }
+
+      window.addEventListener('hashchange', abrirPorHash);
+
+      const menu      = document.querySelector<HTMLElement>('[data-servicios-menu]');
+      const trigger   = document.querySelector<HTMLButtonElement>('[data-servicios-menu-trigger]');
+      const closers   = document.querySelectorAll<HTMLElement>('[data-servicios-menu-close]');
+      const menuItems = document.querySelectorAll<HTMLAnchorElement>('[data-servicios-menu-item]');
+
+      let lastFocus: HTMLElement | null = null;
+
+      const openMenu = () => {
+        if (!menu) return;
+        lastFocus = document.activeElement as HTMLElement;
+        menu.hidden = false;
+        document.body.style.overflow = 'hidden';
+        trigger?.setAttribute('aria-expanded', 'true');
+        requestAnimationFrame(() => {
+          menu.querySelector<HTMLElement>('.servicios-menu__close')?.focus();
+        });
+      };
+
+      const closeMenu = () => {
+        if (!menu) return;
+        menu.hidden = true;
+        document.body.style.overflow = '';
+        trigger?.setAttribute('aria-expanded', 'false');
+        lastFocus?.focus();
+      };
+
+      trigger?.addEventListener('click', openMenu);
+      closers.forEach((el) => el.addEventListener('click', closeMenu));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu && !menu.hidden) closeMenu();
+      });
+
+      menuItems.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const slug = link.dataset.slug;
+          if (!slug) return;
+          closeMenu();
+          history.pushState(null, '', `#${slug}`);
+          abrirPorHash();
+        });
+      });
+
+      const sheet = document.querySelector<HTMLElement>('.servicios-menu__sheet');
+      if (sheet) {
+        let startY = 0;
+        let currentY = 0;
+        let dragging = false;
+
+        sheet.addEventListener('touchstart', (e: TouchEvent) => {
+          if (sheet.scrollTop > 0) return;
+          startY = currentY = e.touches[0].clientY;
+          dragging = true;
+          sheet.style.transition = 'none';
+        }, { passive: true });
+
+        sheet.addEventListener('touchmove', (e: TouchEvent) => {
+          if (!dragging) return;
+          currentY = e.touches[0].clientY;
+          const delta = currentY - startY;
+          if (delta > 0) sheet.style.transform = `translateY(${delta}px)`;
+        }, { passive: true });
+
+        sheet.addEventListener('touchend', () => {
+          if (!dragging) return;
+          dragging = false;
+          sheet.style.transition = '';
+          if (currentY - startY > 120) closeMenu();
+          sheet.style.transform = '';
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initServicios);
+    } else {
+      initServicios();
+    }
+
+    document.addEventListener('astro:page-load', initServicios);
   </script>
 
   <style>
@@ -284,7 +306,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1.2rem;
     }
-    .servicio-anchor { scroll-margin-top: 150px; }
+    .servicio-anchor { scroll-margin-top: 130px; }
 
     .servicios-menu {
       position: fixed;
@@ -456,7 +478,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     @media (max-width: 980px) { .servicios-hero { padding-top: 2.5rem; } }
     @media (max-width: 720px) {
       .servicios-grid { grid-template-columns: 1fr; gap: 0.9rem; }
-      .servicio-anchor { scroll-margin-top: 210px; }
+      .servicio-anchor { scroll-margin-top: 160px; }
       .servicios-hero h1 { font-size: 1.65rem; }
       .servicios-hero p  { font-size: 0.95rem; }
     }
