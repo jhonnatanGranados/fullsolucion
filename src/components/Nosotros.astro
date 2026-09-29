@@ -1,5 +1,4 @@
 ---
-// src/components/Nosotros.astro
 const valores = [
   {
     title: 'Colaboración',
@@ -107,7 +106,6 @@ const valores = [
     margin: 0.85rem auto 0;
   }
 
-  /* ===== Título "Nosotros" ===== */
   .section__title {
     font-family: var(--font-display);
     font-weight: 900;
@@ -174,7 +172,6 @@ const valores = [
       0 1px 2px rgba(20, 33, 86, 0.08);
   }
 
-  /* ===== Esquineros ===== */
   .corner {
     position: absolute;
     width: 22px;
@@ -216,7 +213,6 @@ const valores = [
     border-bottom-right-radius: 8px;
   }
 
-  /* ===== Misión / Visión ===== */
   .statement {
     position: relative;
     max-width: 700px;
@@ -290,7 +286,6 @@ const valores = [
       0 1px 1px rgba(20, 33, 86, 0.06);
   }
 
-  /* ===== Valores ===== */
   .values {
     margin-top: 3.5rem;
     padding-top: 3rem;
@@ -416,9 +411,6 @@ const valores = [
     .values__grid { grid-template-columns: 1fr; }
   }
 
-  /* =========================================================
-     EFECTO DIGITALIZACIÓN POR SCROLL CON DIRECCIÓN
-     ========================================================= */
   .digitize {
     --p: 0;
     --tx: 0px;
@@ -440,12 +432,10 @@ const valores = [
     will-change: opacity, filter, transform, clip-path;
   }
 
-  /* Direcciones — desplazamiento grande para que venga desde la orilla */
   .digitize[data-dir="up"]    { --ty: 40px;   --tx: 0; }
   .digitize[data-dir="left"]  { --tx: -140px; --ty: 0; }
   .digitize[data-dir="right"] { --tx: 140px;  --ty: 0; }
 
-  /* Línea de escaneo */
   .digitize::after {
     content: '';
     position: absolute;
@@ -500,21 +490,14 @@ const valores = [
         let p = 0;
 
         if (dir === 'left') {
-          // Entra desde la orilla izquierda del navegador.
-          // p = 0 cuando el borde izquierdo está completamente fuera (x = -ancho)
-          // p = 1 cuando el borde izquierdo llega al 15% del viewport
           const start = -rect.width;
           const end = vw * 0.15;
           p = (rect.left - start) / (end - start);
         } else if (dir === 'right') {
-          // Entra desde la orilla derecha del navegador.
-          // p = 0 cuando el borde derecho está completamente fuera (x = vw + ancho)
-          // p = 1 cuando el borde derecho llega al 85% del viewport
           const start = vw + rect.width;
           const end = vw * 0.85;
           p = (start - rect.right) / (start - end);
         } else {
-          // up: entra desde abajo del viewport
           const start = vh;
           const end = vh * 0.5;
           p = (start - rect.top) / (start - end);
