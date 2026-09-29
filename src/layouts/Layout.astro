@@ -19,137 +19,31 @@ const {
 const siteUrl = 'https://fullsolucion.vercel.app';
 const canonicalURL = new URL(canonical, siteUrl);
 const ogImage = new URL(image, siteUrl);
-
-const telefono = '+502 4108 0263';
-const email = 'fullsolution001@gmail.com';
-
-const ubicacion = {
-  latitud: 15.3197,
-  longitud: -91.4708,
-  ciudad: 'Huehuetenango',
-  region: 'Huehuetenango',
-  pais: 'GT',
-};
-
-const serviciosCatalogo = [
-  { slug: 'electricidad-general', nombre: 'Instalaciones eléctricas residenciales e industriales en Guatemala' },
-  { slug: 'energias-renovables', nombre: 'Energías renovables y paneles solares en Guatemala y Huehuetenango' },
-  { slug: 'cableado-estructurado', nombre: 'Cableado estructurado y redes' },
-  { slug: 'videovigilancia', nombre: 'Videovigilancia y cámaras de seguridad' },
-  { slug: 'sonido-comercial', nombre: 'Sonido comercial' },
-  { slug: 'generadores-electricos', nombre: 'Generadores eléctricos' },
-  { slug: 'reparacion-mantenimiento', nombre: 'Reparación y mantenimiento eléctrico' },
-  { slug: 'automatizacion-industrial', nombre: 'Automatización de sistemas industriales en Guatemala y Huehuetenango' },
-  { slug: 'sistemas-prefabricados', nombre: 'Sistemas prefabricados livianos' },
-  { slug: 'pintura', nombre: 'Pintura residencial e industrial' },
-  { slug: 'estructuras-livianas', nombre: 'Estructuras livianas' },
-  { slug: 'soldadura-industrial', nombre: 'Soldadura industrial' },
-  { slug: 'sistemas-de-gases', nombre: 'Sistemas de gases' },
-  { slug: 'perfileria-pvc', nombre: 'Perfilería PVC' },
-  { slug: 'mantenimiento-limpieza', nombre: 'Mantenimiento y limpieza' },
-  { slug: 'desarrollo-software', nombre: 'Desarrollo de software' },
-];
-
-const orgId = `${siteUrl}/#organizacion`;
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'ElectricalContractor',
-      '@id': orgId,
-      name: 'Full Solución',
-      alternateName: 'Full Solución Guatemala',
-      url: siteUrl,
-      logo: `${siteUrl}/logo.png`,
-      image: ogImage.href,
-      description:
-        'Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales en Guatemala y Huehuetenango.',
-      telephone: telefono,
-      email,
-      priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: ubicacion.pais,
-        addressRegion: ubicacion.region,
-        addressLocality: ubicacion.ciudad,
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: ubicacion.latitud,
-        longitude: ubicacion.longitud,
-      },
-      areaServed: [
-        { '@type': 'Country', name: 'Guatemala' },
-        { '@type': 'City', name: 'Guatemala' },
-        { '@type': 'City', name: 'Huehuetenango' },
-        { '@type': 'City', name: 'Quetzaltenango' },
-        { '@type': 'City', name: 'Chimaltenango' },
-      ],
-      knowsLanguage: ['es-GT', 'es'],
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '08:00',
-          closes: '18:00',
-        },
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Saturday'],
-          opens: '08:00',
-          closes: '13:00',
-        },
-      ],
-      sameAs: [
-        'https://www.facebook.com/people/Fullsolution-Gt/pfbid031XL1kRyrCVpH1ccsTbyDk9gNrCxADrns4UfuZxaVeVqEFwdcAwXo94okCHRpw6AHl/',
-        'https://www.instagram.com/fullsolution_gt/',
-        'https://www.tiktok.com/@full.solution_gt',
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Servicios de Full Solución',
-        itemListElement: serviciosCatalogo.map((s) => ({
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: s.nombre,
-            url: `${siteUrl}/#${s.slug}`,
-          },
-        })),
-      },
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
-      name: 'Full Solución',
-      url: siteUrl,
-      inLanguage: 'es-GT',
-      publisher: { '@id': orgId },
-    },
-  ],
-};
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es-GT">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- ============ SEO BÁSICO ============ -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <meta name="geo.region" content="GT-HU" />
-    <meta name="geo.placename" content={`${ubicacion.ciudad}, ${ubicacion.region}`} />
-    <meta name="geo.position" content={`${ubicacion.latitud};${ubicacion.longitud}`} />
-    <meta name="ICBM" content={`${ubicacion.latitud}, ${ubicacion.longitud}`} />
+    <!-- Geolocalización para SEO local -->
+    <meta name="geo.region" content="GT" />
+    <meta name="geo.placename" content="Guatemala, Huehuetenango" />
+    <meta name="geo.position" content="14.6349;-90.5069" />
+    <meta name="ICBM" content="14.6349, -90.5069" />
 
+    <!-- ============ FAVICON (LOGO DE LA COMPAÑÍA) ============ -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
 
+    <!-- ============ OPEN GRAPH ============ -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Full Solución" />
     <meta property="og:locale" content="es_GT" />
@@ -157,17 +51,414 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
+    <!-- ============ TWITTER CARDS ============ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  </head>
+    <!-- ============ DATOS ESTRUCTURADOS (JSON-LD) ============ -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ElectricalContractor',
+        '@id': `${siteUrl}/#organizacion`,
+        name: 'Full Solución',
+        alternateName: 'Full Solución Guatemala',
+        url: siteUrl,
+        logo: `${siteUrl}/logo.png`,
+        image: ogImage,
+        description:
+          'Empresa guatemalteca especializada en instalaciones eléctricas, energías renovables, automatización industrial, videovigilancia y soluciones integrales en Guatemala y Huehuetenango.',
+        telephone: '+502-0000-0000', // 👈 pon tu teléfono real
+        email: 'contacto@fullsolucion.com', // 👈 pon tu correo real
+        priceRange: '$$',
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'GT',
+          addressRegion: 'Huehuetenango',
+          addressLocality: 'Huehuetenango',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 15.3197,
+          longitude: -91.4708,
+        },
+        areaServed: [
+          { '@type': 'Country', name: 'Guatemala' },
+          { '@type': 'City', name: 'Guatemala' },
+          { '@type': 'City', name: 'Huehuetenango' },
+          { '@type': 'City', name: 'Quetzaltenango' },
+          { '@type': 'City', name: 'Chimaltenango' },
+        ],
+        knowsLanguage: ['es-GT', 'es'],
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '08:00',
+            closes: '18:00',
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Saturday'],
+            opens: '08:00',
+            closes: '13:00',
+          },
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Servicios de Full Solución',
+          itemListElement: [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Instalaciones eléctricas residenciales e industriales en Guatemala' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Energías renovables y paneles solares en Guatemala y Huehuetenango' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cableado estructurado y redes' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Videovigilancia y cámaras de seguridad' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sonido comercial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Generadores eléctricos' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Reparación y mantenimiento eléctrico' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatización de sistemas industriales en Guatemala y Huehuetenango' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas prefabricados livianos' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Pintura residencial e industrial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Estructuras livianas' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Soldadura industrial' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Sistemas de gases' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Perfilería PVC' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y limpieza' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software' } },
+          ],
+        },
+      })}
+    />
 
+    <!-- ============ GOOGLE FONTS ============ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style is:global>
+      /* ============================================================
+         PALETA INSTITUCIONAL FULL SOLUCIÓN
+         ============================================================ */
+      :root {
+        --fs-primary: #142156;
+        --fs-secondary: #152A7D;
+        --fs-accent: #107BCD;
+        --fs-highlight: #0CBBCC;
+
+        --fs-ink: #14161F;
+        --fs-slate: #475569;
+        --fs-steel: #6B7488;
+        --fs-line: #DDE3EC;
+        --fs-paper: #F3F5F8;
+        --fs-surface: #FAFBFD;
+        --fs-white: #FFFFFF;
+
+        --fs-gradient-brand: linear-gradient(
+          90deg,
+          #142156 0%,
+          #152A7D 35%,
+          #107BCD 70%,
+          #0CBBCC 100%
+        );
+        --fs-gradient-accent: linear-gradient(135deg, #0CBBCC, #107BCD);
+        --fs-gradient-soft: linear-gradient(180deg, #FAFBFD 0%, #F0F3F7 100%);
+
+        --fs-shadow-sm: 0 1px 2px rgba(20, 22, 31, 0.04);
+        --fs-shadow-md: 0 8px 24px -16px rgba(20, 33, 86, 0.14);
+        --fs-shadow-lg: 0 20px 40px -20px rgba(20, 33, 86, 0.22);
+        --fs-shadow-glow: 0 12px 24px -12px rgba(12, 187, 204, 0.45);
+
+        --font-display: 'Space Grotesk', sans-serif;
+        --font-body: 'IBM Plex Sans', sans-serif;
+        --font-mono: 'IBM Plex Mono', monospace;
+
+        --radius-sm: 4px;
+        --radius-md: 10px;
+        --radius-lg: 16px;
+      }
+
+      /* ============================================================
+         RESET Y BASE
+         ============================================================ */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--fs-ink);
+        background: var(--fs-white);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      img,
+      video {
+        max-width: 100%;
+        display: block;
+      }
+
+      svg {
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font-family: inherit;
+      }
+
+      ::selection {
+        background: var(--fs-highlight);
+        color: var(--fs-primary);
+      }
+
+      main {
+        display: block;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+
+      .display {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: var(--fs-primary);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+        color: var(--fs-primary);
+        text-align: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .section-title::after {
+        content: '';
+        display: block;
+        width: 56px;
+        height: 3px;
+        margin: 1rem auto 0;
+        border-radius: 2px;
+        background: var(--fs-gradient-accent);
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: var(--fs-steel);
+        font-size: 1.075rem;
+        line-height: 1.65;
+        max-width: 620px;
+        margin: 1rem auto 3rem;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--fs-accent);
+        margin-bottom: 0.75rem;
+      }
+
+      /* ============================================================
+         BOTONES GLOBALES
+         ============================================================ */
+      .btn-primary,
+      .btn-secondary,
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
+        padding: 0.85rem 2rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        text-decoration: none;
+        border: 2px solid transparent;
+        transition:
+          background 0.25s ease,
+          color 0.25s ease,
+          border-color 0.25s ease,
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .btn-primary {
+        background: var(--fs-highlight);
+        color: var(--fs-primary);
+        border-color: var(--fs-highlight);
+      }
+
+      .btn-primary:hover {
+        background: var(--fs-white);
+        color: var(--fs-primary);
+        border-color: var(--fs-highlight);
+        transform: translateY(-2px);
+        box-shadow: var(--fs-shadow-glow);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--fs-primary);
+        border-color: var(--fs-primary);
+      }
+
+      .btn-secondary:hover {
+        background: var(--fs-primary);
+        color: var(--fs-white);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--fs-white);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .btn-ghost:hover {
+        border-color: var(--fs-highlight);
+        color: var(--fs-highlight);
+        background: rgba(12, 187, 204, 0.08);
+      }
+
+      .bg-paper { background: var(--fs-paper); }
+      .bg-surface { background: var(--fs-surface); }
+      .bg-primary {
+        background: var(--fs-primary);
+        color: var(--fs-white);
+      }
+
+      .top-accent {
+        height: 4px;
+        width: 100%;
+        background: var(--fs-gradient-brand);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--fs-highlight);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--fs-paper);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--fs-accent), var(--fs-highlight));
+        border-radius: 10px;
+        border: 2px solid var(--fs-paper);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--fs-primary);
+      }
+
+      @media (max-width: 1024px) {
+        section { padding: 4rem 0; }
+      }
+
+      @media (max-width: 768px) {
+        .grid-3,
+        .grid-2 { grid-template-columns: 1fr; }
+        section { padding: 3rem 0; }
+        .container { padding: 0 1.25rem; }
+        .section-title::after { width: 44px; }
+      }
+
+      @media (max-width: 480px) {
+        body { font-size: 15px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
   <body>
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+
     <ContactDropdown />
-    <slot />
+
+    <script>
+      import { initHeroCarousel } from '../scripts/hero-carousel';
+      import { initContactDropdowns } from '../scripts/contact-dropdown';
+      import { initCardTilt } from '../scripts/card-tilt';
+
+      initHeroCarousel();
+      initContactDropdowns();
+      initCardTilt();
+    </script>
   </body>
 </html>
