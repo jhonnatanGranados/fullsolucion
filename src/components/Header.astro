@@ -181,15 +181,22 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
+    z-index: 100;
     padding: 0;
-    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-bottom: 8px;
+    transition:
+      padding 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      margin-bottom 0.4s ease;
+  }
+
+  .header.is-scrolled {
+    margin-bottom: 4px;
   }
 
   .header__main {
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 180, 216, 0.12);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 14px rgba(11, 31, 51, 0.08);
     transition:
       background 0.35s ease,
       border-color 0.35s ease,
@@ -197,9 +204,9 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   }
 
   .header.is-scrolled .header__main {
-    background: transparent;
-    border-bottom-color: transparent;
-    box-shadow: none;
+    background: #ffffff;
+    border-bottom-color: rgba(0, 180, 216, 0.18);
+    box-shadow: 0 6px 20px rgba(11, 31, 51, 0.12);
   }
 
   .header__inner {
@@ -230,10 +237,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transition: filter 0.35s ease;
   }
 
-  .header.is-scrolled .brand {
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
-  }
-
   .brand__logo {
     display: block;
     width: clamp(44px, 5vw, 60px);
@@ -246,10 +249,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     will-change: width;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-  }
-
-  .header.is-scrolled .brand__logo {
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
   }
 
   .brand__name {
@@ -280,20 +279,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     text-transform: uppercase;
     margin-top: 0.15em;
     transition: color 0.35s ease, text-shadow 0.35s ease;
-  }
-
-  .header.is-scrolled .brand__name-main {
-    color: #ffffff;
-    text-shadow:
-      0 1px 0 rgba(10, 75, 211, 0.6),
-      0 2px 8px rgba(0, 0, 0, 0.55);
-  }
-
-  .header.is-scrolled .brand__name-sub {
-    color: #ffffff;
-    text-shadow:
-      0 1px 0 rgba(0, 0, 0, 0.45),
-      0 2px 8px rgba(0, 0, 0, 0.55);
   }
 
   .nav {
