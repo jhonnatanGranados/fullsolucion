@@ -190,23 +190,26 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   }
 
   .header.is-scrolled {
-    margin-bottom: 4px;
+    margin-bottom: 0;
   }
 
   .header__main {
-    background: #ffffff;
-    border-bottom: 1px solid rgba(0, 180, 216, 0.12);
-    box-shadow: 0 4px 14px rgba(11, 31, 51, 0.08);
+    background: linear-gradient(
+      180deg,
+      #f2fbfb 0%,
+      #e6f7f7 50%,
+      #ddf3f3 100%
+    );
+    border-bottom: none;
+    box-shadow: 0 4px 18px rgba(11, 31, 51, 0.06);
     transition:
       background 0.35s ease,
-      border-color 0.35s ease,
       box-shadow 0.35s ease;
   }
 
   .header.is-scrolled .header__main {
-    background: #ffffff;
-    border-bottom-color: rgba(0, 180, 216, 0.18);
-    box-shadow: 0 6px 20px rgba(11, 31, 51, 0.12);
+    background: transparent;
+    box-shadow: none;
   }
 
   .header__inner {
@@ -279,6 +282,28 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     text-transform: uppercase;
     margin-top: 0.15em;
     transition: color 0.35s ease, text-shadow 0.35s ease;
+  }
+
+  .header.is-scrolled .brand__name-main {
+    color: #ffffff;
+    text-shadow:
+      0 1px 0 rgba(10, 75, 211, 0.6),
+      0 2px 8px rgba(0, 0, 0, 0.55);
+  }
+
+  .header.is-scrolled .brand__name-sub {
+    color: #ffffff;
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.45),
+      0 2px 8px rgba(0, 0, 0, 0.55);
+  }
+
+  .header.is-scrolled .brand {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  }
+
+  .header.is-scrolled .brand__logo {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
   }
 
   .nav {
