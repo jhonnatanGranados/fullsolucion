@@ -21,8 +21,8 @@ export type Categoria =
   | 'complementarios';
 
 export interface Servicio {
-  slug: string;           // ← NUEVO: ancla + futura URL
-  category: Categoria;    // ← NUEVO: agrupación para el megamenú
+  slug: string;           
+  category: Categoria;   
   ref: string;
   title: string;
   subtitle: string;
@@ -263,7 +263,7 @@ export const servicios: Servicio[] = [
     slug: 'mantenimiento-limpieza',
     category: 'complementarios',
     ref: 'FS-15',
-    title: 'Mantenimiento y limpieza',
+    title: 'Mantenimiento y limpieza General',
     subtitle: 'Espacios comerciales',
     description:
       'Servicios de mantenimiento y limpieza para espacios comerciales e industriales.',

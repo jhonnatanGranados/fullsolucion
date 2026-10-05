@@ -6,9 +6,10 @@ import { servicios } from '../data/servicios';
 
 <section id="servicios" class="section section--wide">
   <div class="section__head section__head--center">
+    <h2 class="section__slogan">Damos forma y vida a tus proyectos</h2>
     <span class="eyebrow">Servicios</span>
-    <h2 class="section__title">Soluciones integrales para cada etapa de tu proyecto</h2>
-    <p class="section__lead">Dieciséis áreas de trabajo, un mismo equipo técnico.</p>
+    <p class="section__title">Soluciones integrales para cada etapa de tu proyecto</p>
+    <p class="section__highlight">16 áreas de trabajo, un mismo equipo técnico.</p>
   </div>
 
   <div class="services">
@@ -45,18 +46,82 @@ import { servicios } from '../data/servicios';
     margin-right: auto;
   }
 
-  .section__head--center .section__lead {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.85rem;
+  /* === ESLOGAN PRINCIPAL CON RELIEVE 3D === */
+  .section__slogan {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 auto 1.5rem;
+    max-width: 22ch;
+    color: var(--fs-primary);
+    perspective: 900px;
+    transform-style: preserve-3d;
+    animation: slogan3D 7s ease-in-out infinite;
+    text-shadow:
+      1px 1px 0 rgba(16, 123, 205, 0.55),
+      2px 2px 0 rgba(16, 123, 205, 0.45),
+      3px 3px 0 rgba(16, 123, 205, 0.35),
+      4px 4px 0 rgba(12, 187, 204, 0.28),
+      5px 5px 0 rgba(12, 187, 204, 0.20),
+      6px 6px 0 rgba(12, 187, 204, 0.12),
+      8px 12px 24px rgba(10, 30, 60, 0.35);
+  }
+
+  @keyframes slogan3D {
+    0%, 100% {
+      transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+      text-shadow:
+        1px 1px 0 rgba(16, 123, 205, 0.55),
+        2px 2px 0 rgba(16, 123, 205, 0.45),
+        3px 3px 0 rgba(16, 123, 205, 0.35),
+        4px 4px 0 rgba(12, 187, 204, 0.28),
+        5px 5px 0 rgba(12, 187, 204, 0.20),
+        6px 6px 0 rgba(12, 187, 204, 0.12),
+        8px 12px 24px rgba(10, 30, 60, 0.35);
+    }
+    25% {
+      transform: rotateX(6deg) rotateY(-6deg) translateZ(10px);
+      text-shadow:
+        1px 2px 0 rgba(16, 123, 205, 0.6),
+        2px 4px 0 rgba(16, 123, 205, 0.5),
+        3px 6px 0 rgba(16, 123, 205, 0.4),
+        4px 8px 0 rgba(12, 187, 204, 0.32),
+        5px 10px 0 rgba(12, 187, 204, 0.24),
+        6px 12px 0 rgba(12, 187, 204, 0.14),
+        -10px 18px 30px rgba(10, 30, 60, 0.45);
+    }
+    50% {
+      transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+      text-shadow:
+        1px 1px 0 rgba(16, 123, 205, 0.55),
+        2px 2px 0 rgba(16, 123, 205, 0.45),
+        3px 3px 0 rgba(16, 123, 205, 0.35),
+        4px 4px 0 rgba(12, 187, 204, 0.28),
+        5px 5px 0 rgba(12, 187, 204, 0.20),
+        6px 6px 0 rgba(12, 187, 204, 0.12),
+        8px 12px 24px rgba(10, 30, 60, 0.35);
+    }
+    75% {
+      transform: rotateX(6deg) rotateY(6deg) translateZ(10px);
+      text-shadow:
+        -1px 2px 0 rgba(16, 123, 205, 0.6),
+        -2px 4px 0 rgba(16, 123, 205, 0.5),
+        -3px 6px 0 rgba(16, 123, 205, 0.4),
+        -4px 8px 0 rgba(12, 187, 204, 0.32),
+        -5px 10px 0 rgba(12, 187, 204, 0.24),
+        -6px 12px 0 rgba(12, 187, 204, 0.14),
+        10px 18px 30px rgba(10, 30, 60, 0.45);
+    }
   }
 
   .eyebrow {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--fs-accent);
     margin-bottom: 0.85rem;
@@ -65,28 +130,24 @@ import { servicios } from '../data/servicios';
   .section__title {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
     color: var(--fs-primary);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
     margin: 0 0 0.6rem;
   }
 
-  .section__head--center .section__title::after {
-    content: '';
-    display: block;
-    width: 56px;
-    height: 3px;
-    margin: 1rem auto 0;
-    border-radius: 2px;
-    background: var(--fs-gradient-accent);
-  }
-
-  .section__lead {
+  .section__highlight {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
     color: var(--fs-steel);
-    font-size: 1rem;
-    line-height: 1.65;
-    margin: 0;
+    margin: 0.5rem auto 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
   }
 
   .services {
@@ -131,5 +192,9 @@ import { servicios } from '../data/servicios';
     .services > :nth-child(even) {
       justify-self: stretch;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section__slogan { animation: none; }
   }
 </style>

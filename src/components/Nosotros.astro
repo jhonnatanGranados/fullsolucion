@@ -344,16 +344,7 @@ const valores = [
     --corner-color: var(--fs-accent);
   }
 
-  .value::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 1.4rem;
-    right: 1.4rem;
-    height: 3px;
-    border-radius: 0 0 3px 3px;
-    background: var(--fs-gradient-accent);
-  }
+  /* Línea azul superior eliminada */
 
   .value:hover .corner { width: 30px; height: 30px; }
 
@@ -455,6 +446,20 @@ const valores = [
     z-index: 3;
   }
 
+  /* Estado final: elimina blur, clip-path y transform residuales en Android */
+  .digitize.digitize--done {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: none;
+    will-change: auto;
+    transition: none;
+  }
+
+  .digitize.digitize--done::after {
+    display: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .digitize {
       opacity: 1 !important;
@@ -474,7 +479,10 @@ const valores = [
     if (!items.length) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      items.forEach((el) => el.style.setProperty('--p', '1'));
+      items.forEach((el) => {
+        el.style.setProperty('--p', '1');
+        el.classList.add('digitize--done');
+      });
       return;
     }
 
@@ -505,6 +513,14 @@ const valores = [
 
         p = Math.max(0, Math.min(1, p));
         el.style.setProperty('--p', p.toFixed(3));
+
+        // Al completar la animación, quitamos filtros y transformaciones
+        // para evitar el renderizado borroso en Android.
+        if (p >= 0.999) {
+          el.classList.add('digitize--done');
+        } else {
+          el.classList.remove('digitize--done');
+        }
       });
 
       ticking = false;

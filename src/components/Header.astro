@@ -15,6 +15,23 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   ...cat,
   items: servicios.filter((s) => s.category === cat.id),
 }));
+
+const serviciosGrid = serviciosPorCategoria.flatMap((cat) =>
+  cat.items.map((s) => ({ ...s, cat: cat.id }))
+);
+
+const iconosCategoria: Record<string, string> = {
+  'electrico':
+    '<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>',
+  'energia-redes':
+    '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  'industrial':
+    '<path d="M3 21V11l6 4v-4l6 4V6h6v15z"/>',
+  'construccion-liviana':
+    '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/>',
+  'complementarios':
+    '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>',
+};
 ---
 
 <script is:inline>
@@ -126,7 +143,10 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     <div class="header-services-sheet__handle" aria-hidden="true"></div>
 
     <header class="header-services-sheet__head">
-      <h2 id="header-services-title">Servicios</h2>
+      <div class="header-services-sheet__head-text">
+        <h2 id="header-services-title">Servicios</h2>
+        <p>16 áreas, un mismo equipo técnico</p>
+      </div>
       <button
         type="button"
         class="header-services-sheet__close"
@@ -136,28 +156,34 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     </header>
 
     <div class="header-services-sheet__body">
-      {serviciosPorCategoria.map((cat) => (
-        <section class="header-services-sheet__group">
-          <h3 class="header-services-sheet__group-title">{cat.label}</h3>
-          <ul class="header-services-sheet__list">
-            {cat.items.map((s) => (
-              <li>
-                <a
-                  href={`/servicios#${s.slug}`}
-                  class="header-services-sheet__item"
-                  data-header-services-item
-                >
-                  <span class="header-services-sheet__item-text">
-                    <strong>{s.title}</strong>
-                    <small>{s.subtitle}</small>
-                  </span>
-                  <span class="header-services-sheet__item-arrow" aria-hidden="true">›</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      <ul class="header-services-sheet__grid">
+        {serviciosGrid.map((s, i) => (
+          <li>
+            <a
+              href={`/servicios#${s.slug}`}
+              class="header-services-sheet__card"
+              data-cat={s.cat}
+              style={`--i:${i}`}
+              data-header-services-item
+            >
+              <span class="header-services-sheet__icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={iconosCategoria[s.cat]}
+                />
+              </span>
+              <span class="header-services-sheet__label">{s.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
 
       <a
         href="/servicios"
@@ -184,14 +210,17 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     z-index: 100;
     padding: 0;
     margin-bottom: 8px;
-    transition:
-      padding 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-      margin-bottom 0.4s ease;
+    transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .header.is-scrolled {
     margin-bottom: 0;
+    padding-top: 0.6rem;
   }
+
+  /* ================================
+     HEADER MAIN — Estado normal (con logo + nav + wa)
+     ================================ */
 
   .header__main {
     background: linear-gradient(
@@ -200,11 +229,8 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       #e6f7f7 50%,
       #ddf3f3 100%
     );
-    border-bottom: none;
     box-shadow: 0 4px 18px rgba(11, 31, 51, 0.06);
-    transition:
-      background 0.35s ease,
-      box-shadow 0.35s ease;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
   }
 
   .header.is-scrolled .header__main {
@@ -224,7 +250,10 @@ const serviciosPorCategoria = categorias.map((cat) => ({
   }
 
   .header.is-scrolled .header__inner {
-    padding: 0.6rem 0.75rem 0.6rem 0.35rem;
+    padding: 0;
+    gap: 0;
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 
   .brand {
@@ -237,7 +266,11 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     margin: 0;
     padding: 0;
     line-height: 1;
-    transition: filter 0.35s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+
+  .header.is-scrolled .brand {
+    display: none;
   }
 
   .brand__logo {
@@ -248,10 +281,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     object-fit: contain;
     flex: 0 0 auto;
     filter: drop-shadow(0 2px 4px rgba(11, 31, 51, 0.08));
-    transition: filter 0.35s ease, width 0.4s ease;
-    will-change: width;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
   }
 
   .brand__name {
@@ -270,7 +299,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     letter-spacing: 0.02em;
     color: #0A4BD3;
     text-transform: uppercase;
-    transition: color 0.35s ease, text-shadow 0.35s ease;
   }
 
   .brand__name-sub {
@@ -281,36 +309,18 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     color: #0b0f1a;
     text-transform: uppercase;
     margin-top: 0.15em;
-    transition: color 0.35s ease, text-shadow 0.35s ease;
   }
 
-  .header.is-scrolled .brand__name-main {
-    color: #ffffff;
-    text-shadow:
-      0 1px 0 rgba(10, 75, 211, 0.6),
-      0 2px 8px rgba(0, 0, 0, 0.55);
-  }
-
-  .header.is-scrolled .brand__name-sub {
-    color: #ffffff;
-    text-shadow:
-      0 1px 0 rgba(0, 0, 0, 0.45),
-      0 2px 8px rgba(0, 0, 0, 0.55);
-  }
-
-  .header.is-scrolled .brand {
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
-  }
-
-  .header.is-scrolled .brand__logo {
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
-  }
+  /* ================================
+     NAV — Normal
+     ================================ */
 
   .nav {
     justify-self: center;
     width: 100%;
     display: flex;
     justify-content: center;
+    transition: all 0.35s ease;
   }
 
   .nav__list {
@@ -326,6 +336,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     font-size: 0.86rem;
     width: 100%;
     max-width: 600px;
+    transition: all 0.35s ease;
   }
 
   .nav__list > li {
@@ -335,154 +346,72 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     justify-content: center;
   }
 
+  
+
   .nav__btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
-    padding: 0.5rem 1.05rem;
-    border-radius: 999px;
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
     color: #ffffff;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.02em;
     font-family: inherit;
     font-size: inherit;
-    border: 1px solid rgba(120, 210, 255, 0.6);
+    border: none;
     cursor: pointer;
 
+    /* Degradado azul → turquesa muy sutil */
     background: linear-gradient(
-      180deg,
-      #5fc8ff 0%,
-      #2ba7f0 18%,
-      #0b8ce0 45%,
-      #0673c9 70%,
-      #035fa9 100%
+      135deg,
+      #4a90d9 0%,
+      #3b7fbf 50%,
+      #2f9e9e 100%
     );
 
-    box-shadow:
-      0 6px 14px rgba(3, 95, 169, 0.45),
-      0 2px 4px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.85),
-      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
-      inset 0 8px 12px rgba(255, 255, 255, 0.25);
-
-    text-shadow: 0 1px 2px rgba(0, 45, 90, 0.45);
-    overflow: hidden;
-    z-index: 1;
+    box-shadow: 0 1px 2px rgba(11, 31, 51, 0.08);
+    transition: filter 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
     width: 100%;
     max-width: 170px;
-
-    transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.2s ease;
   }
-
-  .nav__btn::before {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 6%;
-    width: 88%;
-    height: 42%;
-    border-radius: 999px;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 255, 255, 0.35) 40%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    pointer-events: none;
-    filter: blur(0.5px);
-  }
-
-  .nav__btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.55) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-20deg);
-    transition: left 0.6s ease;
-    pointer-events: none;
-  }
-
-  .nav__btn:hover::after { left: 125%; }
 
   .nav__btn:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08) saturate(1.1);
-    box-shadow:
-      0 10px 22px rgba(3, 95, 169, 0.55),
-      0 3px 6px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
-      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
-      inset 0 8px 12px rgba(255, 255, 255, 0.3);
+    filter: brightness(1.08);
+    box-shadow: 0 3px 8px rgba(11, 31, 51, 0.14);
+    transform: translateY(-1px);
   }
 
   .nav__btn:active {
     transform: translateY(0);
     filter: brightness(0.96);
-    box-shadow:
-      0 3px 8px rgba(3, 95, 169, 0.4),
-      inset 0 2px 6px rgba(0, 40, 90, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  .header.is-scrolled .nav__btn {
-    box-shadow:
-      0 12px 26px rgba(3, 95, 169, 0.55),
-      0 3px 6px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
-      inset 0 -2px 6px rgba(0, 40, 90, 0.35),
-      inset 0 8px 12px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 2px rgba(11, 31, 51, 0.1);
   }
 
   .nav__btn--inicio {
-    background: linear-gradient(
-      180deg,
-      #6fd0ff 0%,
-      #35b0f5 18%,
-      #1095e8 45%,
-      #0a7cd0 70%,
-      #065fa8 100%
-    );
+    background: linear-gradient(135deg, #4a90d9 0%, #2f9e9e 100%);
   }
-
   .nav__btn--servicios {
-    background: linear-gradient(
-      180deg,
-      #5fc8ff 0%,
-      #2ba7f0 18%,
-      #0b8ce0 45%,
-      #0673c9 70%,
-      #035fa9 100%
-    );
+    background: linear-gradient(135deg, #5a9de0 0%, #3a8a8a 100%);
   }
-
   .nav__btn--nosotros {
-    background: linear-gradient(
-      180deg,
-      #57c0fb 0%,
-      #229ee8 18%,
-      #0884d8 45%,
-      #0569be 70%,
-      #03569e 100%
-    );
+    background: linear-gradient(135deg, #4288cf 0%, #2c9494 100%);
   }
 
-  .nav__caret { transition: transform 0.2s ease; }
+  .nav__caret {
+    transition: transform 0.2s ease;
+    opacity: 0.85;
+  }
 
   .nav__item--has-menu:hover .nav__caret,
   .nav__item--has-menu:focus-within .nav__caret {
     transform: rotate(180deg);
   }
+
+
 
   .header__wa {
     justify-self: end;
@@ -490,56 +419,40 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 1.1rem;
-    border-radius: 999px;
+    border-radius: 8px;
     font-family: var(--font-body);
     font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
+    font-weight: 600;
     color: #ffffff;
     text-decoration: none;
     white-space: nowrap;
-    background: linear-gradient(135deg, #7ee0a0 0%, #4fd17e 50%, #2bb866 100%);
-    box-shadow: 0 4px 14px rgba(43, 184, 102, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    transition: transform 0.2s ease, box-shadow 0.35s ease, background 0.25s ease, filter 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    background: #25a95c;
+    box-shadow: 0 1px 2px rgba(11, 31, 51, 0.08);
+    transition: filter 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   }
 
   .header.is-scrolled .header__wa {
-    box-shadow: 0 10px 26px rgba(43, 184, 102, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.32);
-  }
-
-  .header__wa::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0) 100%);
-    transform: skewX(-20deg);
-    animation: wa-shine 3.5s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes wa-shine {
-    0%   { left: -75%; }
-    60%  { left: 125%; }
-    100% { left: 125%; }
+    display: none;
   }
 
   .header__wa:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, #6dd592 0%, #42c574 50%, #25a95c 100%);
-    box-shadow: 0 10px 24px rgba(43, 184, 102, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.32);
-    filter: brightness(1.04);
+    filter: brightness(1.08);
+    box-shadow: 0 3px 8px rgba(37, 169, 92, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .header__wa:active {
+    transform: translateY(0);
+    filter: brightness(0.96);
   }
 
   .header__wa-icon {
     flex-shrink: 0;
-    filter: drop-shadow(0 1px 1px rgba(0, 60, 40, 0.15));
   }
+
+  /* ================================
+     MEGAMENU
+     ================================ */
 
   .megamenu {
     position: absolute;
@@ -548,7 +461,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     transform: translate(-50%, 8px);
     width: min(1080px, 96vw);
     background: #ffffff;
-    border-top: 2px solid #7ed9b8;
     border-radius: 10px;
     box-shadow: 0 18px 48px rgba(11, 31, 51, 0.16);
     padding: 1.5rem 1.6rem 1.1rem;
@@ -600,12 +512,12 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     color: #37475a;
     padding: 0.1rem 0;
     text-decoration: none;
+    transition: color 0.2s ease, padding 0.2s ease;
   }
 
   .megamenu__list a:hover {
-    color: #2bb583;
+    color: #0A4BD3;
     padding-left: 4px;
-    transition: padding 0.2s ease, color 0.2s ease;
   }
 
   .megamenu__footer {
@@ -618,18 +530,28 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     gap: 1rem;
   }
 
-  .megamenu__footer p { margin: 0; font-size: 0.8rem; color: #5a6b7b; }
+  .megamenu__footer p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #5a6b7b;
+  }
 
   .megamenu__cta {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #2bb583;
+    color: #0A4BD3;
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.2s ease;
   }
 
-  .megamenu__cta:hover { color: var(--fs-primary); }
+  .megamenu__cta:hover {
+    color: #0637a0;
+  }
+
+  /* ================================
+     MOBILE SHEET — cuadrícula de servicios
+     ================================ */
 
   .header-services-sheet {
     position: fixed;
@@ -655,7 +577,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     width: 100%;
     max-height: 92dvh;
     background: #ffffff;
-    border-radius: 20px 20px 0 0;
+    border-radius: 22px 22px 0 0;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -679,7 +601,7 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 1.25rem 1rem;
+    padding: 0.5rem 1.1rem 0.85rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
@@ -687,103 +609,117 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     z-index: 2;
   }
 
-  .header-services-sheet__head h2 {
+  .header-services-sheet__head-text h2 {
     font-family: var(--font-display, system-ui, sans-serif);
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     color: #0b0f1a;
     margin: 0;
+    line-height: 1.2;
+  }
+
+  .header-services-sheet__head-text p {
+    margin: 0.15rem 0 0;
+    font-size: 0.76rem;
+    color: #6b7280;
+    line-height: 1.3;
   }
 
   .header-services-sheet__close {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: transparent;
+    background: #f2f4f8;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #6b7280;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .header-services-sheet__body {
-    padding: 0.5rem 1.25rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .header-services-sheet__group-title {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin: 0 0 0.25rem 0.15rem;
-  }
-
-  .header-services-sheet__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-radius: 14px;
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.07);
-  }
-
-  .header-services-sheet__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 1.05rem 1rem;
-    min-height: 56px;
-    background: #ffffff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    text-decoration: none;
-    color: inherit;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .header-services-sheet__list li:last-child .header-services-sheet__item { border-bottom: none; }
-  .header-services-sheet__item:active { background: #f2f4f8; }
-
-  .header-services-sheet__item-text {
+  .header-services-sheet__body {
+    padding: 0.9rem 0.9rem 1.5rem;
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    gap: 1rem;
+  }
+
+  /* Cuadrícula 3 columnas */
+  .header-services-sheet__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .header-services-sheet__grid > li { min-width: 0; display: flex; }
+
+  .header-services-sheet__card {
+    --c1: #4a90d9;
+    --c2: #2f9e9e;
     flex: 1;
-    gap: 0.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 0.3rem 0.65rem;
+    min-height: 92px;
+    border-radius: 14px;
+    background: #f5f8fc;
+    border: 1px solid rgba(10, 75, 211, 0.08);
+    text-decoration: none;
+    text-align: center;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    animation: headerCardIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 22ms + 80ms);
   }
 
-  .header-services-sheet__item-text strong {
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-size: 1rem;
-    font-weight: 600;
-    color: #0b0f1a;
-    line-height: 1.3;
+  .header-services-sheet__card:active {
+    transform: scale(0.95);
+    background: #e9eff8;
   }
 
-  .header-services-sheet__item-text small {
-    font-size: 0.78rem;
-    color: #6b7280;
-    line-height: 1.3;
-  }
+  /* Color por categoría */
+  .header-services-sheet__card[data-cat='electrico']            { --c1: #f5a524; --c2: #e27d0f; }
+  .header-services-sheet__card[data-cat='energia-redes']        { --c1: #2f9e9e; --c2: #1f7f9a; }
+  .header-services-sheet__card[data-cat='industrial']           { --c1: #4a90d9; --c2: #0A4BD3; }
+  .header-services-sheet__card[data-cat='construccion-liviana'] { --c1: #8b7bd8; --c2: #5b4bb8; }
+  .header-services-sheet__card[data-cat='complementarios']      { --c1: #3fb27f; --c2: #25a95c; }
 
-  .header-services-sheet__item-arrow {
-    font-size: 1.1rem;
-    color: #c4c9d2;
-    line-height: 1;
+  .header-services-sheet__icon {
     flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    box-shadow: 0 4px 10px -4px var(--c2);
+  }
+
+  .header-services-sheet__label {
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #0b0f1a;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 
   .header-services-sheet__all {
@@ -791,38 +727,46 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     padding: 0.9rem 1rem;
     text-align: center;
     font-family: var(--font-display, system-ui, sans-serif);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.98rem;
     color: #ffffff;
-    background: linear-gradient(135deg, #107bcd, #0A4BD3);
-    border-radius: 14px;
+    background: linear-gradient(135deg, #4a90d9 0%, #2f9e9e 100%);
+    border-radius: 12px;
     text-decoration: none;
-    transition: transform 0.15s ease, filter 0.2s ease;
+    transition: filter 0.2s ease, transform 0.15s ease;
   }
 
-  .header-services-sheet__all:active { transform: scale(0.98); }
+  .header-services-sheet__all:hover { filter: brightness(1.08); }
+  .header-services-sheet__all:active { transform: scale(0.98); filter: brightness(0.96); }
 
   @keyframes headerFadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes headerSheetSlideUp {
     from { transform: translateY(60px); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
   }
+  @keyframes headerCardIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+
+  /* ================================
+     RESPONSIVE
+     ================================ */
 
   @media (max-width: 1180px) {
     .nav__list { gap: 0.6rem; font-size: 0.8rem; max-width: 520px; }
-    .nav__btn { padding: 0.45rem 0.85rem; }
+    .nav__btn { padding: 0.5rem 0.9rem; }
     .header__wa { padding: 0.5rem 0.9rem; font-size: 0.78rem; }
   }
 
   @media (max-width: 980px) {
     .nav__list { gap: 0.45rem; font-size: 0.74rem; max-width: 440px; }
-    .nav__btn { padding: 0.4rem 0.68rem; }
+    .nav__btn { padding: 0.45rem 0.7rem; }
     .megamenu { width: 96vw; padding: 1.1rem 1.2rem 0.9rem; }
     .megamenu__grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .header__wa span { display: none; }
     .header__wa { padding: 0.55rem; }
     .header__inner { padding: 0.9rem 0.9rem 0.9rem 0.4rem; }
-    .header.is-scrolled .header__inner { padding: 0.5rem 0.7rem 0.5rem 0.3rem; }
   }
 
   @media (max-width: 720px) {
@@ -831,7 +775,6 @@ const serviciosPorCategoria = categorias.map((cat) => ({
       gap: 0.4rem;
       padding: 0.7rem 0.6rem 0.7rem 0.25rem;
     }
-    .header.is-scrolled .header__inner { padding: 0.5rem 0.5rem 0.5rem 0.25rem; }
 
     .brand { gap: 0.4rem; }
     .brand__logo { width: clamp(36px, 10vw, 46px); max-height: 46px; }
@@ -840,8 +783,8 @@ const serviciosPorCategoria = categorias.map((cat) => ({
 
     .nav__list { gap: 0.22rem; font-size: 0.58rem; max-width: 100%; }
     .nav__btn {
-      padding: 0.3rem 0.42rem;
-      border-radius: 999px;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
       letter-spacing: 0.01em;
       max-width: 100px;
     }
@@ -852,6 +795,20 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     .header__wa-icon { width: 15px; height: 15px; }
 
     .megamenu { display: none !important; }
+
+    /* Estado scrolled en mobile: nav pill centrado */
+    .header.is-scrolled .header__inner {
+      padding: 0 0.75rem;
+    }
+    .header.is-scrolled .nav {
+      width: 100%;
+    }
+    .header.is-scrolled .nav__list {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.3rem;
+      border-radius: 10px;
+      gap: 0.3rem;
+    }
   }
 
   @media (max-width: 400px) {
@@ -861,12 +818,19 @@ const serviciosPorCategoria = categorias.map((cat) => ({
     .brand__name-sub  { font-size: 0.46rem; letter-spacing: 0.16em; }
 
     .nav__list { font-size: 0.52rem; gap: 0.18rem; }
-    .nav__btn { padding: 0.26rem 0.34rem; max-width: 84px; }
+    .nav__btn { padding: 0.3rem 0.4rem; max-width: 84px; }
     .header__inner { padding: 0.55rem 0.5rem 0.55rem 0.2rem; gap: 0.3rem; }
+
+    .header-services-sheet__body { padding: 0.8rem 0.7rem 1.3rem; }
+    .header-services-sheet__grid { gap: 0.45rem; }
+    .header-services-sheet__card { min-height: 88px; padding: 0.65rem 0.25rem 0.55rem; }
+    .header-services-sheet__icon { width: 34px; height: 34px; border-radius: 11px; }
+    .header-services-sheet__label { font-size: 0.68rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .header, .header__main, .header__inner, .nav__btn, .header__wa, .brand__logo { transition: none; }
+    .header-services-sheet__card { animation: none; }
   }
 
   @supports (padding: max(0px)) {

@@ -14,257 +14,266 @@ import imagen9  from '../assets/imagen9.webp';
 import imagen10 from '../assets/imagen10.webp';
 import imagen11 from '../assets/imagen11.webp';
 
+import c2_img1 from '../assets/Caruzel2/imagen1_11zon.webp';
+import c2_img2 from '../assets/Caruzel2/imagen2_11zon.webp';
+import c2_img3 from '../assets/Caruzel2/imagen3_11zon.webp';
+import c2_img4 from '../assets/Caruzel2/imagen4_11zon.webp';
+import c2_img5 from '../assets/Caruzel2/imagen5_11zon.webp';
+import c2_img6 from '../assets/Caruzel2/imagen6_11zon.webp';
+
 const heroImages = [
-  {
-    src: portada.src,
-    alt: 'Proyecto eléctrico residencial en Guatemala ejecutado por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen2.src,
-    alt: 'Instalación eléctrica industrial en Huehuetenango por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen3.src,
-    alt: 'Panel solar instalado por Full Solución en Guatemala',
-    isLogo: false,
-  },
-  {
-    src: imagen4.src,
-    alt: 'Automatización industrial ejecutada por Full Solución en Guatemala',
-    isLogo: false,
-  },
-  {
-    src: imagen5.src,
-    alt: 'Sistema de videovigilancia instalado en Guatemala por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen6.src,
-    alt: 'Trabajo de cableado estructurado en Huehuetenango por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen7.src,
-    alt: 'Mantenimiento eléctrico industrial en Guatemala por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen8.src,
-    alt: 'Instalación de generador eléctrico en Guatemala por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen9.src,
-    alt: 'Proyecto de construcción liviana en Huehuetenango por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: imagen10.src,
-    alt: 'Estructura metálica liviana instalada por Full Solución en Guatemala',
-    isLogo: false,
-  },
-  {
-    src: imagen11.src,
-    alt: 'Proyecto de soldadura industrial en Guatemala por Full Solución',
-    isLogo: false,
-  },
-  {
-    src: logo.src,
-    alt: 'Full Solución — Servicios eléctricos y técnicos en Guatemala y Huehuetenango',
-    isLogo: true,
-  },
+  { src: portada.src,  alt: 'Proyecto eléctrico residencial en Guatemala ejecutado por Full Solución' },
+  { src: imagen2.src,  alt: 'Instalación eléctrica industrial en Huehuetenango por Full Solución' },
+  { src: imagen3.src,  alt: 'Panel solar instalado por Full Solución en Guatemala' },
+  { src: imagen4.src,  alt: 'Automatización industrial ejecutada por Full Solución en Guatemala' },
+  { src: imagen5.src,  alt: 'Sistema de videovigilancia instalado en Guatemala por Full Solución' },
+  { src: imagen6.src,  alt: 'Trabajo de cableado estructurado en Huehuetenango por Full Solución' },
+  { src: imagen7.src,  alt: 'Mantenimiento eléctrico industrial en Guatemala por Full Solución' },
+  { src: imagen8.src,  alt: 'Instalación de generador eléctrico en Guatemala por Full Solución' },
+  { src: imagen9.src,  alt: 'Proyecto de construcción liviana en Huehuetenango por Full Solución' },
+  { src: imagen10.src, alt: 'Estructura metálica liviana instalada por Full Solución en Guatemala' },
+  { src: imagen11.src, alt: 'Proyecto de soldadura industrial en Guatemala por Full Solución' },
+];
+
+const carrusel2Images = [
+  { src: c2_img1.src, alt: 'Equipo Full Solución en proyecto 1' },
+  { src: c2_img2.src, alt: 'Equipo Full Solución en proyecto 2' },
+  { src: c2_img3.src, alt: 'Equipo Full Solución en proyecto 3' },
+  { src: c2_img4.src, alt: 'Equipo Full Solución en proyecto 4' },
+  { src: c2_img5.src, alt: 'Equipo Full Solución en proyecto 5' },
+  { src: c2_img6.src, alt: 'Equipo Full Solución en proyecto 6' },
 ];
 ---
 
 <section
   id="inicio"
   class="hero"
-  data-interval="5000"
+  data-interval="6000"
   aria-label="Full Solución — Servicios eléctricos, energía solar y automatización industrial en Guatemala y Huehuetenango"
 >
 
-  <div class="hero__layer hero__layer--blue" aria-hidden="true"></div>
+  <div class="hero__grid">
 
-  <div class="hero__layer hero__layer--silver" aria-hidden="true">
-    <span class="hero__tri hero__tri--s1"></span>
-    <span class="hero__tri hero__tri--s2"></span>
-    <span class="hero__tri hero__tri--s3"></span>
-    <span class="hero__tri hero__tri--s4"></span>
-  </div>
-
-  <div class="hero__layer hero__layer--graphite" aria-hidden="true">
-    <span class="hero__tri hero__tri--g1"></span>
-    <span class="hero__tri hero__tri--g2"></span>
-    <span class="hero__tri hero__tri--g3"></span>
-    <span class="hero__tri hero__tri--g4"></span>
-    <span class="hero__tri hero__tri--g5"></span>
-    <span class="hero__tri hero__tri--g6"></span>
-    <span class="hero__tri hero__tri--g7"></span>
-  </div>
-
-  <div class="hero__layer hero__layer--v-accent" aria-hidden="true"></div>
-  <div class="hero__layer hero__layer--v-line" aria-hidden="true"></div>
-
-  <div class="hero__photo">
-    <div class="hero__photo-clip">
-      <div class="hero__carousel">
+    <div class="hero__carousel-main">
+      <div class="hero__carousel" data-carousel="main">
         {heroImages.map((img, i) => (
           <div
-            class={`hero__slide ${img.isLogo ? 'hero__slide--logo' : ''}`}
+            class="hero__slide"
             data-active={i === 0 ? 'true' : 'false'}
           >
-            {img.isLogo ? (
-              <div class="hero__logo-wrap">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  draggable="false"
-                  width="600"
-                  height="600"
-                />
-                <span class="hero__logo-text">FULL SOLUCIÓN</span>
-              </div>
-            ) : (
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-                draggable="false"
-                width="1200"
-                height="800"
-              />
-            )}
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              draggable="false"
+              width="1200"
+              height="800"
+            />
           </div>
         ))}
       </div>
+
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <span class="hero__eyebrow">FULL SOLUCIÓN</span>
+
+        <h1 class="hero__title">
+          <span class="hero__title-white">Servicios eléctricos y técnicos</span>
+          <span class="hero__title-blue">en Guatemala y Huehuetenango</span>
+        </h1>
+
+        <div class="hero__divider" aria-hidden="true">
+          <span class="hero__divider-dot"></span>
+          <span class="hero__divider-line"></span>
+          <span class="hero__divider-dot"></span>
+        </div>
+
+        <p class="hero__lead">
+          En <strong>Full Solución</strong> diseñamos, instalamos y mantenemos sistemas
+          eléctricos, de energía solar y de automatización para tu hogar, comercio o planta
+          industrial. 16 servicios, un solo equipo técnico.
+        </p>
+
+        <button
+          type="button"
+          class="hero__cta"
+          data-scroll-to="servicios"
+          aria-label="Ir a la sección de servicios"
+        >CONOCE MÁS</button>
+      </div>
     </div>
-  </div>
 
-  <div class="hero__content">
-    <h1 class="hero__title">
-      <span class="hero__title-blue">Servicios eléctricos</span>
-      <span class="hero__title-white">y técnicos</span><br />
-      <span class="hero__title-white">en Guatemala y Huehuetenango</span>
-    </h1>
+    <div class="hero__carousel-right">
+      <div class="hero__carousel" data-carousel="side">
+        {carrusel2Images.map((img, i) => (
+          <div
+            class="hero__slide"
+            data-active={i === 0 ? 'true' : 'false'}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              draggable="false"
+              width="1600"
+              height="900"
+            />
+          </div>
+        ))}
+      </div>
 
-    <div class="hero__divider" aria-hidden="true">
-      <span class="hero__divider-dot"></span>
-      <span class="hero__divider-line"></span>
-      <span class="hero__divider-dot"></span>
+      <div class="hero__badge" aria-hidden="true">
+        <img
+          src={logo.src}
+          alt=""
+          width="72"
+          height="72"
+          decoding="async"
+          draggable="false"
+        />
+      </div>
     </div>
 
-    <p class="hero__lead">
-      En <strong>Full Solución</strong> (Full Solution) diseñamos, instalamos y mantenemos
-      los sistemas eléctricos, de energía solar y de automatización industrial que hacen
-      funcionar tu planta y tu hogar en toda Guatemala.
-    </p>
-
-    <button
-      type="button"
-      class="hero__cta"
-      data-contact-trigger
-      data-service="hero"
-      data-service-title="Trabajemos juntos"
-      aria-label="Contáctanos por WhatsApp"
-    >CONOCE MÁS</button>
   </div>
 </section>
 
 <style>
   .hero {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    max-height: 90vh;
-    min-height: 480px;
+    width: calc(100% - 6rem);
+    max-width: 1400px;
+    margin: 2.5rem auto 6rem;
+    aspect-ratio: 16 / 7.2;
+    max-height: 78vh;
+    min-height: 460px;
     overflow: hidden;
-    background: #1E2530;
+    background: #0A1A3A;
     isolation: isolate;
+    border-radius: 10px;
+    box-shadow: 0 24px 70px -35px rgba(0, 0, 0, 0.55);
   }
 
-  .hero__layer--blue {
+  .hero__grid {
     position: absolute;
     inset: 0;
-    z-index: 1;
-    background: linear-gradient(135deg, #0A4BD3 0%, #021A5A 100%);
-    clip-path: polygon(0 0, 22% 32%, 0 100%);
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 38% 62%;
+    gap: 0;
   }
 
-  .hero__layer--silver {
+  .hero__carousel-main,
+  .hero__carousel-right {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0f1823;
+    min-height: 0;
+  }
+
+  .hero__overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: #CBD5E1;
-    clip-path: polygon(0 0, 31% 0, 18% 100%, 0 100%);
-    filter: drop-shadow(8px 0 16px rgba(0, 0, 0, 0.35));
-    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 26, 58, 0.10) 0%,
+      rgba(10, 26, 58, 0.45) 45%,
+      rgba(10, 26, 58, 0.88) 100%
+    );
+    pointer-events: none;
   }
 
-  .hero__tri { position: absolute; pointer-events: none; }
-
-  .hero__tri--s1 { inset: 0; background: rgba(255,255,255,0.35); clip-path: polygon(0 0, 31% 0, 0 55%); }
-  .hero__tri--s2 { inset: 0; background: rgba(148,163,184,0.35); clip-path: polygon(0 100%, 18% 100%, 0 55%); }
-  .hero__tri--s3 { inset: 0; background: rgba(255,255,255,0.18); clip-path: polygon(0 55%, 31% 0, 18% 100%); }
-  .hero__tri--s4 { inset: 0; background: rgba(100,116,139,0.25); clip-path: polygon(0 0, 18% 100%, 0 100%); }
-
-  .hero__layer--graphite {
+  .hero__content {
     position: absolute;
-    inset: 0;
-    z-index: 3;
-    background: #1E2530;
-    clip-path: polygon(25% 0, 72% 0, 58% 60%, 72% 100%, 12% 100%);
-    overflow: hidden;
-  }
-
-  .hero__tri--g1 { inset: 0; background: rgba(255,255,255,0.03); clip-path: polygon(25% 0, 58% 60%, 12% 100%); }
-  .hero__tri--g2 { inset: 0; background: rgba(255,255,255,0.05); clip-path: polygon(25% 0, 48% 0, 58% 60%); }
-  .hero__tri--g3 { inset: 0; background: rgba(0,0,0,0.12);       clip-path: polygon(48% 0, 72% 0, 58% 60%); }
-  .hero__tri--g4 { inset: 0; background: rgba(255,255,255,0.04); clip-path: polygon(58% 60%, 72% 0, 72% 100%); }
-  .hero__tri--g5 { inset: 0; background: rgba(0,0,0,0.08);       clip-path: polygon(58% 60%, 72% 100%, 42% 100%); }
-  .hero__tri--g6 { inset: 0; background: rgba(255,255,255,0.02); clip-path: polygon(12% 100%, 42% 100%, 58% 60%); }
-  .hero__tri--g7 { inset: 0; background: rgba(0,0,0,0.06);       clip-path: polygon(12% 100%, 58% 60%, 25% 0%); }
-
-  .hero__layer--v-accent {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    background: #0A4BD3;
-    clip-path: polygon(70% 0, 100% 0, 100% 25%, 75% 65%, 100% 100%, 70% 100%, 56% 60%);
-  }
-
-  .hero__layer--v-line {
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    background: #FFFFFF;
-    clip-path: polygon(71% 0, 73% 0, 60% 60%, 73% 100%, 71% 100%, 57% 60%);
-  }
-
-  .hero__photo {
-    position: absolute;
-    inset: 0;
-    z-index: 6;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #0f1823;
-    clip-path: polygon(72% 0, 100% 0, 100% 100%, 72% 100%, 58% 60%);
-  }
-
-  .hero__photo-clip {
-    position: absolute;
-    top: 0;
+    left: 0;
     right: 0;
-    width: 42%;
-    height: 100%;
-    overflow: hidden;
-    background: #0f1823;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+    padding: 2.6rem 2.4rem 2.8rem;
+    max-width: 100%;
   }
+
+  .hero__eyebrow {
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #4FC3FF;
+  }
+
+  .hero__title {
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-weight: 900;
+    font-size: clamp(2.1rem, 3.4vw, 3.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .hero__title-white { color: #ffffff; display: block; }
+  .hero__title-blue  { color: #4FC3FF; display: block; margin-top: 0.14em; }
+
+  .hero__divider { display: flex; align-items: center; gap: 0.7rem; width: 100%; max-width: 280px; margin-top: 0.2rem; }
+  .hero__divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.55); }
+  .hero__divider-dot  { width: 6px; height: 6px; border-radius: 50%; background: #ffffff; }
+
+  .hero__lead {
+    font-size: clamp(1rem, 1.15vw, 1.2rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 48ch;
+  }
+  .hero__lead strong { color: #ffffff; font-weight: 700; }
+
+  .hero__cta {
+    position: relative;
+    display: inline-block;
+    margin: 0.7rem 0 0;
+    font-family: var(--font-display, system-ui, sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    width: auto;
+    min-width: 170px;
+    padding: 0.85rem 1.8rem;
+    background-color: #0A4BD3;
+    border: 1px solid #0A4BD3;
+    border-radius: 999px;
+    color: #ffffff;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+    box-shadow: 0 3px 9px -3px rgba(10, 75, 211, 0.55), 0 9px 20px -10px rgba(10, 75, 211, 0.6);
+    transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.3s ease, box-shadow 0.35s ease;
+  }
+  .hero__cta::before {
+    content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg); transition: left 0.7s cubic-bezier(0.22,1,0.36,1);
+    pointer-events: none; z-index: 1;
+  }
+  .hero__cta:hover::before { left: 130%; }
+  .hero__cta:hover {
+    background-color: #0c5eef;
+    border-color: #0c5eef;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px -5px rgba(10,75,211,0.35), 0 14px 30px -14px rgba(10,75,211,0.55);
+  }
+  .hero__cta:active { transform: translateY(0) scale(0.98); }
 
   .hero__carousel {
     position: relative;
@@ -278,16 +287,17 @@ const heroImages = [
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     background: #0f1823;
     opacity: 0;
     visibility: hidden;
     z-index: 0;
-    transform: scale(1.04);
+    transform: scale(1.08);
     transition:
-      opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-      visibility 0s linear 0.9s;
+      opacity 1400ms cubic-bezier(0.45, 0.05, 0.55, 0.95),
+      transform 1800ms cubic-bezier(0.45, 0.05, 0.55, 0.95),
+      visibility 0s linear 1800ms;
+    will-change: opacity, transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     pointer-events: none;
@@ -301,8 +311,8 @@ const heroImages = [
     transform: scale(1);
     pointer-events: auto;
     transition:
-      opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 1400ms cubic-bezier(0.45, 0.05, 0.55, 0.95),
+      transform 1800ms cubic-bezier(0.45, 0.05, 0.55, 0.95),
       visibility 0s linear 0s;
   }
 
@@ -310,197 +320,64 @@ const heroImages = [
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: right center;
-    padding: 0;
-    box-sizing: border-box;
-    background: transparent;
+    object-fit: cover;
+    object-position: center center;
     user-select: none;
     -webkit-user-drag: none;
-    filter: saturate(0.9) brightness(0.95) contrast(1.05);
+    filter: saturate(0.95) brightness(0.96) contrast(1.05);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transition: none;
   }
 
-  .hero__slide--logo {
+  .hero__badge {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    width: clamp(64px, 6vw, 92px);
+    height: clamp(64px, 6vw, 92px);
+    border-radius: 50%;
+    background: rgba(10, 75, 211, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .hero__slide--logo .hero__logo-wrap {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.6rem, 1.4vw, 1.2rem);
-    width: 100%;
-    height: 100%;
-    padding: 6% 8%;
-    box-sizing: border-box;
-  }
-
-  .hero__slide--logo .hero__logo-wrap img {
-    display: block;
-    width: auto;
-    height: 60%;
-    max-width: 45%;
-    object-fit: contain;
-    object-position: center center;
-    padding: 0;
-    flex: 0 0 auto;
-    filter: saturate(0.9) brightness(0.95) contrast(1.05);
-  }
-
-  .hero__logo-text {
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-size: clamp(0.9rem, 1.4vw, 1.5rem);
-    line-height: 1.15;
-    color: #ffffff;
-    text-align: left;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
-    flex: 0 0 auto;
-  }
-
-  .hero__content {
-    position: absolute;
-    top: 50%;
-    left: 28%;
-    transform: translateY(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    gap: 0.9rem;
-    width: 34%;
-    max-width: 520px;
-  }
-
-  .hero__title {
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-weight: 800;
-    font-size: clamp(1.4rem, 2.4vw, 2.4rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin: 0;
-    color: #ffffff;
-    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-  }
-  .hero__title-blue  { color: #0A4BD3; margin-right: 0.35em; }
-  .hero__title-white { color: #ffffff; }
-
-  .hero__divider {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 240px;
-  }
-  .hero__divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.55); }
-  .hero__divider-dot  { width: 5px; height: 5px; border-radius: 50%; background: #ffffff; }
-
-  .hero__lead {
-    font-size: clamp(0.78rem, 0.9vw, 0.92rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-    margin: 0;
-    max-width: 42ch;
-  }
-
-  .hero__lead strong {
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  .hero__cta {
-    position: relative;
-    display: inline-block;
-    margin: 0.3rem 0 0;
-    font-family: var(--font-display, system-ui, sans-serif);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    width: auto;
-    min-width: 130px;
-    padding: 0.55rem 1.2rem;
-    background-color: var(--fs-accent, #107bcd);
-    border: 1px solid var(--fs-accent, #107bcd);
-    border-radius: 999px;
-    color: #ffffff;
-    cursor: pointer;
-    overflow: hidden;
-    isolation: isolate;
-    text-decoration: none;
-    text-align: center;
-
-    box-shadow:
-      0 3px 9px -3px rgba(16, 123, 205, 0.5),
-      0 9px 20px -10px rgba(16, 123, 205, 0.6);
-
-    transition:
-      background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .hero__cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.45) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-20deg);
-    transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.6);
+    z-index: 20;
     pointer-events: none;
-    z-index: 1;
+  }
+  .hero__badge img {
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
   }
 
-  .hero__cta:hover::before { left: 130%; }
-
-  .hero__cta:hover {
-    background-color: rgba(255, 255, 255, 0.22);
-    border-color: rgba(255, 255, 255, 0.55);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow:
-      0 5px 12px -5px rgba(20, 22, 31, 0.25),
-      0 14px 30px -14px rgba(20, 33, 86, 0.35);
-  }
-
-  .hero__cta:active {
-    background-color: rgba(12, 187, 204, 0.35);
-    border-color: rgba(12, 187, 204, 0.75);
-    color: #ffffff;
-    transform: translateY(0) scale(0.98);
-  }
-
-  .hero__cta:focus-visible {
-    outline: 2px solid var(--fs-highlight, #0cbbcc);
-    outline-offset: 3px;
+  @media (max-width: 1280px) {
+    .hero {
+      width: calc(100% - 4rem);
+      margin: 2rem auto 5rem;
+    }
+    .hero__title { font-size: clamp(1.85rem, 2.8vw, 2.9rem); }
+    .hero__eyebrow { font-size: 0.95rem; }
+    .hero__lead { font-size: clamp(0.95rem, 1.05vw, 1.1rem); }
+    .hero__content { padding: 2rem 2rem 2.2rem; }
   }
 
   @media (max-width: 1100px) {
-    .hero__content { width: 38%; left: 26%; }
-    .hero__title   { font-size: clamp(1.2rem, 2.2vw, 2rem); }
+    .hero__title { font-size: clamp(1.6rem, 2.6vw, 2.4rem); }
+    .hero__content { padding: 1.8rem 1.8rem 2rem; }
+    .hero__eyebrow { font-size: 0.88rem; }
+    .hero__lead { font-size: 0.98rem; }
+    .hero__cta { font-size: 0.86rem; padding: 0.75rem 1.5rem; }
   }
 
   @media (max-width: 900px) {
     .hero {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       aspect-ratio: auto;
       min-height: 100svh;
       max-height: none;
@@ -508,29 +385,37 @@ const heroImages = [
       background: #000000;
       overflow: hidden;
       position: relative;
+      border-radius: 0;
+      box-shadow: none;
     }
 
-    .hero__layer--blue,
-    .hero__layer--silver,
-    .hero__layer--graphite,
-    .hero__layer--v-accent,
-    .hero__layer--v-line { display: none; }
-
-    .hero__photo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
+    .hero__grid {
+      position: static;
+      display: flex;
+      flex-direction: column;
       height: 100%;
-      clip-path: none;
+      min-height: 100svh;
+      padding: 0;
+      gap: 0;
+    }
+
+    .hero__carousel-main {
+      position: relative;
+      width: 100%;
+      flex: 1 1 62%;
+      min-height: 62svh;
+      display: block;
+      overflow: hidden;
       background: #000000;
-      z-index: 1;
     }
 
-    .hero__photo-clip {
-      position: absolute;
-      inset: 0;
+    .hero__carousel-right {
+      position: relative;
       width: 100%;
-      height: 100%;
+      flex: 1 1 38%;
+      min-height: 38svh;
+      display: block;
+      overflow: hidden;
       background: #000000;
     }
 
@@ -538,6 +423,8 @@ const heroImages = [
       background: #000000;
       width: 100%;
       height: 100%;
+      position: absolute;
+      inset: 0;
     }
 
     .hero__slide {
@@ -549,29 +436,22 @@ const heroImages = [
     .hero__slide img {
       object-fit: cover;
       object-position: center center;
-      padding: 0;
       width: 100%;
       height: 100%;
     }
 
-    .hero__slide--logo .hero__logo-wrap {
-      flex-direction: row;
-      padding: 6% 8%;
-      gap: 0.8rem;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-
-    .hero__slide--logo .hero__logo-wrap img {
-      width: auto;
-      height: 55%;
-      max-width: 45%;
-      padding: 0;
-    }
-
-    .hero__logo-text {
-      font-size: clamp(0.85rem, 3.5vw, 1.2rem);
+    .hero__overlay {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.45) 50%,
+        rgba(0, 0, 0, 0.85) 100%
+      );
+      pointer-events: none;
     }
 
     .hero__content {
@@ -587,105 +467,171 @@ const heroImages = [
       text-align: center;
       gap: 0.7rem;
       z-index: 10;
-
       background: rgba(30, 37, 48, 0.55);
       backdrop-filter: blur(10px) saturate(1.1);
       -webkit-backdrop-filter: blur(10px) saturate(1.1);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 16px;
-      box-shadow:
-        0 12px 32px -12px rgba(0, 0, 0, 0.65),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.65),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
+    .hero__eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; }
+    .hero__title   { font-size: clamp(1.4rem, 6.2vw, 2rem); text-align: center; }
+    .hero__title-white, .hero__title-blue { display: block; }
+    .hero__lead    { font-size: 0.95rem; max-width: 50ch; }
     .hero__divider { max-width: 200px; }
-    .hero__lead    { max-width: 50ch; }
+
+    .hero__badge {
+      display: flex;
+      position: absolute;
+      right: 12px;
+      top: -46px;
+      width: 72px;
+      height: 72px;
+      z-index: 30;
+    }
   }
 
   @media (max-width: 560px) {
+    .hero__carousel-main  { min-height: 58svh; flex: 1 1 58%; }
+    .hero__carousel-right { min-height: 42svh; flex: 1 1 42%; }
+
     .hero__content {
       bottom: 6%;
       padding: 1.3rem 1.1rem 1.5rem;
       border-radius: 14px;
     }
-    .hero__title { font-size: clamp(1.3rem, 6vw, 1.7rem); }
+    .hero__eyebrow { font-size: 0.72rem; }
+    .hero__title   { font-size: clamp(1.3rem, 6.4vw, 1.75rem); }
+    .hero__lead    { font-size: 0.9rem; }
+
+    .hero__badge {
+      width: 60px;
+      height: 60px;
+      top: -38px;
+      right: 10px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide,
+    .hero__slide[data-active='true'] {
+      transition:
+        opacity 400ms ease,
+        visibility 0s linear 400ms;
+      transform: none !important;
+    }
+    .hero__slide[data-active='true'] {
+      transition:
+        opacity 400ms ease,
+        visibility 0s linear 0s;
+    }
   }
 </style>
 
 <script>
-  const hero = document.querySelector<HTMLElement>('.hero');
+  function initHeroCarousels() {
+    document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+      if (hero.dataset.carouselInit) return;
+      hero.dataset.carouselInit = 'true';
 
-  if (hero && !hero.dataset.carouselInit) {
-    hero.dataset.carouselInit = 'true';
+      const interval = Number(hero.dataset.interval ?? 6000);
+      const carousels = hero.querySelectorAll<HTMLElement>('.hero__carousel');
 
-    const slides = hero.querySelectorAll<HTMLElement>('.hero__slide');
-    const interval = Number(hero.dataset.interval ?? 5000);
+      const controllers: Array<{ start: () => void; stop: () => void }> = [];
 
-    if (slides.length > 1) {
-      let current = 0;
-      let rafId: number | null = null;
-      let lastTime = performance.now();
-      let isPaused = false;
+      carousels.forEach((carousel, idx) => {
+        const slides = carousel.querySelectorAll<HTMLElement>('.hero__slide');
+        if (slides.length < 2) return;
 
-      slides.forEach((s, i) => {
-        s.dataset.active = i === 0 ? 'true' : 'false';
+        let current = 0;
+        let rafId: number | null = null;
+        let isPaused = false;
+        let nextChangeAt = performance.now() + idx * 1200 + interval;
+
+        slides.forEach((s, i) => {
+          s.dataset.active = i === 0 ? 'true' : 'false';
+        });
+
+        const nextSlide = () => {
+          slides[current].dataset.active = 'false';
+          current = (current + 1) % slides.length;
+          slides[current].dataset.active = 'true';
+        };
+
+        const tick = (now: number) => {
+          if (!isPaused && now >= nextChangeAt) {
+            nextSlide();
+            nextChangeAt = now + interval;
+          }
+          rafId = requestAnimationFrame(tick);
+        };
+
+        const start = () => {
+          if (rafId !== null) return;
+          nextChangeAt = performance.now() + interval;
+          rafId = requestAnimationFrame(tick);
+        };
+
+        const stop = () => {
+          if (rafId !== null) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        };
+
+        const io = new IntersectionObserver(
+          ([entry]) => {
+            isPaused = !entry.isIntersecting;
+            if (entry.isIntersecting && !document.hidden) start();
+            else stop();
+          },
+          { threshold: 0, rootMargin: '100px' }
+        );
+        io.observe(carousel);
+
+        start();
+        controllers.push({ start, stop });
       });
-
-      const nextSlide = () => {
-        slides[current].dataset.active = 'false';
-        current = (current + 1) % slides.length;
-        slides[current].dataset.active = 'true';
-      };
-
-      const tick = (now: number) => {
-        if (!isPaused && now - lastTime >= interval) {
-          nextSlide();
-          lastTime = now;
-        }
-        rafId = requestAnimationFrame(tick);
-      };
-
-      const start = () => {
-        if (rafId !== null) return;
-        lastTime = performance.now();
-        rafId = requestAnimationFrame(tick);
-      };
-
-      const stop = () => {
-        if (rafId !== null) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      };
 
       document.addEventListener('visibilitychange', () => {
-        isPaused = document.hidden;
         if (document.hidden) {
-          stop();
+          controllers.forEach((c) => c.stop());
         } else {
-          start();
+          controllers.forEach((c) => c.start());
         }
       });
 
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          isPaused = !entry.isIntersecting;
-          if (entry.isIntersecting && !document.hidden) {
-            start();
-          } else {
-            stop();
-          }
-        },
-        { threshold: 0.15 }
-      );
-      io.observe(hero);
-
-      start();
-
       document.addEventListener('astro:before-swap', () => {
-        stop();
-        io.disconnect();
+        controllers.forEach((c) => c.stop());
       });
-    }
+    });
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroCarousels);
+  } else {
+    initHeroCarousels();
+  }
+  document.addEventListener('astro:page-load', initHeroCarousels);
+
+  document.querySelectorAll<HTMLElement>('[data-scroll-to]').forEach((btn) => {
+    if (btn.dataset.scrollInit) return;
+    btn.dataset.scrollInit = 'true';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = btn.dataset.scrollTo;
+      if (!targetId) return;
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({
+        behavior: prefersReduced ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
+  });
 </script>
