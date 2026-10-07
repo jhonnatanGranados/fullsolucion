@@ -7,12 +7,7 @@ export default defineConfig({
   site: 'https://fullsolucion.vercel.app',
 
   integrations: [
-    sitemap({
-      i18n: {
-        defaultLocale: 'es',
-        locales: { es: 'es-GT' },
-      },
-    }),
+    sitemap(),
 
     icon({
       include: {
