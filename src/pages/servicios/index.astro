@@ -5,11 +5,76 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Card from '../../components/Card.astro';
 import { servicios } from '../../data/servicios';
+
+const seoFichas = [
+  {
+    id: 'servicios-tecnicos',
+    titulo: 'Servicios técnicos',
+    subtitulo: 'Guatemala y Huehuetenango',
+    icono: '<path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/>',
+    parrafos: [
+      'En <strong>Full Solución</strong> ofrecemos <strong>instalaciones eléctricas</strong>, <strong>tierras físicas</strong>, <strong>automatización industrial</strong> y <strong>energías renovables</strong> para hogares, comercios y plantas industriales en <strong>Huehuetenango, Quetzaltenango, Chimaltenango, Totonicapán, San Marcos</strong> y toda Guatemala.',
+    ],
+  },
+  {
+    id: 'electricidad',
+    titulo: 'Electricidad',
+    subtitulo: 'Residencial, comercial e industrial',
+    icono: '<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>',
+    parrafos: [
+      'Ejecutamos <strong>instalaciones eléctricas residenciales</strong> e <strong>industriales bajo normativa</strong>, con materiales certificados y personal calificado. Incluye <strong>instalación de equipo de bombeo</strong>, <strong>sistemas de tierra física</strong>, <strong>instalación de generadores eléctricos</strong> y <strong>estudios de iluminación y calidad de energía</strong>.',
+    ],
+  },
+  {
+    id: 'energias-renovables',
+    titulo: 'Energías renovables',
+    subtitulo: 'Paneles y calentadores solares',
+    icono: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    parrafos: [
+      'Diseñamos e instalamos <strong>sistemas solares fotovoltaicos</strong> y <strong>calentadores solares</strong> adaptados a tu consumo real. Nuestro equipo técnico evalúa tu caso y propone la solución más eficiente para tu hogar o empresa en Guatemala.',
+    ],
+  },
+  {
+    id: 'automatizacion',
+    titulo: 'Automatización',
+    subtitulo: 'PLC y control industrial',
+    icono: '<path d="M3 21V11l6 4v-4l6 4V6h6v15z"/>',
+    parrafos: [
+      'Automatizamos <strong>procesos industriales</strong> con <strong>PLC</strong>, sensores y sistemas de control a medida. Diseñamos <strong>tableros eléctricos</strong> y ofrecemos mantenimiento preventivo y correctivo para equipos, maquinaria y sistemas industriales.',
+    ],
+  },
+  {
+    id: 'tierras-fisicas',
+    titulo: 'Tierras físicas',
+    subtitulo: 'Protección eléctrica',
+    icono: '<path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 12h10"/><path d="M9 16h6"/>',
+    parrafos: [
+      'Instalamos <strong>sistemas de tierra física</strong> para proteger tus equipos eléctricos y electrónicos frente a descargas y sobrecargas. Es un servicio clave para plantas industriales, comercios y data centers en Guatemala.',
+    ],
+  },
+  {
+    id: 'complementarios',
+    titulo: 'Complementarios',
+    subtitulo: 'Un solo proveedor',
+    icono: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>',
+    parrafos: [
+      'Además ofrecemos <strong>cableado estructurado</strong>, <strong>videovigilancia</strong>, <strong>sonido comercial</strong>, <strong>sistemas prefabricados livianos</strong>, <strong>pintura industrial</strong>, <strong>estructuras metálicas</strong>, <strong>soldadura industrial</strong>, <strong>sistemas de gases</strong>, <strong>perfilería PVC</strong> y <strong>desarrollo de software</strong>. Un solo proveedor para todo tu proyecto.',
+    ],
+  },
+];
+
+const beneficios = [
+  '16 servicios técnicos con un mismo equipo',
+  'Personal calificado y materiales certificados',
+  'Atención en toda Guatemala, con base en Huehuetenango, Zona 3',
+  'Cotización rápida por WhatsApp',
+  'Garantía y soporte post-instalación',
+];
 ---
 
 <Layout
-  title="Servicios | Full Solution"
-  description="16 servicios técnicos en Guatemala: electricidad, energías renovables, automatización industrial, construcción liviana y servicios complementarios. Personal calificado y materiales certificados."
+  title="Servicios | Full Solución - Instalaciones Eléctricas, Tierras Físicas y Energías Renovables en Guatemala"
+  description="16 servicios técnicos en Guatemala y Huehuetenango: instalaciones eléctricas, tierras físicas, automatización industrial, energías renovables, paneles solares y construcción liviana. Cotiza por WhatsApp al +502 4108 0263."
 >
   <Header slot="header" />
 
@@ -40,12 +105,220 @@ import { servicios } from '../../data/servicios';
         </div>
       ))}
     </section>
+
+    <section class="servicios-seo" aria-label="Información ampliada sobre nuestros servicios">
+      <div class="servicios-seo__inner">
+        <header class="servicios-seo__head">
+          <span class="servicios-seo__kicker">Más información</span>
+          <h2>Conoce más sobre nuestros servicios</h2>
+          <p>Desliza con las flechas y toca cada ficha para ver más detalles.</p>
+        </header>
+
+        <div class="seo-carousel" data-seo-carousel tabindex="0">
+          <button
+            type="button"
+            class="seo-carousel__nav seo-carousel__nav--prev"
+            aria-label="Ficha anterior"
+            data-seo-prev
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+
+          <div class="seo-carousel__viewport">
+            {seoFichas.map((ficha, i) => (
+              <article
+                class="seo-card"
+                data-seo-slide
+                data-index={i}
+                data-active={i === 0 ? 'true' : 'false'}
+                aria-hidden={i === 0 ? 'false' : 'true'}
+              >
+                <div class="seo-card__bg" aria-hidden="true"></div>
+
+                <button
+                  type="button"
+                  class="seo-card__head"
+                  data-seo-toggle
+                  aria-expanded="false"
+                  aria-controls={`seo-body-${ficha.id}`}
+                >
+                  <span class="seo-card__icon" aria-hidden="true">
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      set:html={ficha.icono}
+                    />
+                  </span>
+
+                  <div class="seo-card__head-text">
+                    <span class="seo-card__counter">
+                      {String(i + 1).padStart(2, '0')} / {String(seoFichas.length + 1).padStart(2, '0')}
+                    </span>
+                    <h3 class="seo-card__title">{ficha.titulo}</h3>
+                    <p class="seo-card__sub">{ficha.subtitulo}</p>
+                  </div>
+
+                  <span class="seo-card__chevron" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3 6l5 5 5-5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  class="seo-card__body"
+                  id={`seo-body-${ficha.id}`}
+                  hidden
+                >
+                  {ficha.parrafos.map((p) => (
+                    <p set:html={p} />
+                  ))}
+
+                  <a
+                    class="seo-card__cta"
+                    href="https://wa.me/50241080263?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Cotiza por WhatsApp →
+                  </a>
+                </div>
+              </article>
+            ))}
+
+            <article
+              class="seo-card seo-card--beneficios"
+              data-seo-slide
+              data-index={seoFichas.length}
+              data-active="false"
+              aria-hidden="true"
+            >
+              <div class="seo-card__bg" aria-hidden="true"></div>
+
+              <button
+                type="button"
+                class="seo-card__head"
+                data-seo-toggle
+                aria-expanded="false"
+                aria-controls="seo-body-beneficios"
+              >
+                <span class="seo-card__icon" aria-hidden="true">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2l2.4 5.2 5.6.8-4.1 4 1 5.6L12 15l-4.9 2.6 1-5.6-4.1-4 5.6-.8z" />
+                  </svg>
+                </span>
+
+                <div class="seo-card__head-text">
+                  <span class="seo-card__counter">
+                    {String(seoFichas.length + 1).padStart(2, '0')} / {String(seoFichas.length + 1).padStart(2, '0')}
+                  </span>
+                  <h3 class="seo-card__title">¿Por qué elegirnos?</h3>
+                  <p class="seo-card__sub">Nuestros diferenciales</p>
+                </div>
+
+                <span class="seo-card__chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path
+                      d="M3 6l5 5 5-5"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+
+              <div
+                class="seo-card__body"
+                id="seo-body-beneficios"
+                hidden
+              >
+                <ul class="seo-card__list">
+                  {beneficios.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+
+                <a
+                  class="seo-card__cta"
+                  href="https://wa.me/50241080263?text=Hola%2C%20quiero%20cotizar%20un%20servicio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Cotiza por WhatsApp →
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <button
+            type="button"
+            class="seo-carousel__nav seo-carousel__nav--next"
+            aria-label="Ficha siguiente"
+            data-seo-next
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="seo-carousel__dots" role="tablist" aria-label="Seleccionar ficha" data-seo-dots>
+          {seoFichas.map((ficha, i) => (
+            <button
+              type="button"
+              class="seo-carousel__dot"
+              role="tab"
+              aria-label={`Ir a ${ficha.titulo}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              data-seo-dot
+              data-index={i}
+            />
+          ))}
+          <button
+            type="button"
+            class="seo-carousel__dot"
+            role="tab"
+            aria-label="Ir a ¿Por qué elegirnos?"
+            aria-selected="false"
+            data-seo-dot
+            data-index={seoFichas.length}
+          />
+        </div>
+      </div>
+    </section>
   </main>
 
   <Footer slot="footer" />
 
   <script>
     let serviciosInit = false;
+    let carouselInit = false;
+    let togglesInit = false;
 
     function abrirPorHash() {
       const hash = window.location.hash.replace('#', '');
@@ -89,13 +362,119 @@ import { servicios } from '../../data/servicios';
       window.addEventListener('hashchange', abrirPorHash);
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initServicios);
-    } else {
-      initServicios();
+    function initCarousel() {
+      if (carouselInit) return;
+      carouselInit = true;
+
+      const carousel = document.querySelector<HTMLElement>('[data-seo-carousel]');
+      if (!carousel) return;
+
+      const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-seo-slide]'));
+      const prevBtn = carousel.querySelector<HTMLButtonElement>('[data-seo-prev]');
+      const nextBtn = carousel.querySelector<HTMLButtonElement>('[data-seo-next]');
+      const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-seo-dot]'));
+
+      if (slides.length === 0) return;
+
+      let current = 0;
+      let isAnimating = false;
+
+      const setActive = (index: number) => {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        if (index === current && slides[current].dataset.active === 'true') return;
+
+        slides.forEach((s, i) => {
+          const active = i === index;
+          s.dataset.active = active ? 'true' : 'false';
+          s.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+
+        dots.forEach((d, i) => {
+          d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+
+        current = index;
+      };
+
+      const go = (dir: number) => {
+        if (isAnimating) return;
+        isAnimating = true;
+        setActive(current + dir);
+        window.setTimeout(() => {
+          isAnimating = false;
+        }, 520);
+      };
+
+      prevBtn?.addEventListener('click', () => go(-1));
+      nextBtn?.addEventListener('click', () => go(1));
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = Number(dot.dataset.index ?? 0);
+          if (idx === current) return;
+          setActive(idx);
+        });
+      });
+
+      carousel.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+      });
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      carousel.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', (e: TouchEvent) => {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) go(1);
+          else go(-1);
+        }
+      }, { passive: true });
+
+      setActive(0);
     }
 
-    document.addEventListener('astro:page-load', initServicios);
+    function initToggles() {
+      if (togglesInit) return;
+      togglesInit = true;
+
+      const toggles = document.querySelectorAll<HTMLButtonElement>('[data-seo-toggle]');
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const controlsId = toggle.getAttribute('aria-controls');
+          if (!controlsId) return;
+
+          const body = document.getElementById(controlsId);
+          if (!body) return;
+
+          const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+          body.hidden = isOpen;
+        });
+      });
+    }
+
+    function initAll() {
+      initServicios();
+      initCarousel();
+      initToggles();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+      initAll();
+    }
+
+    document.addEventListener('astro:page-load', initAll);
   </script>
 
   <style>
@@ -143,12 +522,391 @@ import { servicios } from '../../data/servicios';
     }
     .servicio-anchor { scroll-margin-top: 130px; }
 
+    .servicios-seo {
+      background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+      border-top: 1px solid rgba(15, 23, 48, 0.08);
+      padding: 3.5rem 0 4.5rem;
+    }
+
+    .servicios-seo__inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      color: #1a2238;
+    }
+
+    .servicios-seo__head {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .servicios-seo__kicker {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fs-highlight);
+      margin-bottom: 0.75rem;
+    }
+
+    .servicios-seo__head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 800;
+      color: #0f1730;
+      margin: 0 0 0.6rem;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    .servicios-seo__head p {
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: rgba(15, 23, 48, 0.7);
+      margin: 0;
+    }
+
+    .seo-carousel {
+      position: relative;
+      outline: none;
+    }
+
+    .seo-carousel:focus-visible {
+      outline: 2px solid var(--fs-highlight);
+      outline-offset: 6px;
+      border-radius: 24px;
+    }
+
+    .seo-carousel__viewport {
+      position: relative;
+      width: 100%;
+      min-height: 180px;
+      transition: min-height 0.4s ease;
+    }
+
+    .seo-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 48, 0.08);
+      border-radius: 22px;
+      padding: 0;
+      box-shadow: 0 18px 48px -28px rgba(10, 40, 90, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px) scale(0.96);
+      transition:
+        opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 620ms;
+      overflow: hidden;
+      isolation: isolate;
+      height: auto;
+    }
+
+    .seo-card[data-active='true'] {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) scale(1);
+      z-index: 2;
+      position: relative;
+      transition:
+        opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+    }
+
+    .seo-card__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(12, 187, 204, 0.10) 0%, rgba(12, 187, 204, 0) 55%),
+        radial-gradient(circle at 100% 100%, rgba(10, 75, 211, 0.08) 0%, rgba(10, 75, 211, 0) 55%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .seo-card__head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      width: 100%;
+      padding: 1.5rem 1.75rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      transition: background 0.2s ease;
+    }
+
+    .seo-card__head:hover {
+      background: rgba(12, 187, 204, 0.04);
+    }
+
+    .seo-card__head:focus-visible {
+      outline: 2px solid var(--fs-highlight);
+      outline-offset: -2px;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .seo-card__icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0A4BD3 0%, #0CBBCC 100%);
+      color: #ffffff;
+      box-shadow: 0 10px 24px -12px rgba(10, 75, 211, 0.6);
+    }
+
+    .seo-card__head-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .seo-card__counter {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fs-accent);
+      opacity: 0.85;
+    }
+
+    .seo-card__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 800;
+      color: #0f1730;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .seo-card__sub {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(15, 23, 48, 0.6);
+      margin: 0;
+    }
+
+    .seo-card__chevron {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(10, 75, 211, 0.08);
+      color: #0A4BD3;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+    }
+
+    .seo-card__head[aria-expanded='true'] .seo-card__chevron {
+      transform: rotate(180deg);
+      background: rgba(12, 187, 204, 0.16);
+    }
+
+    .seo-card__body {
+      position: relative;
+      z-index: 1;
+      padding: 0 1.75rem 1.75rem;
+      animation: seoBodyFadeIn 0.35s ease-out;
+    }
+
+    @keyframes seoBodyFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .seo-card__body p {
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: rgba(15, 23, 48, 0.82);
+      margin: 0 0 1rem;
+    }
+
+    .seo-card__body strong {
+      color: #0f1730;
+      font-weight: 700;
+    }
+
+    .seo-card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .seo-card__list li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(15, 23, 48, 0.85);
+    }
+
+    .seo-card__list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--fs-highlight), var(--fs-accent));
+      box-shadow: 0 0 0 3px rgba(12, 187, 204, 0.15);
+    }
+
+    .seo-card__cta {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      padding: 0.8rem 1.7rem;
+      border-radius: 999px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0A4BD3 0%, #0CBBCC 100%);
+      text-decoration: none;
+      box-shadow: 0 10px 22px -10px rgba(10, 75, 211, 0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .seo-card__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -12px rgba(10, 75, 211, 0.7);
+    }
+
+    .seo-carousel__nav {
+      position: absolute;
+      top: 90px;
+      transform: translateY(-50%);
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 48, 0.1);
+      color: #0A4BD3;
+      cursor: pointer;
+      box-shadow: 0 10px 24px -14px rgba(10, 40, 90, 0.5);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+
+    .seo-carousel__nav:hover {
+      background: linear-gradient(135deg, #0A4BD3 0%, #0CBBCC 100%);
+      color: #ffffff;
+      transform: translateY(-50%) scale(1.06);
+      box-shadow: 0 14px 30px -16px rgba(10, 75, 211, 0.65);
+    }
+
+    .seo-carousel__nav:focus-visible {
+      outline: 2px solid var(--fs-highlight);
+      outline-offset: 3px;
+    }
+
+    .seo-carousel__nav--prev { left: -24px; }
+    .seo-carousel__nav--next { right: -24px; }
+
+    .seo-carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+    }
+
+    .seo-carousel__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(15, 23, 48, 0.18);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.25s ease, transform 0.25s ease, width 0.25s ease;
+    }
+
+    .seo-carousel__dot:hover {
+      background: rgba(15, 23, 48, 0.32);
+    }
+
+    .seo-carousel__dot[aria-selected='true'] {
+      background: linear-gradient(135deg, #0A4BD3 0%, #0CBBCC 100%);
+      width: 22px;
+      border-radius: 999px;
+      transform: scale(1.05);
+    }
+
     @media (max-width: 980px) { .servicios-hero { padding-top: 2.5rem; } }
+
     @media (max-width: 720px) {
       .servicios-grid { grid-template-columns: 1fr; gap: 0.9rem; }
       .servicio-anchor { scroll-margin-top: 160px; }
       .servicios-hero h1 { font-size: 1.65rem; }
       .servicios-hero p  { font-size: 0.95rem; }
+
+      .servicios-seo { padding: 2.75rem 0 3.5rem; }
+      .servicios-seo__head { margin-bottom: 1.75rem; }
+
+      .seo-card {
+        border-radius: 18px;
+      }
+
+      .seo-card__head { padding: 1.15rem 1.15rem; gap: 0.85rem; }
+      .seo-card__icon { width: 46px; height: 46px; border-radius: 12px; }
+      .seo-card__title { font-size: 1.05rem; }
+      .seo-card__sub { font-size: 0.78rem; }
+      .seo-card__chevron { width: 30px; height: 30px; }
+
+      .seo-card__body { padding: 0 1.15rem 1.25rem; }
+      .seo-card__body p { font-size: 0.93rem; line-height: 1.7; }
+      .seo-card__list li { font-size: 0.9rem; }
+
+      .seo-carousel__nav {
+        width: 40px;
+        height: 40px;
+        top: 76px;
+      }
+
+      .seo-carousel__nav--prev { left: 6px; }
+      .seo-carousel__nav--next { right: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .seo-card,
+      .seo-card[data-active='true'] {
+        transition:
+          opacity 300ms ease,
+          visibility 0s linear 300ms;
+        transform: none !important;
+      }
+      .seo-card[data-active='true'] {
+        transition:
+          opacity 300ms ease,
+          visibility 0s linear 0s;
+      }
+      .seo-card__body { animation: none; }
     }
   </style>
 </Layout>
